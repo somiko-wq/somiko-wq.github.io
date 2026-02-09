@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디저트 트럭 이벤트 - 실시간 응모율</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.95em;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .university-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .university-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3em;
+            color: white;
+        }
+
+        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
+        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #808080); }
+        .rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); }
+        .rank-other { background: linear-gradient(135deg, #667eea, #764ba2); }
+
+        .university-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .response-count {
+            font-size: 3em;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .response-count .label {
+            font-size: 0.4em;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 15px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .total-stats {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .total-stats h2 {
+            font-size: 1.5em;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .total-number {
+            font-size: 4em;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .update-time {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            padding: 40px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .response-count {
+                font-size: 2.5em;
+            }
+
+            .total-number {
+                font-size: 3em;
+            }
+        }
+
+        .change-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .change-up {
+            background: #def7ec;
+            color: #03543f;
+        }
+
+        .change-down {
+            background: #fde8e8;
+            color: #9b1c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍰 디저트 트럭이 찾아갑니다!</h1>
+            <p class="subtitle">여러분의 대학에 특별한 디저트 트럭을 보내드립니다</p>
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                실시간 업데이트 중
+            </div>
+        </header>
+
+        <div id="loading" class="loading">데이터를 불러오는 중...</div>
+        <div id="error" class="error-message" style="display: none;"></div>
+
+        <div class="stats-grid" id="universityGrid" style="display: none;">
+            <!-- University cards will be inserted here -->
+        </div>
+
+        <div class="total-stats" id="totalStats" style="display: none;">
+            <h2>전체 응모 현황</h2>
+            <div class="total-number" id="totalResponses">0</div>
+            <div class="update-time">마지막 업데이트: <span id="updateTime"></span></div>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ 여기에 구글 스프레드시트 정보를 입력하세요
+        const SHEET_ID = 'YOUR_SHEET_ID_HERE'; // 스프레드시트 ID
+        const SHEET_NAME = '집계'; // 집계 시트 이름 (보통 '집계' 또는 'Sheet2')
+        
+        // 구글 시트 API URL 생성
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
+
+        let previousData = {};
+
+        async function fetchGoogleSheetData() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const text = await response.text();
+                
+                // Google Sheets는 JSONP 형식으로 응답하므로 파싱 필요
+                const json = JSON.parse(text.substr(47).slice(0, -2));
+                
+                // 데이터 추출
+                const rows = json.table.rows;
+                const universities = [];
+                
+                // UNIQUE 함수 사용 시 첫 번째 행이 비어있을 수 있으므로 체크
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    
+                    // 행이 존재하고, A열과 B열에 데이터가 있는지 확인
+                    if (row.c && row.c[0] && row.c[1]) {
+                        const nameCell = row.c[0];
+                        const countCell = row.c[1];
+                        
+                        // 값이 null이거나 빈 문자열이 아닌 경우만 처리
+                        if (nameCell.v && countCell.v !== null && countCell.v !== '') {
+                            const name = nameCell.v.toString().trim();
+                            const responses = parseInt(countCell.v);
+                            
+                            // 유효한 데이터인지 확인
+                            if (name && !isNaN(responses)) {
+                                const lastCount = previousData[name] || 0;
+                                const change = responses - lastCount;
+                                
+                                universities.push({
+                                    name: name,
+                                    responses: responses,
+                                    change: change
+                                });
+                                
+                                previousData[name] = responses;
+                            }
+                        }
+                    }
+                }
+                
+                return universities;
+                
+            } catch (error) {
+                console.error('데이터 가져오기 실패:', error);
+                throw error;
+            }
+        }
+
+        function updateDisplay(universities) {
+            if (!universities || universities.length === 0) {
+                showError('아직 응모한 대학교가 없습니다. 첫 번째 응모자가 되어보세요!');
+                return;
+            }
+
+            // 로딩 숨기기
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('universityGrid').style.display = 'grid';
+            document.getElementById('totalStats').style.display = 'block';
+            
+            // 순위별로 정렬 (응모수 많은 순)
+            universities.sort((a, b) => b.responses - a.responses);
+            
+            const grid = document.getElementById('universityGrid');
+            const maxResponses = Math.max(...universities.map(u => u.responses));
+            
+            grid.innerHTML = universities.map((uni, index) => {
+                const percentage = maxResponses > 0 ? (uni.responses / maxResponses * 100).toFixed(1) : 0;
+                const change = uni.change;
+                const changeClass = change > 0 ? 'change-up' : change < 0 ? 'change-down' : '';
+                const changeSymbol = change > 0 ? '↑' : change < 0 ? '↓' : '';
+                
+                // 순위 배지 클래스 결정
+                let rankClass = 'rank-other';
+                if (index === 0) rankClass = 'rank-1';
+                else if (index === 1) rankClass = 'rank-2';
+                else if (index === 2) rankClass = 'rank-3';
+                
+                return `
+                    <div class="university-card">
+                        <div class="rank-badge ${rankClass}">${index + 1}</div>
+                        <h3 class="university-name">${uni.name}</h3>
+                        <div class="response-count">
+                            ${uni.responses.toLocaleString()}
+                            <span class="label">명</span>
+                            ${change !== 0 ? `<span class="change-indicator ${changeClass}">${changeSymbol}${Math.abs(change)}</span>` : ''}
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${percentage}%">
+                                ${percentage}%
+                            </div>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stat-item">
+                                <div class="stat-value">${index + 1}위</div>
+                                <div class="stat-label">현재 순위</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${percentage}%</div>
+                                <div class="stat-label">응모율</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // 전체 응모 수 업데이트
+            const total = universities.reduce((sum, uni) => sum + uni.responses, 0);
+            document.getElementById('totalResponses').textContent = total.toLocaleString();
+            
+            // 업데이트 시간
+            const now = new Date();
+            document.getElementById('updateTime').textContent = now.toLocaleTimeString('ko-KR');
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        async function refreshData() {
+            try {
+                const data = await fetchGoogleSheetData();
+                updateDisplay(data);
+            } catch (error) {
+                showError('데이터를 불러오는데 실패했습니다. 구글 시트 설정을 확인해주세요.');
+                console.error('상세 오류:', error);
+            }
+        }
+
+        // 초기 로드
+        refreshData();
+
+        // 10초마다 자동 새로고침
+        setInterval(refreshData, 10000);
+    </script>
+</body>
+</html>
