@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봄날엔 판매 대시보드 (실시간 연동)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(102, 126, 234, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .dashboard.loaded {
+            display: block;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .sync-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #10b981;
+            font-size: 14px;
+        }
+
+        .sync-dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .period-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .period-btn {
+            padding: 12px 24px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .period-btn:hover {
+            background: #f0f3ff;
+        }
+
+        .period-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .custom-period {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .date-input {
+            padding: 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .date-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .apply-btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            background: #5568d3;
+        }
+
+        .refresh-btn {
+            padding: 10px 20px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            background: #f0f3ff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            color: #333;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-change {
+            font-size: 14px;
+            color: #10b981;
+        }
+
+        .stat-change.negative {
+            color: #ef4444;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .chart-card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .table-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .table-card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        td {
+            padding: 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .product-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .rank {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .period-filter {
+                width: 100%;
+            }
+
+            .period-btn {
+                flex: 1;
+                min-width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loadingScreen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2>데이터를 불러오는 중...</h2>
+            <p>구글 시트에서 최신 데이터를 가져오고 있습니다</p>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard">
+        <div class="header">
+            <div class="header-top">
+                <div class="header-title">
+                    <h1>🌸 봄날엔 판매 대시보드</h1>
+                    <p id="periodDisplay">전체 기간</p>
+                    <div class="sync-info">
+                        <div class="sync-dot"></div>
+                        <span>구글 시트와 실시간 연동</span>
+                    </div>
+                </div>
+                <button class="refresh-btn" onclick="loadData()">
+                    <span>🔄</span>
+                    <span>새로고침</span>
+                </button>
+            </div>
+            <div class="period-filter">
+                <button class="period-btn active" data-period="all">전체</button>
+                <button class="period-btn" data-period="7">최근 7일</button>
+                <button class="period-btn" data-period="30">최근 30일</button>
+                <button class="period-btn" data-period="custom">사용자 지정</button>
+            </div>
+            <div class="custom-period" id="customPeriod" style="display: none;">
+                <input type="date" id="startDate" class="date-input">
+                <span>~</span>
+                <input type="date" id="endDate" class="date-input">
+                <button class="apply-btn" onclick="applyCustomPeriod()">적용</button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">총 매출</div>
+                <div class="stat-value" id="totalRevenue">-</div>
+                <div class="stat-change" id="revenueChange"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">총 주문 수</div>
+                <div class="stat-value" id="totalOrders">-</div>
+                <div class="stat-change" id="ordersChange"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">총 판매 수량</div>
+                <div class="stat-value" id="totalItems">-</div>
+                <div class="stat-change" id="itemsChange"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">평균 주문 금액</div>
+                <div class="stat-value" id="avgOrderValue">-</div>
+                <div class="stat-change" id="avgChange"></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>📈 일별 매출 추이</h3>
+                <div class="chart-container">
+                    <canvas id="dailySalesChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>🏆 인기 상품 TOP 10</h3>
+                <div class="chart-container">
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <h3>🎯 베스트 셀러 상품</h3>
+            <table id="bestSellersTable">
+                <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>상품명</th>
+                        <th>판매수량</th>
+                        <th>매출</th>
+                        <th>주문수</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ⚙️ 여기에 구글 시트 URL을 입력하세요
+        const SHEET_URL = 'YOUR_GOOGLE_SHEET_URL_HERE';
+        
+        let allData = {
+            daily_sales: [],
+            products: []
+        };
+        let dailyChart, topProductsChart;
+        let currentPeriod = 'all';
+
+        // 숫자 포맷팅 함수
+        function formatNumber(num) {
+            return new Intl.NumberFormat('ko-KR').format(Math.round(num));
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('ko-KR').format(Math.round(num)) + '원';
+        }
+
+        // 구글 시트에서 데이터 로드
+        async function loadData() {
+            try {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.display = 'flex';
+
+                // 주문내역 시트 로드
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
+                
+                Papa.parse(csvText, {
+                    header: true,
+                    complete: function(results) {
+                        processData(results.data);
+                        loadingScreen.style.display = 'none';
+                        document.getElementById('dashboard').classList.add('loaded');
+                    },
+                    error: function(error) {
+                        console.error('데이터 로드 오류:', error);
+                        showError('데이터를 불러오는데 실패했습니다. 구글 시트 URL을 확인해주세요.');
+                    }
+                });
+            } catch (error) {
+                console.error('데이터 로드 오류:', error);
+                showError('데이터를 불러오는데 실패했습니다. 구글 시트가 웹에 게시되었는지 확인해주세요.');
+            }
+        }
+
+        // 데이터 처리
+        function processData(rawData) {
+            // 일별 매출 집계
+            const dailySalesMap = {};
+            const productSalesMap = {};
+            
+            rawData.forEach(row => {
+                if (!row['결제일자'] || !row['제품매출']) return;
+                
+                const date = row['결제일자'].split(' ')[0]; // 날짜만 추출
+                const revenue = parseFloat(row['제품매출']) || 0;
+                const quantity = parseFloat(row['판매수량']) || 0;
+                const orderNum = row['주문번호'];
+                const productName = row['상품명'];
+                
+                // 일별 집계
+                if (!dailySalesMap[date]) {
+                    dailySalesMap[date] = {
+                        날짜: date,
+                        매출: 0,
+                        주문수: new Set(),
+                        판매수량: 0
+                    };
+                }
+                dailySalesMap[date].매출 += revenue;
+                dailySalesMap[date].주문수.add(orderNum);
+                dailySalesMap[date].판매수량 += quantity;
+                
+                // 상품별 집계
+                if (productName) {
+                    if (!productSalesMap[productName]) {
+                        productSalesMap[productName] = {
+                            상품명: productName,
+                            판매수량: 0,
+                            매출: 0,
+                            주문수: new Set()
+                        };
+                    }
+                    productSalesMap[productName].판매수량 += quantity;
+                    productSalesMap[productName].매출 += revenue;
+                    productSalesMap[productName].주문수.add(orderNum);
+                }
+            });
+            
+            // 일별 데이터 변환
+            allData.daily_sales = Object.values(dailySalesMap)
+                .map(d => ({
+                    날짜: d.날짜,
+                    매출: d.매출,
+                    주문수: d.주문수.size,
+                    판매수량: d.판매수량
+                }))
+                .sort((a, b) => a.날짜.localeCompare(b.날짜));
+            
+            // 상품별 데이터 변환 및 정렬
+            allData.products = Object.values(productSalesMap)
+                .map(p => ({
+                    상품명: p.상품명,
+                    판매수량: p.판매수량,
+                    매출: p.매출,
+                    주문수: p.주문수.size
+                }))
+                .sort((a, b) => b.판매수량 - a.판매수량)
+                .slice(0, 20); // 상위 20개만
+            
+            // 대시보드 업데이트
+            updateDashboard(currentPeriod);
+        }
+
+        // 에러 표시
+        function showError(message) {
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.body.innerHTML += `<div class="error-message"><h2>⚠️ 오류</h2><p>${message}</p></div>`;
+        }
+
+        // 날짜 필터링 함수
+        function filterDataByPeriod(period, startDate = null, endDate = null) {
+            let filteredData = [...allData.daily_sales];
+            
+            if (period === 'all') {
+                // 전체 데이터
+            } else if (period === '7') {
+                filteredData = filteredData.slice(-7);
+            } else if (period === '30') {
+                filteredData = filteredData.slice(-30);
+            } else if (period === 'custom' && startDate && endDate) {
+                filteredData = filteredData.filter(d => {
+                    return d.날짜 >= startDate && d.날짜 <= endDate;
+                });
+            }
+            
+            return filteredData;
+        }
+
+        // 통계 계산 함수
+        function calculateStats(data) {
+            const totalRevenue = data.reduce((sum, d) => sum + d.매출, 0);
+            const totalOrders = data.reduce((sum, d) => sum + d.주문수, 0);
+            const totalItems = data.reduce((sum, d) => sum + d.판매수량, 0);
+            const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+            
+            return {
+                totalRevenue,
+                totalOrders,
+                totalItems,
+                avgOrderValue
+            };
+        }
+
+        // 대시보드 업데이트 함수
+        function updateDashboard(period, startDate = null, endDate = null) {
+            const filteredData = filterDataByPeriod(period, startDate, endDate);
+            
+            if (filteredData.length === 0) {
+                console.warn('필터링된 데이터가 없습니다');
+                return;
+            }
+            
+            const stats = calculateStats(filteredData);
+            
+            // 기간 표시 업데이트
+            let periodText = '';
+            if (period === 'all') {
+                const firstDate = filteredData[0].날짜;
+                const lastDate = filteredData[filteredData.length - 1].날짜;
+                periodText = `전체 기간 (${firstDate} ~ ${lastDate})`;
+            } else if (period === '7') {
+                periodText = '최근 7일';
+            } else if (period === '30') {
+                periodText = '최근 30일';
+            } else if (period === 'custom') {
+                periodText = `${startDate} ~ ${endDate}`;
+            }
+            document.getElementById('periodDisplay').textContent = periodText;
+            
+            // 통계 업데이트
+            document.getElementById('totalRevenue').textContent = formatCurrency(stats.totalRevenue);
+            document.getElementById('totalOrders').textContent = formatNumber(stats.totalOrders) + '건';
+            document.getElementById('totalItems').textContent = formatNumber(stats.totalItems) + '개';
+            document.getElementById('avgOrderValue').textContent = formatCurrency(stats.avgOrderValue);
+            
+            // 변화율 계산
+            const prevData = period === '7' ? filterDataByPeriod('all').slice(-14, -7) :
+                            period === '30' ? filterDataByPeriod('all').slice(-60, -30) :
+                            [];
+            
+            if (prevData.length > 0) {
+                const prevStats = calculateStats(prevData);
+                const revenueChange = ((stats.totalRevenue - prevStats.totalRevenue) / prevStats.totalRevenue * 100).toFixed(1);
+                const ordersChange = ((stats.totalOrders - prevStats.totalOrders) / prevStats.totalOrders * 100).toFixed(1);
+                const itemsChange = ((stats.totalItems - prevStats.totalItems) / prevStats.totalItems * 100).toFixed(1);
+                const avgChange = ((stats.avgOrderValue - prevStats.avgOrderValue) / prevStats.avgOrderValue * 100).toFixed(1);
+                
+                updateChangeDisplay('revenueChange', revenueChange);
+                updateChangeDisplay('ordersChange', ordersChange);
+                updateChangeDisplay('itemsChange', itemsChange);
+                updateChangeDisplay('avgChange', avgChange);
+            } else {
+                document.getElementById('revenueChange').textContent = '';
+                document.getElementById('ordersChange').textContent = '';
+                document.getElementById('itemsChange').textContent = '';
+                document.getElementById('avgChange').textContent = '';
+            }
+            
+            // 차트 업데이트
+            updateCharts(filteredData);
+            
+            // 테이블 업데이트
+            updateTable();
+        }
+
+        function updateChangeDisplay(id, change) {
+            const element = document.getElementById(id);
+            const isPositive = parseFloat(change) >= 0;
+            element.textContent = `전 기간 대비 ${isPositive ? '+' : ''}${change}%`;
+            element.className = isPositive ? 'stat-change' : 'stat-change negative';
+        }
+
+        // 차트 업데이트 함수
+        function updateCharts(data) {
+            // 일별 매출 차트
+            if (dailyChart) {
+                dailyChart.destroy();
+            }
+            
+            const dailyCtx = document.getElementById('dailySalesChart').getContext('2d');
+            dailyChart = new Chart(dailyCtx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.날짜.substring(5)),
+                    datasets: [{
+                        label: '일별 매출',
+                        data: data.map(d => d.매출),
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return (value / 1000000).toFixed(0) + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 인기 상품 차트
+            if (topProductsChart) {
+                topProductsChart.destroy();
+            }
+            
+            const topProducts = allData.products.slice(0, 10);
+            const topProductsCtx = document.getElementById('topProductsChart').getContext('2d');
+            topProductsChart = new Chart(topProductsCtx, {
+                type: 'bar',
+                data: {
+                    labels: topProducts.map(p => {
+                        const words = p.상품명.split(' ');
+                        return words.length > 2 ? words[1] + ' ' + words[2] : p.상품명;
+                    }),
+                    datasets: [{
+                        label: '판매 수량',
+                        data: topProducts.map(p => p.판매수량),
+                        backgroundColor: [
+                            '#667eea', '#764ba2', '#f093fb', '#4facfe',
+                            '#43e97b', '#fa709a', '#fee140', '#30cfd0',
+                            '#a8edea', '#fbc2eb'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // 테이블 업데이트 함수
+        function updateTable() {
+            const tbody = document.querySelector('#bestSellersTable tbody');
+            tbody.innerHTML = '';
+            
+            allData.products.forEach((product, index) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td><span class="rank">${index + 1}</span></td>
+                    <td class="product-name">${product.상품명}</td>
+                    <td>${formatNumber(product.판매수량)}개</td>
+                    <td>${formatCurrency(product.매출)}</td>
+                    <td>${formatNumber(product.주문수)}건</td>
+                `;
+            });
+        }
+
+        // 기간 버튼 이벤트
+        document.querySelectorAll('.period-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const period = this.dataset.period;
+                currentPeriod = period;
+                
+                const customPeriod = document.getElementById('customPeriod');
+                if (period === 'custom') {
+                    customPeriod.style.display = 'flex';
+                    const today = new Date();
+                    const thirtyDaysAgo = new Date(today);
+                    thirtyDaysAgo.setDate(today.getDate() - 30);
+                    
+                    document.getElementById('startDate').value = thirtyDaysAgo.toISOString().split('T')[0];
+                    document.getElementById('endDate').value = today.toISOString().split('T')[0];
+                } else {
+                    customPeriod.style.display = 'none';
+                    updateDashboard(period);
+                }
+            });
+        });
+
+        // 사용자 지정 기간 적용
+        function applyCustomPeriod() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (startDate && endDate) {
+                updateDashboard('custom', startDate, endDate);
+            }
+        }
+
+        // 페이지 로드 시 데이터 로드
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>
