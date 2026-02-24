@@ -3,163 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>디저트 트럭 이벤트 - 실시간 응모율</title>
+    <title>🍰 디저트 트럭이 찾아갑니다!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --peach: #FF8C69;
+            --coral: #FF6B6B;
+            --mint: #4ECDC4;
+            --yellow: #FFE66D;
+            --cream: #FFF9F0;
+            --pink-light: #FFD6D6;
+            --brown: #5C3D2E;
+            --text-dark: #3D2B1F;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Nanum Gothic', sans-serif;
+            background-color: var(--cream);
             min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Polka dot background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, #FFD6D6 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
+        /* ===== HEADER ===== */
         header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            padding: 30px 20px;
+            padding: 40px 20px 30px;
+            position: relative;
+        }
+
+        .truck-emoji {
+            font-size: 5em;
+            display: block;
+            animation: bounce 2s infinite;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
         }
 
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-family: 'Gaegu', cursive;
+            font-size: 3em;
+            color: var(--brown);
+            line-height: 1.2;
+            text-shadow: 3px 3px 0px var(--pink-light);
+            position: relative;
+        }
+
+        h1 span {
+            color: var(--coral);
         }
 
         .subtitle {
-            font-size: 1.2em;
-            opacity: 0.95;
-            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #7a5c50;
+            margin: 12px 0 20px;
+            line-height: 1.6;
         }
 
-        .live-indicator {
+        /* Live badge */
+        .live-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 20px;
+            background: var(--coral);
+            color: white;
+            padding: 8px 22px;
+            border-radius: 30px;
             font-size: 0.95em;
+            font-weight: 700;
+            box-shadow: 0 4px 0 #c0392b;
+            letter-spacing: 0.5px;
         }
 
         .live-dot {
             width: 10px;
             height: 10px;
-            background: #ff4444;
+            background: white;
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            50% { opacity: 0.4; transform: scale(1.4); }
         }
 
+        /* ===== URGENCY BANNER ===== */
+        .urgency-banner {
+            background: linear-gradient(90deg, var(--yellow), #FFD700, var(--yellow));
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.05em;
+            font-weight: 800;
+            color: var(--brown);
+            box-shadow: 0 4px 0 #d4a017, 0 6px 20px rgba(255, 180, 0, 0.3);
+            border: 2px dashed #d4a017;
+            letter-spacing: 0.3px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* ===== CARDS GRID ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
+            margin: 30px 0;
         }
 
         .university-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 24px;
+            padding: 28px;
             position: relative;
             overflow: hidden;
+            border: 3px solid transparent;
+            transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
+            cursor: default;
+            animation: cardIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .university-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transform: translateY(-6px) scale(1.02);
         }
 
+        /* Rank-based styles */
+        .rank-1 {
+            border-color: #FFD700;
+            box-shadow: 0 8px 0 #C8A000, 0 12px 30px rgba(255, 215, 0, 0.25);
+            background: linear-gradient(160deg, #FFFDF0 0%, #FFF8D6 100%);
+        }
+        .rank-1:hover { box-shadow: 0 10px 0 #C8A000, 0 16px 40px rgba(255, 215, 0, 0.35); }
+
+        .rank-2 {
+            border-color: #C0C0C0;
+            box-shadow: 0 8px 0 #909090, 0 12px 30px rgba(192, 192, 192, 0.25);
+            background: linear-gradient(160deg, #FAFAFA 0%, #F0F0F0 100%);
+        }
+        .rank-2:hover { box-shadow: 0 10px 0 #909090, 0 16px 40px rgba(192, 192, 192, 0.35); }
+
+        .rank-3 {
+            border-color: #CD7F32;
+            box-shadow: 0 8px 0 #8B5A1E, 0 12px 30px rgba(205, 127, 50, 0.25);
+            background: linear-gradient(160deg, #FFF8F0 0%, #F5E8D8 100%);
+        }
+        .rank-3:hover { box-shadow: 0 10px 0 #8B5A1E, 0 16px 40px rgba(205, 127, 50, 0.35); }
+
+        .rank-other {
+            box-shadow: 0 6px 0 #E0C8C0, 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .rank-other:hover { box-shadow: 0 8px 0 #E0C8C0, 0 14px 35px rgba(0,0,0,0.12); }
+
+        /* Medal badge */
         .rank-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            top: 18px;
+            right: 18px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.3em;
+            font-weight: 800;
+            font-size: 0.85em;
             color: white;
+            line-height: 1;
+            font-family: 'Gaegu', cursive;
         }
 
-        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
-        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #808080); }
-        .rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); }
-        .rank-other { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .badge-1 {
+            background: radial-gradient(circle at 35% 35%, #FFE066, #FFB800);
+            box-shadow: 0 3px 0 #C8900, 0 4px 12px rgba(255, 180, 0, 0.5);
+            font-size: 1.6em;
+        }
+        .badge-2 {
+            background: radial-gradient(circle at 35% 35%, #E8E8E8, #A0A0A0);
+            box-shadow: 0 3px 0 #606060, 0 4px 12px rgba(160, 160, 160, 0.5);
+            font-size: 1.6em;
+        }
+        .badge-3 {
+            background: radial-gradient(circle at 35% 35%, #E8A870, #A05818);
+            box-shadow: 0 3px 0 #703010, 0 4px 12px rgba(160, 100, 40, 0.5);
+            font-size: 1.6em;
+        }
+        .badge-other {
+            background: linear-gradient(135deg, var(--peach), var(--coral));
+            box-shadow: 0 3px 0 #c0392b, 0 4px 10px rgba(255, 100, 80, 0.35);
+        }
 
         .university-name {
-            font-size: 1.8em;
+            font-family: 'Gaegu', cursive;
+            font-size: 1.7em;
             font-weight: 700;
-            margin-bottom: 20px;
-            color: #2d3748;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            padding-right: 60px;
+            line-height: 1.2;
         }
 
+        /* Response count with counting animation */
         .response-count {
-            font-size: 3em;
-            font-weight: 800;
-            color: #667eea;
-            margin-bottom: 10px;
             display: flex;
             align-items: baseline;
-            gap: 5px;
+            gap: 6px;
+            margin-bottom: 14px;
         }
 
-        .response-count .label {
-            font-size: 0.4em;
-            color: #718096;
-            font-weight: 500;
+        .count-number {
+            font-family: 'Gaegu', cursive;
+            font-size: 3.2em;
+            font-weight: 700;
+            color: var(--coral);
+            line-height: 1;
+            transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
         }
 
-        .progress-bar-container {
-            background: #e2e8f0;
-            height: 30px;
-            border-radius: 15px;
+        .count-number.bump {
+            animation: countBump 0.4s cubic-bezier(.34,1.56,.64,1);
+        }
+
+        @keyframes countBump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); color: var(--mint); }
+            100% { transform: scale(1); }
+        }
+
+        .count-label {
+            font-size: 1em;
+            color: #9a7a70;
+            font-weight: 700;
+        }
+
+        /* Change indicator */
+        .change-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.85em;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 800;
+            margin-left: 6px;
+            animation: popIn 0.3s cubic-bezier(.34,1.56,.64,1);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .change-up { background: #d4f7e8; color: #1a7a4a; }
+        .change-down { background: #fde8e8; color: #9b1c1c; }
+
+        /* Progress bar */
+        .progress-wrap {
+            background: #f0e8e4;
+            border-radius: 30px;
+            height: 26px;
             overflow: hidden;
-            margin: 20px 0;
+            margin: 14px 0;
             position: relative;
         }
 
-        .progress-bar {
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 15px;
-            transition: width 1s ease;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 15px;
+            padding-right: 12px;
             color: white;
-            font-weight: 600;
-            font-size: 0.9em;
+            font-weight: 800;
+            font-size: 0.85em;
+            transition: width 1.2s cubic-bezier(.65,0,.35,1);
+            position: relative;
+            overflow: hidden;
+            min-width: 40px;
         }
 
+        .rank-1 .progress-fill { background: linear-gradient(90deg, #FFD700, #FFA500); }
+        .rank-2 .progress-fill { background: linear-gradient(90deg, #B0B0B0, #808080); }
+        .rank-3 .progress-fill { background: linear-gradient(90deg, #CD7F32, #8B4513); }
+        .rank-other .progress-fill { background: linear-gradient(90deg, var(--peach), var(--coral)); }
+
+        /* Shine effect on bar */
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: barShine 2.5s infinite;
+        }
+
+        @keyframes barShine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        /* Stats row */
         .stats-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #e2e8f0;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 2px dashed #f0e0d8;
         }
 
         .stat-item {
@@ -167,131 +356,235 @@
         }
 
         .stat-value {
-            font-size: 1.5em;
+            font-family: 'Gaegu', cursive;
+            font-size: 1.4em;
             font-weight: 700;
-            color: #667eea;
+            color: var(--brown);
         }
 
         .stat-label {
-            font-size: 0.85em;
-            color: #718096;
-            margin-top: 5px;
+            font-size: 0.8em;
+            color: #9a7a70;
+            margin-top: 2px;
         }
 
-        .total-stats {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .total-stats h2 {
+        /* Ranking ribbon for 1st */
+        .crown {
+            position: absolute;
+            top: -2px;
+            left: 20px;
             font-size: 1.5em;
-            color: #2d3748;
-            margin-bottom: 20px;
+            animation: crownWiggle 3s ease-in-out infinite;
         }
 
-        .total-number {
-            font-size: 4em;
-            font-weight: 800;
-            color: #667eea;
+        @keyframes crownWiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* ===== TOTAL STATS ===== */
+        .total-box {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+            border: 3px solid var(--pink-light);
+            box-shadow: 0 8px 0 var(--pink-light), 0 12px 30px rgba(255, 100, 100, 0.1);
+            margin-top: 10px;
+        }
+
+        .total-box h2 {
+            font-family: 'Gaegu', cursive;
+            font-size: 1.6em;
+            color: var(--brown);
             margin-bottom: 10px;
         }
 
-        .update-time {
-            color: #718096;
-            font-size: 0.9em;
+        .total-number {
+            font-family: 'Gaegu', cursive;
+            font-size: 5em;
+            color: var(--coral);
+            line-height: 1;
+            font-weight: 700;
+            animation: countBump 0.5s cubic-bezier(.34,1.56,.64,1);
         }
 
-        .loading {
+        .total-label {
+            font-size: 1em;
+            color: #9a7a70;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .update-time {
+            font-size: 0.85em;
+            color: #b0948a;
+            margin-top: 14px;
+        }
+
+        /* CTA section */
+        .cta-box {
+            background: linear-gradient(135deg, var(--coral), #FF4757);
+            border-radius: 24px;
+            padding: 28px 32px;
             text-align: center;
             color: white;
-            font-size: 1.2em;
-            padding: 40px;
+            margin: 24px 0;
+            box-shadow: 0 8px 0 #c0392b, 0 12px 30px rgba(255, 70, 70, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '🍩 🧁 🍪 🎂 🍰 🍦 🍩 🧁 🍪 🎂 🍰 🍦';
+            position: absolute;
+            top: 8px; left: 0;
+            font-size: 1.3em;
+            opacity: 0.15;
+            white-space: nowrap;
+            animation: scrollEmoji 20s linear infinite;
+        }
+
+        @keyframes scrollEmoji {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .cta-box h3 {
+            font-family: 'Gaegu', cursive;
+            font-size: 2em;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .cta-box p {
+            font-size: 1em;
+            opacity: 0.92;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Loading / Error */
+        .loading {
+            text-align: center;
+            color: var(--brown);
+            font-family: 'Gaegu', cursive;
+            font-size: 1.5em;
+            padding: 60px 20px;
+        }
+
+        .loading span {
+            display: inline-block;
+            animation: loadDot 1.4s infinite both;
+        }
+        .loading span:nth-child(2) { animation-delay: 0.2s; }
+        .loading span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes loadDot {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+            40% { transform: scale(1.2); opacity: 1; }
         }
 
         .error-message {
-            background: #fee;
-            color: #c33;
+            background: #fff0f0;
+            border: 2px solid var(--coral);
+            color: var(--coral);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 16px;
             margin: 20px 0;
             text-align: center;
+            font-weight: 700;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .response-count {
-                font-size: 2.5em;
-            }
-
-            .total-number {
-                font-size: 3em;
-            }
+        /* Floating treats */
+        .floater {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.8em;
+            animation: floatUp 6s ease-in infinite;
+            z-index: 0;
+            opacity: 0;
         }
 
-        .change-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.9em;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-            margin-left: 10px;
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-80vh) rotate(360deg); }
         }
 
-        .change-up {
-            background: #def7ec;
-            color: #03543f;
+        @media (max-width: 680px) {
+            h1 { font-size: 2.1em; }
+            .truck-emoji { font-size: 3.5em; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .total-number { font-size: 3.5em; }
         }
 
-        .change-down {
-            background: #fde8e8;
-            color: #9b1c1c;
-        }
+        /* Stagger card animations */
+        .university-card:nth-child(1) { animation-delay: 0.05s; }
+        .university-card:nth-child(2) { animation-delay: 0.10s; }
+        .university-card:nth-child(3) { animation-delay: 0.15s; }
+        .university-card:nth-child(4) { animation-delay: 0.20s; }
+        .university-card:nth-child(5) { animation-delay: 0.25s; }
+        .university-card:nth-child(6) { animation-delay: 0.30s; }
     </style>
 </head>
 <body>
+
+    <!-- Floating treat emojis in background -->
+    <div class="floater" style="left:5%; animation-delay:0s;">🍩</div>
+    <div class="floater" style="left:15%; animation-delay:1.5s;">🧁</div>
+    <div class="floater" style="left:28%; animation-delay:3s;">🍪</div>
+    <div class="floater" style="left:45%; animation-delay:0.8s;">🍰</div>
+    <div class="floater" style="left:62%; animation-delay:2.2s;">🍦</div>
+    <div class="floater" style="left:75%; animation-delay:4s;">🎂</div>
+    <div class="floater" style="left:88%; animation-delay:1s;">🍩</div>
+    <div class="floater" style="left:92%; animation-delay:3.5s;">🧁</div>
+
     <div class="container">
+
         <header>
-            <h1>🍰 디저트 트럭이 찾아갑니다!</h1>
-            <p class="subtitle">여러분의 대학에 특별한 디저트 트럭을 보내드립니다</p>
-            <div class="live-indicator">
+            <span class="truck-emoji">🚚</span>
+            <h1>디저트 트럭이<br><span>찾아갑니다!</span></h1>
+            <p class="subtitle">
+                응모수가 가장 많은 대학교에<br>
+                달콤한 디저트 트럭을 직접 보내드려요 🍰
+            </p>
+            <div class="live-badge">
                 <div class="live-dot"></div>
-                실시간 업데이트 중
+                실시간 집계 중
             </div>
         </header>
 
-        <div id="loading" class="loading">데이터를 불러오는 중...</div>
-        <div id="error" class="error-message" style="display: none;"></div>
-
-        <div class="stats-grid" id="universityGrid" style="display: none;">
-            <!-- University cards will be inserted here -->
+        <div class="urgency-banner">
+            🏆 지금 1등 대학교로 트럭이 출동합니다! 우리 학교가 이기게 해주세요 🔥
         </div>
 
-        <div class="total-stats" id="totalStats" style="display: none;">
-            <h2>전체 응모 현황</h2>
+        <div class="cta-box">
+            <h3>🍩 아직 응모 안 했다면 지금 바로!</h3>
+            <p>내 학교 순위가 올라가는 걸 실시간으로 확인해보세요!<br>한 명 한 명의 응모가 순위를 바꿉니다 ✨</p>
+        </div>
+
+        <div id="loading" class="loading">
+            불러오는 중<span>●</span><span>●</span><span>●</span>
+        </div>
+        <div id="error" class="error-message" style="display:none;"></div>
+
+        <div class="stats-grid" id="universityGrid" style="display:none;"></div>
+
+        <div class="total-box" id="totalStats" style="display:none;">
+            <h2>🎉 지금까지 총 응모 수</h2>
             <div class="total-number" id="totalResponses">0</div>
-            <div class="update-time">마지막 업데이트: <span id="updateTime"></span></div>
+            <div class="total-label">명이 참여했어요!</div>
+            <div class="update-time">마지막 업데이트: <span id="updateTime">—</span></div>
         </div>
+
     </div>
 
     <script>
-        // ⚠️ 여기에 구글 스프레드시트 정보를 입력하세요
-        const SHEET_ID = '1K9E0VDxspjRsTpjRbKL9KKvcyHFM4POz1HekzUSPL0k'; // 스프레드시트 ID
-        const SHEET_NAME = '집계'; // 집계 시트 이름 (보통 '집계' 또는 'Sheet2')
-        
-        // 구글 시트 API URL 생성
-        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
+        const SHEET_ID = '1K9E0VDxspjRsTpjRbKL9KKvcyHFM4POz1HekzUSPL0k';
+        const SHEET_GID = '340181697'; // 집계 시트의 gid
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
 
         let previousData = {};
 
@@ -300,46 +593,31 @@
                 const response = await fetch(SHEET_URL);
                 const text = await response.text();
                 
-                // Google Sheets는 JSONP 형식으로 응답하므로 파싱 필요
-                const json = JSON.parse(text.substr(47).slice(0, -2));
+                // /*O_o*/ google.visualization.Query.setResponse({...}); 형식 파싱
+                const start = text.indexOf('(') + 1;
+                const end = text.lastIndexOf(')');
+                const json = JSON.parse(text.substring(start, end));
                 
-                // 데이터 추출
                 const rows = json.table.rows;
                 const universities = [];
                 
-                // UNIQUE 함수 사용 시 첫 번째 행이 비어있을 수 있으므로 체크
                 for (let i = 0; i < rows.length; i++) {
                     const row = rows[i];
-                    
-                    // 행이 존재하고, A열과 B열에 데이터가 있는지 확인
                     if (row.c && row.c[0] && row.c[1]) {
                         const nameCell = row.c[0];
                         const countCell = row.c[1];
-                        
-                        // 값이 null이거나 빈 문자열이 아닌 경우만 처리
                         if (nameCell.v && countCell.v !== null && countCell.v !== '') {
                             const name = nameCell.v.toString().trim();
                             const responses = parseInt(countCell.v);
-                            
-                            // 유효한 데이터인지 확인
                             if (name && !isNaN(responses)) {
                                 const lastCount = previousData[name] || 0;
-                                const change = responses - lastCount;
-                                
-                                universities.push({
-                                    name: name,
-                                    responses: responses,
-                                    change: change
-                                });
-                                
+                                universities.push({ name, responses, change: responses - lastCount });
                                 previousData[name] = responses;
                             }
                         }
                     }
                 }
-                
                 return universities;
-                
             } catch (error) {
                 console.error('데이터 가져오기 실패:', error);
                 throw error;
@@ -348,51 +626,47 @@
 
         function updateDisplay(universities) {
             if (!universities || universities.length === 0) {
-                showError('아직 응모한 대학교가 없습니다. 첫 번째 응모자가 되어보세요!');
+                showError('아직 응모한 대학교가 없습니다. 첫 번째 응모자가 되어보세요! 🎉');
                 return;
             }
 
-            // 로딩 숨기기
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
             document.getElementById('universityGrid').style.display = 'grid';
             document.getElementById('totalStats').style.display = 'block';
-            
-            // 순위별로 정렬 (응모수 많은 순)
+
             universities.sort((a, b) => b.responses - a.responses);
-            
             const grid = document.getElementById('universityGrid');
             const maxResponses = Math.max(...universities.map(u => u.responses));
-            
+
             grid.innerHTML = universities.map((uni, index) => {
                 const percentage = maxResponses > 0 ? (uni.responses / maxResponses * 100).toFixed(1) : 0;
                 const change = uni.change;
                 const changeClass = change > 0 ? 'change-up' : change < 0 ? 'change-down' : '';
-                const changeSymbol = change > 0 ? '↑' : change < 0 ? '↓' : '';
-                
-                // 순위 배지 클래스 결정
+                const changeSymbol = change > 0 ? '▲' : change < 0 ? '▼' : '';
+
                 let rankClass = 'rank-other';
-                if (index === 0) rankClass = 'rank-1';
-                else if (index === 1) rankClass = 'rank-2';
-                else if (index === 2) rankClass = 'rank-3';
-                
+                let badgeClass = 'badge-other';
+                let medal = null;
+                if (index === 0) { rankClass = 'rank-1'; badgeClass = 'badge-1'; medal = '🥇'; }
+                else if (index === 1) { rankClass = 'rank-2'; badgeClass = 'badge-2'; medal = '🥈'; }
+                else if (index === 2) { rankClass = 'rank-3'; badgeClass = 'badge-3'; medal = '🥉'; }
+
                 return `
-                    <div class="university-card">
-                        <div class="rank-badge ${rankClass}">${index + 1}</div>
+                    <div class="university-card ${rankClass}" data-name="${uni.name}" style="animation-delay:${index * 0.07}s">
+                        ${index === 0 ? '<span class="crown">👑</span>' : ''}
+                        <div class="rank-badge ${badgeClass}">${medal || (index + 1)}</div>
                         <h3 class="university-name">${uni.name}</h3>
                         <div class="response-count">
-                            ${uni.responses.toLocaleString()}
-                            <span class="label">명</span>
-                            ${change !== 0 ? `<span class="change-indicator ${changeClass}">${changeSymbol}${Math.abs(change)}</span>` : ''}
+                            <span class="count-number">${uni.responses.toLocaleString()}</span>
+                            <span class="count-label">명 ${change !== 0 ? `<span class="change-indicator ${changeClass}">${changeSymbol}${Math.abs(change)}</span>` : ''}</span>
                         </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: ${percentage}%">
-                                ${percentage}%
-                            </div>
+                        <div class="progress-wrap">
+                            <div class="progress-fill" style="width: ${percentage}%">${percentage}%</div>
                         </div>
                         <div class="stats-row">
                             <div class="stat-item">
-                                <div class="stat-value">${index + 1}위</div>
+                                <div class="stat-value">${medal || `${index+1}위`}</div>
                                 <div class="stat-label">현재 순위</div>
                             </div>
                             <div class="stat-item">
@@ -404,13 +678,9 @@
                 `;
             }).join('');
 
-            // 전체 응모 수 업데이트
             const total = universities.reduce((sum, uni) => sum + uni.responses, 0);
             document.getElementById('totalResponses').textContent = total.toLocaleString();
-            
-            // 업데이트 시간
-            const now = new Date();
-            document.getElementById('updateTime').textContent = now.toLocaleTimeString('ko-KR');
+            document.getElementById('updateTime').textContent = new Date().toLocaleTimeString('ko-KR');
         }
 
         function showError(message) {
@@ -430,11 +700,6 @@
             }
         }
 
-        // 초기 로드
         refreshData();
-
-        // 10초마다 자동 새로고침
         setInterval(refreshData, 10000);
     </script>
-</body>
-</html>
