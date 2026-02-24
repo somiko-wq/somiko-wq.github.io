@@ -157,6 +157,64 @@
             color: #7a5c50;
         }
 
+        /* ===== ACTION BUTTONS ===== */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--coral), #FF4757);
+            color: white;
+            box-shadow: 0 6px 0 #D63031;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 0 #D63031;
+        }
+
+        .btn-share {
+            background: linear-gradient(135deg, var(--mint), #2EBAAE);
+            color: white;
+            box-shadow: 0 6px 0 #259B8F;
+        }
+
+        .btn-share:hover {
+            box-shadow: 0 10px 0 #259B8F;
+        }
+
+        .btn-icon {
+            font-size: 1.3em;
+        }
+
         /* ===== PODIUM DESIGN ===== */
         .podium-section {
             margin: 40px 0;
@@ -544,6 +602,13 @@
                 padding: 3px 8px;
             }
             .total-number { font-size: 3.5em; }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -579,6 +644,17 @@
         <div class="cta-box">
             <h3>🍩 아직 응모 안 했다면 지금 바로!</h3>
             <p>내 학교 순위가 올라가는 걸 실시간으로 확인해보세요!<br>한 명 한 명의 응모가 순위를 바꿉니다 ✨</p>
+            
+            <div class="action-buttons">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScDTEGuc0fR4LmoQIAvIehzdTgykRXpdL-YUi535FJALB7fbA/viewform?usp=header" target="_blank" class="btn btn-primary">
+                    <span class="btn-icon">📝</span>
+                    지금 바로 응모하기
+                </a>
+                <button onclick="shareEvent()" class="btn btn-share">
+                    <span class="btn-icon">📢</span>
+                    친구에게 공유하기
+                </button>
+            </div>
         </div>
 
         <div id="loading" class="loading">
@@ -776,6 +852,31 @@
 
         refreshData();
         setInterval(refreshData, 10000);
+
+        // Share function
+        function shareEvent() {
+            const shareData = {
+                title: '🍰 디저트 트럭 이벤트',
+                text: '우리 학교에 디저트 트럭을 보내주세요! 지금 바로 응모하고 실시간 순위를 확인하세요!',
+                url: window.location.href
+            };
+
+            // Web Share API 지원 여부 확인 (모바일)
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('공유 성공!'))
+                    .catch((error) => console.log('공유 취소:', error));
+            } else {
+                // Web Share API 미지원 시 URL 복사
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('🎉 링크가 복사되었습니다!\n\n친구들에게 공유해주세요:\n' + url);
+                }).catch(() => {
+                    // 복사 실패 시 프롬프트 표시
+                    prompt('아래 링크를 복사해서 공유해주세요:', url);
+                });
+            }
+        }
     </script>
 </body>
 </html>
