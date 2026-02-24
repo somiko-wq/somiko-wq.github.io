@@ -546,18 +546,34 @@
         .floater {
             position: fixed;
             pointer-events: none;
-            font-size: 1.8em;
-            animation: floatUp 6s ease-in infinite;
+            animation: floatUp 8s ease-in infinite;
             z-index: 0;
             opacity: 0;
         }
 
+        .floater img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+
         @keyframes floatUp {
             0% { opacity: 0; transform: translateY(0) rotate(0deg); }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.3; }
-            100% { opacity: 0; transform: translateY(-80vh) rotate(360deg); }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.4; }
+            100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
         }
+
+        /* Stagger animations */
+        .floater:nth-child(1) { animation-delay: 0s; left: 5%; }
+        .floater:nth-child(2) { animation-delay: 2s; left: 15%; }
+        .floater:nth-child(3) { animation-delay: 4s; left: 28%; }
+        .floater:nth-child(4) { animation-delay: 1s; left: 45%; }
+        .floater:nth-child(5) { animation-delay: 3s; left: 62%; }
+        .floater:nth-child(6) { animation-delay: 5s; left: 75%; }
+        .floater:nth-child(7) { animation-delay: 1.5s; left: 88%; }
+        .floater:nth-child(8) { animation-delay: 3.5s; left: 92%; }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.1em; }
@@ -614,14 +630,15 @@
 </head>
 <body>
 
-    <!-- Floating treats -->
-    <div class="floater" style="left:5%; animation-delay:0s;">🍩</div>
-    <div class="floater" style="left:15%; animation-delay:1.5s;">🧁</div>
-    <div class="floater" style="left:28%; animation-delay:3s;">🍪</div>
-    <div class="floater" style="left:45%; animation-delay:0.8s;">🍰</div>
-    <div class="floater" style="left:62%; animation-delay:2.2s;">🍦</div>
-    <div class="floater" style="left:75%; animation-delay:4s;">🎂</div>
-    <div class="floater" style="left:88%; animation-delay:1s;">🍩</div>
+    <!-- Floating product images -->
+    <div class="floater"><img src="1771930651027_image.png" alt="약과 캐릭터"></div>
+    <div class="floater"><img src="image_117.png" alt="떡 캐릭터"></div>
+    <div class="floater"><img src="두쫀떡_피넛__패키지.png" alt="두쫀떡 피넛"></div>
+    <div class="floater"><img src="우리밀_약과.png" alt="우리밀 약과"></div>
+    <div class="floater"><img src="초코퐁당요거꿀떡.png" alt="초코퐁당 요거꿀떡"></div>
+    <div class="floater"><img src="1771930651027_image.png" alt="약과 캐릭터"></div>
+    <div class="floater"><img src="image_117.png" alt="떡 캐릭터"></div>
+    <div class="floater"><img src="두쫀떡_피넛__패키지.png" alt="두쫀떡 피넛"></div>
 
     <div class="container">
         <header>
