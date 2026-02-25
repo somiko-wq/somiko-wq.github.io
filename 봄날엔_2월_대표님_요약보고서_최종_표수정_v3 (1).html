@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>봄날엔 · 2월 광고 성과 요약</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F5F1;
+  --surface: #FFFFFF;
+  --surface2: #F2EFE9;
+  --border: #E4DDD2;
+  --text: #1A1816;
+  --muted: #9A9088;
+  --accent: #C8601A;
+  --green: #1E7A4E;
+  --green-bg: #EAF5EE;
+  --red: #C03020;
+  --red-bg: #FDECEA;
+  --yellow: #A07010;
+  --yellow-bg: #FEF8E6;
+  --blue: #1A50A0;
+  --blue-bg: #EAF0FB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 32px 36px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--text);
+}
+.header-left h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+}
+.header-left h1 em { font-style: italic; color: var(--accent); }
+.header-left .sub  { font-size: 0.7rem; color: var(--muted); margin-top: 5px; letter-spacing: 0.05em; }
+.header-right { text-align: right; }
+.roas-big { font-family: 'DM Serif Display', serif; font-size: 2.6rem; color: var(--accent); line-height: 1; }
+.roas-lbl { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+.period-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 3px 12px;
+  font-size: 0.63rem; color: var(--muted); margin-bottom: 18px;
+}
+.period-tag span { color: var(--accent); font-weight: 700; }
+
+/* ══════════════════════════════
+   CARDS
+══════════════════════════════ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: transparent;
+}
+.card.c-accent::before { background: var(--accent); }
+.card.c-green::before  { background: var(--green); }
+.card.c-red::before    { background: var(--red); }
+.card.c-yellow::before { background: var(--yellow); }
+.card.c-blue::before   { background: var(--blue); }
+
+.card-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
+.card-value { font-family: 'DM Serif Display', serif; font-size: 1.5rem; line-height: 1.1; color: var(--text); }
+.card-sub   { font-size: 0.66rem; color: var(--muted); margin-top: 4px; }
+.card-value.good   { color: var(--green); }
+.card-value.warn   { color: var(--yellow); }
+.card-value.bad    { color: var(--red); }
+.card-value.accent { color: var(--accent); }
+
+.card-title {
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+}
+.card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ══════════════════════════════
+   TOP DASHBOARD GRIDS
+══════════════════════════════ */
+.row-top    { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 12px; }
+.row-mid    { display: grid; grid-template-columns: 1.7fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.row-bottom { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 12px; margin-bottom: 0; }
+
+/* ══════════════════════════════
+   P&L
+══════════════════════════════ */
+.pnl-card { display: flex; flex-direction: column; gap: 8px; }
+.pnl-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 10px; border-radius: 8px; background: var(--surface2);
+}
+.pnl-row .pr-label { font-size: 0.72rem; color: var(--muted); }
+.pnl-row .pr-val   { font-size: 0.88rem; font-weight: 700; }
+.pnl-row.pnl-total { background: var(--green-bg); border: 1px solid #B8DFC8; }
+.pnl-row.pnl-total .pr-label { color: var(--green); font-weight: 700; }
+.pnl-row.pnl-total .pr-val   { color: var(--green); }
+.pnl-row.pnl-warn  { background: var(--yellow-bg); border: 1px solid #E0C870; }
+.pnl-row.pnl-warn .pr-label  { color: var(--yellow); }
+.pnl-row.pnl-warn .pr-val    { color: var(--yellow); }
+
+/* ══════════════════════════════
+   GAUGE
+══════════════════════════════ */
+.gauge-track {
+  height: 9px; background: var(--surface2); border-radius: 5px;
+  position: relative; overflow: visible; margin-bottom: 14px;
+}
+.gauge-fill { height: 100%; border-radius: 5px; position: absolute; left: 0; top: 0; }
+.gauge-needle {
+  position: absolute; top: -5px; width: 3px; height: 19px;
+  background: var(--text); border-radius: 2px; transform: translateX(-50%);
+  box-shadow: 0 0 0 2px white, 0 2px 6px rgba(0,0,0,0.2);
+}
+.gauge-needle::after {
+  content: attr(data-label);
+  position: absolute; bottom: -18px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem; font-weight: 700; color: var(--text); white-space: nowrap;
+}
+.gauge-label-row { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--muted); margin-bottom: 6px; }
+.gauge-zones { display: flex; gap: 8px; margin-top: 6px; }
+.gz { display: flex; align-items: center; gap: 4px; font-size: 0.61rem; color: var(--muted); }
+.gz-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* ══════════════════════════════
+   BARS
+══════════════════════════════ */
+.bar-list { display: flex; flex-direction: column; gap: 6px; }
+.bar-item { display: flex; align-items: center; gap: 8px; }
+.bar-name { font-size: 0.67rem; color: var(--muted); width: 88px; flex-shrink: 0; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; height: 7px; background: var(--surface2); border-radius: 3px; position: relative; }
+.bar-fill  { height: 100%; border-radius: 3px; position: absolute; left: 0; top: 0; }
+.bar-val   { font-size: 0.67rem; font-weight: 700; width: 40px; text-align: right; flex-shrink: 0; }
+
+/* ══════════════════════════════
+   INFLUENCER LIST
+══════════════════════════════ */
+.infl-list { display: flex; flex-direction: column; gap: 7px; }
+.infl-row {
+  display: grid; grid-template-columns: 1fr auto auto auto;
+  align-items: center; gap: 8px;
+  padding: 8px 10px; border-radius: 8px;
+  background: var(--surface2); border: 1px solid transparent;
+}
+.infl-row.best-row { background: var(--green-bg); border-color: #B8DFC8; }
+.infl-row.bad-row  { background: var(--red-bg);   border-color: #E8B8B0; }
+.infl-name { font-size: 0.78rem; font-weight: 700; }
+.infl-tag  { font-size: 0.58rem; font-weight: 700; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+.tag-best  { background: #C8EED8; color: var(--green); }
+.tag-ok    { background: #FEF0C0; color: var(--yellow); }
+.tag-loss  { background: #FDDCDA; color: var(--red); }
+.infl-roas { font-size: 0.72rem; font-weight: 700; text-align: right; white-space: nowrap; }
+.infl-cpa  { font-size: 0.67rem; color: var(--muted); text-align: right; white-space: nowrap; }
+
+/* ══════════════════════════════
+   ACTION LIST
+══════════════════════════════ */
+.action-list { display: flex; flex-direction: column; gap: 7px; }
+.action-item {
+  display: flex; align-items: flex-start; gap: 9px;
+  padding: 8px 10px; border-radius: 8px; background: var(--surface2);
+}
+.action-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+.action-text { font-size: 0.73rem; line-height: 1.55; color: #5A5248; }
+.action-text strong { color: var(--text); font-weight: 700; }
+
+/* ══════════════════════════════
+   ALERT BANDS
+══════════════════════════════ */
+.alert-band {
+  border-radius: 8px; padding: 8px 12px;
+  font-size: 0.71rem; line-height: 1.6; margin-top: 10px;
+}
+.ab-red    { background: var(--red-bg);    border: 1px solid #E8B8B0; color: #8A2018; }
+.ab-red strong { color: var(--red); }
+.ab-yellow { background: var(--yellow-bg); border: 1px solid #E0C870; color: #786010; }
+.ab-yellow strong { color: var(--yellow); }
+.ab-green  { background: var(--green-bg);  border: 1px solid #B8DFC8; color: #185A38; }
+.ab-green strong { color: var(--green); }
+
+/* ══════════════════════════════
+   SECTION DIVIDER
+══════════════════════════════ */
+.section-divider {
+  margin: 40px 0 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.section-divider h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem; font-weight: 400;
+  color: var(--text); white-space: nowrap;
+}
+.section-divider h2 em { font-style: italic; color: var(--accent); }
+.section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ══════════════════════════════
+   DETAIL SECTION — TABLE
+══════════════════════════════ */
+.tcard {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; margin-bottom: 16px;
+}
+.tcard table { width: 100%; border-collapse: collapse; font-size: 0.79rem; }
+.tcard thead tr { background: var(--text); color: white; }
+.tcard thead th { padding: 9px 12px; font-weight: 600; font-size: 0.7rem; text-align: left; letter-spacing: .02em; }
+.tcard tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+.tcard tbody tr:last-child { border-bottom: none; }
+.tcard tbody tr.tot { background: var(--surface2); font-weight: 700; }
+.tcard tbody tr:hover:not(.tot):not(.gh) { background: #fafaf8; }
+.tcard tbody td { padding: 8px 12px; vertical-align: middle; }
+.gh td { background: var(--surface2) !important; font-weight: 700; font-size: 0.71rem; color: var(--muted); padding: 5px 12px !important; letter-spacing: .03em; }
+.rb { } .rb td:first-child { color: var(--green); font-weight: 700; }
+.rw td:first-child { color: var(--red); }
+tr.dim { opacity: .65; }
+
+.good { color: var(--green); font-weight: 700; }
+.bad  { color: var(--red);   font-weight: 700; }
+.mc   { color: var(--muted); }
+
+/* badges */
+.bd { display: inline-block; font-size: 0.59rem; font-weight: 700; padding: 1px 5px; border-radius: 3px; vertical-align: middle; margin-left: 3px; }
+.bst  { background: #C8EED8; color: var(--green); }
+.bbad { background: #FDDCDA; color: var(--red); }
+.binf { background: #D4E8F8; color: var(--blue); }
+.bwn  { background: #FEF0C0; color: var(--yellow); }
+.btl  { background: #D8EEF0; color: #1A6870; }
+.bpp  { background: #EDE0F8; color: #5030A0; }
+
+/* ══════════════════════════════
+   DONUT
+══════════════════════════════ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.dcard {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px; display: flex;
+  flex-direction: column; align-items: center;
+}
+.dcard h4 { font-size: 0.68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+.dw { position: relative; width: 130px; height: 130px; margin-bottom: 10px; }
+.dw svg { transform: rotate(-90deg); }
+.dc { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.dc .dv { font-size: .9rem; font-weight: 900; line-height: 1.1; }
+.dc .dl { font-size: .57rem; color: var(--muted); }
+.leg { width: 100%; display: flex; flex-direction: column; gap: .4rem; }
+.lr { display: flex; justify-content: space-between; align-items: center; font-size: .73rem; }
+.ll { display: flex; align-items: center; gap: .4rem; }
+.ld { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.lv { font-weight: 700; }
+.lp { color: var(--muted); font-size: .65rem; }
+
+/* ══════════════════════════════
+   ADSET BARS
+══════════════════════════════ */
+.pb { background: var(--border); border-radius: 3px; height: 5px; display: inline-block; vertical-align: middle; }
+.pf { height: 100%; border-radius: 3px; display: block; }
+
+/* ══════════════════════════════
+   MARCH STRATEGY CARDS
+══════════════════════════════ */
+.march-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.mc2 {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; display: flex; gap: 10px;
+}
+.mn {
+  width: 26px; height: 26px; background: var(--accent); color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+}
+.mn.green { background: var(--green); }
+.mb h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 4px; }
+.mb p  { font-size: 0.74rem; color: #6A6258; line-height: 1.6; }
+.mb p strong { color: var(--text); }
+.budget-badge {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 16px;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; text-align: center;
+}
+.bb-item .bb-color { width: 10px; height: 10px; border-radius: 50%; margin: 0 auto 4px; }
+.bb-item .bb-label { font-size: .65rem; color: var(--muted); }
+.bb-item .bb-val   { font-size: .88rem; font-weight: 900; color: var(--text); }
+.bb-item .bb-pct   { font-size: .62rem; color: var(--muted); }
+
+/* ══════════════════════════════
+   CREATIVE GALLERY
+══════════════════════════════ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.gal-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; cursor: pointer;
+  transition: box-shadow .15s, transform .15s;
+}
+.gal-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+.gal-thumb {
+  width: 100%; aspect-ratio: 1/1;
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gal-thumb .placeholder {
+  font-size: 2rem; color: var(--border);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.gal-info { padding: 8px 10px; }
+.gal-name { font-size: 0.65rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gal-tag  { display: inline-block; font-size: 0.58rem; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-top: 3px; }
+
+/* lightbox */
+.lightbox {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.75); z-index: 999;
+  align-items: center; justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lb-inner {
+  background: white; border-radius: 14px; padding: 20px;
+  max-width: 480px; width: 90%; text-align: center;
+}
+.lb-inner img { max-width: 100%; border-radius: 8px; margin-bottom: 10px; }
+.lb-title { font-size: .85rem; font-weight: 700; margin-bottom: 4px; }
+.lb-meta  { font-size: .72rem; color: var(--muted); }
+.lb-close {
+  position: absolute; top: 16px; right: 20px;
+  font-size: 1.4rem; cursor: pointer; color: white; font-weight: 300; line-height: 1;
+}
+
+/* ══════════════════════════════
+   SECTION 소제목
+══════════════════════════════ */
+.sec-hd {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+.sec-num {
+  width: 24px; height: 24px; background: var(--accent); color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: .68rem; font-weight: 700; flex-shrink: 0;
+}
+.sec-title { font-size: .95rem; font-weight: 700; }
+.sec-sub   { font-size: .7rem; color: var(--muted); margin-left: auto; }
+
+.detail-section { margin-bottom: 44px; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.footer { text-align: center; font-size: .68rem; color: var(--muted); padding: 24px 0 0; border-top: 1px solid var(--border); margin-top: 20px; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.card { animation: fadeUp .35s ease both; }
+
+@media (max-width: 700px) {
+  body { padding: 20px 16px 32px; }
+  .row-top    { grid-template-columns: repeat(2, 1fr); }
+  .row-mid, .row-bottom { grid-template-columns: 1fr; }
+  .two-col    { grid-template-columns: 1fr; }
+  .march-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="header-left">
+    <h1>봄날엔 · <em>2월</em> 광고 성과 요약</h1>
+    <div class="sub">2026.02.01 – 02.25 &nbsp;·&nbsp; 인스타그램 Meta Ads &nbsp;·&nbsp; 캠페인 3개</div>
+  </div>
+  <div class="header-right">
+    <div class="roas-big">423%</div>
+    <div class="roas-lbl">2월 전체 ROAS</div>
+  </div>
+</div>
+
+<div class="period-tag">집계 기간 <span>2026년 2월 1일 – 25일</span> &nbsp;·&nbsp; 이익 마진 50% 기준 &nbsp;·&nbsp; 객단가 ₩30,000 기준</div>
+
+<!-- ── TOP KPI ── -->
+<div class="row-top">
+  <div class="card c-accent">
+    <div class="card-label">총 광고비</div>
+    <div class="card-value accent">210.9만원</div>
+    <div class="card-sub">일평균 8.8만원 (24일 기준)</div>
+  </div>
+  <div class="card c-green">
+    <div class="card-label">광고 매출</div>
+    <div class="card-value good">893.1만원</div>
+    <div class="card-sub">총 구매 251건</div>
+  </div>
+  <div class="card c-yellow">
+    <div class="card-label">광고 이익 (×50%)</div>
+    <div class="card-value warn">446.5만원</div>
+    <div class="card-sub">매출 × 이익률 50%</div>
+  </div>
+  <div class="card c-green">
+    <div class="card-label">광고 순이익</div>
+    <div class="card-value good">+235.6만원</div>
+    <div class="card-sub">협찬비 포함 +172.6만원</div>
+  </div>
+  <div class="card c-red">
+    <div class="card-label">평균 CPS(구매전환당 단가)</div>
+    <div class="card-value bad">₩8,403</div>
+    <div class="card-sub">목표 ₩4,500~7,500</div>
+  </div>
+</div>
+
+<!-- ── MID ROW ── -->
+<div style="display:grid;grid-template-columns:1.7fr 1fr;gap:12px;margin-bottom:12px">
+
+  <!-- 손익 요약 -->
+  <div class="card c-green">
+    <div class="card-title">💰 손익 요약</div>
+    <p style="font-size:.68rem;color:var(--red);margin-bottom:8px;font-weight:600">※ 배송비 등 변동비는 미반영입니다.</p>
+    <div class="pnl-card">
+      <div class="pnl-row">
+        <span class="pr-label">광고 이익 (매출×50% 이익 마진)</span>
+        <span class="pr-val" style="color:var(--accent)">446.5만원</span>
+      </div>
+      <div class="pnl-row">
+        <span class="pr-label">광고비 지출</span>
+        <span class="pr-val" style="color:var(--red)">− 210.9만원</span>
+      </div>
+      <div class="pnl-row pnl-total">
+        <span class="pr-label">광고 수익 (광고비 기준)</span>
+        <span class="pr-val">+ 235.6만원 <span style="font-size:.65rem;font-weight:400;opacity:.8">(매출의 26.4%)</span></span>
+      </div>
+      <div class="pnl-row pnl-warn">
+        <span class="pr-label">협찬비 포함 실질 수익</span>
+        <span class="pr-val">+ 172.6만원 <span style="font-size:.65rem;font-weight:400;opacity:.8">(매출의 19.3%)</span></span>
+      </div>
+    </div>
+    <div class="alert-band ab-yellow" style="margin-top:8px">
+      <strong>광고비가 이익 마진의 47.2%</strong>를 차지합니다. 권장 비율(30~40%)보다 높아 개선 여지가 있지만, 현재 흑자 구조는 유지 중입니다. 여수언니 영상(ROAS 429%)이 수익 대부분을 견인하며, 협찬비 포함 인플루언서 ROAS는 170%로 sooyammy._ 위주 재편이 필요합니다.
+    </div>
+  </div>
+
+  <!-- CPS 게이지 -->
+  <div class="card c-red">
+    <div class="card-title">📊 구매전환당 비용 (CPS) 현황</div>
+    <div>
+      <div class="gauge-label-row">
+        <span>권장 ₩4,500</span>
+        <span>한계 ₩7,500</span>
+        <span>₩12,000+</span>
+      </div>
+      <div class="gauge-track">
+        <div class="gauge-fill" style="width:50%;background:linear-gradient(to right,#A8DCC0,#1E7A4E)"></div>
+        <div class="gauge-fill" style="left:50%;width:12.5%;background:#E8C84A;opacity:.7"></div>
+        <div class="gauge-fill" style="left:62.5%;width:37.5%;background:#C03020;opacity:.4"></div>
+        <div class="gauge-needle" style="left:70.0%" data-label="CPS ₩8,403"></div>
+      </div>
+      <div class="gauge-zones">
+        <div class="gz"><div class="gz-dot" style="background:var(--green)"></div>권장</div>
+        <div class="gz"><div class="gz-dot" style="background:var(--yellow)"></div>주의</div>
+        <div class="gz"><div class="gz-dot" style="background:var(--red)"></div>한계 초과</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:.69rem;color:var(--muted);line-height:1.65">
+      여수언니·소재별 CPS <span style="color:var(--yellow);font-weight:700">₩7,536~8,516</span><br>
+      ryungs·amu.eats 소재가 평균 끌어올리는 구조
+    </div>
+  </div>
+</div>
+
+<!-- ── BOTTOM ROW ── -->
+<div style="display:grid;grid-template-columns:1fr 1.2fr;gap:12px;margin-bottom:0">
+
+  <!-- 인플루언서 평가 -->
+  <div class="card c-accent">
+    <div class="card-title">👤 인플루언서 평가 (협찬비 포함)</div>
+    <div class="infl-list">
+      <div class="infl-row best-row">
+        <div class="infl-name">sooyammy._ <span style="font-size:.6rem;color:var(--muted);font-weight:400">협찬 5만</span></div>
+        <div class="infl-tag tag-best">✓ 최고</div>
+        <div class="infl-roas" style="color:var(--green)">ROAS 344%</div>
+        <div class="infl-cpa">CPS ₩9,899</div>
+      </div>
+      <div class="infl-row">
+        <div class="infl-name">amu.eats <span style="font-size:.6rem;color:var(--muted);font-weight:400">협찬 8만</span></div>
+        <div class="infl-tag tag-ok">보통</div>
+        <div class="infl-roas" style="color:var(--yellow)">ROAS 275%</div>
+        <div class="infl-cpa">CPS ₩11,947</div>
+      </div>
+      <div class="infl-row bad-row">
+        <div class="infl-name">ryungs <span style="font-size:.6rem;color:var(--muted);font-weight:400">협찬 50만</span></div>
+        <div class="infl-tag tag-loss">🚫 3월 제외</div>
+        <div class="infl-roas" style="color:var(--red)">ROAS 62%</div>
+        <div class="infl-cpa" style="color:var(--red)">CPS ₩71,844</div>
+      </div>
+    </div>
+    <div class="alert-band ab-red">
+      ryungs는 협찬비 50만원 포함 시 <strong>실질 손실 구조</strong>. <strong>3월 광고소재에서 제외</strong>하며 예산은 sooyammy._로 이동합니다.
+    </div>
+  </div>
+
+  <!-- 3월 방향 -->
+  <div class="card c-blue">
+    <div class="card-title">🗓 3월 운영 방향</div>
+    <div class="action-list">
+      <div class="action-item">
+        <div class="action-icon">✅</div>
+        <div class="action-text"><strong>예산 분배 방안</strong> (약 210만원)<br>여수언니 57% · 인플루언서 22% · 리타겟 12% · 기타 9%</div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">⭐</div>
+        <div class="action-text"><strong>sooyammy._ 예산 확대</strong> — 협찬비 포함 ROAS 344%로 유일하게 300%+ 유지</div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">🔁</div>
+        <div class="action-text"><strong>리타겟 소재 다각화</strong> — 1월 베스트 고객리뷰 소재를 광고 소재로 추가하여 구매전환 유도</div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">🎯</div>
+        <div class="action-text"><strong>CPS ₩7,500 이하 목표</strong> — 비효율 소재 교체 + 타겟 세분화</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     상세 분석 섹션
+═══════════════════════════════════════════════════════ -->
+<div class="section-divider">
+  <h2>상세 <em>분석</em></h2>
+</div>
+
+
+<!-- ── 상세 ① 총 예산 분배 현황 ── -->
+<div class="detail-section">
+  <div class="sec-hd">
+    <div class="sec-num">①</div>
+    <div class="sec-title">총 예산 분배 현황</div>
+    <div class="sec-sub">2월 전체 집행 기준</div>
+  </div>
+
+  <div class="two-col">
+    <!-- 광고 목적별 도넛 -->
+    <div class="dcard">
+      <h4>📌 광고 목적별</h4>
+      <div class="dw">
+        <svg viewBox="0 0 130 130" width="130" height="130">
+          <circle cx="65" cy="65" r="44" fill="none" stroke="#C8601A" stroke-width="18" stroke-dasharray="263.2 276.5" stroke-dashoffset="0"/>
+          <circle cx="65" cy="65" r="44" fill="none" stroke="#1A50A0" stroke-width="18" stroke-dasharray="13.3 276.5" stroke-dashoffset="-263.2"/>
+        </svg>
+        <div class="dc"><div class="dv">210.9만</div><div class="dl">총 광고비</div></div>
+      </div>
+      <div class="leg">
+        <div class="lr"><div class="ll"><div class="ld" style="background:#C8601A"></div>구매전환 광고</div><div><span class="lv">210.9만</span><span class="lp"> (100.0%)</span></div></div>
+        <div class="lr"><div class="ll"><div class="ld" style="background:#1A50A0"></div>트래픽 유도</div><div><span class="lv">0.0만</span><span class="lp"> (0.0%)</span></div></div>
+      </div>
+    </div>
+
+    <!-- 소재 유형별 도넛 -->
+    <div class="dcard">
+      <h4>🎬 소재 유형별</h4>
+      <div class="dw">
+        <svg viewBox="0 0 130 130" width="130" height="130">
+          <circle cx="65" cy="65" r="44" fill="none" stroke="#1E7A4E" stroke-width="18" stroke-dasharray="161.3 276.5" stroke-dashoffset="0"/>
+          <circle cx="65" cy="65" r="44" fill="none" stroke="#C8A020" stroke-width="18" stroke-dasharray="74.1 276.5" stroke-dashoffset="-161.3"/>
+          <circle cx="65" cy="65" r="44" fill="none" stroke="#6040A0" stroke-width="18" stroke-dasharray="27.7 276.5" stroke-dashoffset="-235.4"/>
+          <circle cx="65" cy="65" r="44" fill="none" stroke="#1A50A0" stroke-width="18" stroke-dasharray="13.3 276.5" stroke-dashoffset="-263.1"/>
+        </svg>
+        <div class="dc"><div class="dv">210.9만</div><div class="dl">총 광고비</div></div>
+      </div>
+      <div class="leg">
+        <div class="lr"><div class="ll"><div class="ld" style="background:#1E7A4E"></div>여수언니 먹방영상</div><div><span class="lv">123.6만</span><span class="lp"> (58.6%)</span></div></div>
+        <div class="lr"><div class="ll"><div class="ld" style="background:#C8A020"></div>인플루언서 협찬영상</div><div><span class="lv">65.9만</span><span class="lp"> (31.2%)</span></div></div>
+        <div class="lr"><div class="ll"><div class="ld" style="background:#6040A0"></div>리타겟팅 이미지</div><div><span class="lv">21.4만</span><span class="lp"> (10.2%)</span></div></div>
+        <div class="lr"><div class="ll"><div class="ld" style="background:#1A50A0"></div>트래픽 유도</div><div><span class="lv">0.0만</span><span class="lp"> (0.0%)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 소재 유형별 테이블 -->
+    <div class="tcard">
+    <table>
+      <thead><tr>
+        <th>소재 유형별</th><th>광고비</th><th>광고비 비중</th><th>구매건</th><th>평균 클릭율</th><th>구매 전환값</th><th>평균 CPS</th><th>ROAS</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rb">
+          <td>여수언니 영상 (초코퐁당) <span class="bd bst">구매전환</span></td>
+          <td>350,452원</td>
+          <td><span class="pb" style="width:66px"><span class="pf" style="width:16.6%;background:#1E7A4E"></span></span> 16.6%</td>
+          <td>46건</td>
+          <td>1.66%</td>
+          <td>1,656,000원</td>
+          <td class="good">₩7,619</td>
+          <td class="good">473%</td>
+        </tr>
+        <tr class="rb">
+          <td>여수언니 영상 (피넛퐁) <span class="bd bst">구매전환</span></td>
+          <td>885,627원</td>
+          <td><span class="pb" style="width:66px"><span class="pf" style="width:42.0%;background:#1E7A4E"></span></span> 42.0%</td>
+          <td>104건</td>
+          <td>1.72%</td>
+          <td>3,698,200원</td>
+          <td class="good">₩8,516</td>
+          <td class="good">418%</td>
+        </tr>
+        <tr class="">
+          <td>인플루언서 영상 (가니야미 님) <span class="bd bst">구매전환</span></td>
+          <td>111,591원</td>
+          <td><span class="pb" style="width:66px"><span class="pf" style="width:5.3%;background:#C8A020"></span></span> 5.3%</td>
+          <td>21건</td>
+          <td>2.30%</td>
+          <td>785,000원</td>
+          <td class="good">₩5,314</td>
+          <td class="good">703%</td>
+        </tr>
+        <tr class="">
+          <td>인플루언서 영상 (피넛퐁) <span class="bd bst">구매전환</span></td>
+          <td>316,405원</td>
+          <td><span class="pb" style="width:66px"><span class="pf" style="width:15.0%;background:#C8A020"></span></span> 15.0%</td>
+          <td>34건</td>
+          <td>2.40%</td>
+          <td>1,174,000원</td>
+          <td class="">₩9,306</td>
+          <td class="">371%</td>
+        </tr>
+        <tr class="">
+          <td>인플루언서 영상 (피넛퐁) + 배너 <span class="bd bst">구매전환</span></td>
+          <td>230,645원</td>
+          <td><span class="pb" style="width:66px"><span class="pf" style="width:10.9%;background:#C8A020"></span></span> 10.9%</td>
+          <td>23건</td>
+          <td>1.49%</td>
+          <td>828,800원</td>
+          <td class="">₩10,028</td>
+          <td class="">359%</td>
+        </tr>
+        <tr class="">
+          <td>제품 연출컷 활용 이미지 <span class="bd bpp">리타겟</span></td>
+          <td>214,433원</td>
+          <td><span class="pb" style="width:66px"><span class="pf" style="width:10.2%;background:#6040A0"></span></span> 10.2%</td>
+          <td>23건</td>
+          <td>1.03%</td>
+          <td>788,800원</td>
+          <td class="">₩9,323</td>
+          <td class="">368%</td>
+        </tr>
+        <tr class="tot">
+          <td><strong>합계</strong></td>
+          <td><strong>2,109,153원</strong></td><td><strong>100%</strong></td>
+          <td><strong>251건</strong></td>
+          <td><strong>1.70%</strong></td>
+          <td><strong>8,930,800원</strong></td>
+          <td><strong>₩8,403</strong></td>
+          <td class="good"><strong>423%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ── 상세 ② 인플루언서 2차 활용 소재별 상세 현황 ── -->
+<div class="detail-section">
+  <div class="sec-hd">
+    <div class="sec-num">②</div>
+    <div class="sec-title">인플루언서 2차 활용 소재별 상세 현황</div>
+    <div class="sec-sub">협찬비 포함 실제 투자비용 기준 · 2/10 이후 집행</div>
+  </div>
+
+  <!-- 협찬비 포함 종합 -->
+  <div class="tcard" style="margin-bottom:12px">
+    <p style="font-size:.71rem;color:var(--muted);padding:.6rem .9rem .15rem;font-style:italic">※ 협찬비: sooyammy._ ₩50,000 / amu.eats ₩80,000 / ryungs ₩500,000</p>
+    <table>
+      <thead><tr>
+        <th>인플루언서</th><th>광고비</th><th>협찬비</th><th>총 투자비용</th>
+        <th>구매</th><th>매출</th>
+        <th>ROAS (광고비)</th><th>ROAS (총비용)</th>
+        <th>CPS (총비용)</th><th>3월 권장</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rb">
+          <td>sooyammy._<span class="bd bst">실질 1위</span></td>
+          <td>157,870원</td><td class="mc">50,000원</td><td><strong>207,870원</strong></td>
+          <td>21건</td><td>714,900원</td>
+          <td class="good">453%</td><td class="good">344%</td><td class="good">₩9,899</td>
+          <td><span class="bd bst">예산 확대</span></td>
+        </tr>
+        <tr>
+          <td>amu.eats</td>
+          <td>242,581원</td><td class="mc">80,000원</td><td><strong>322,581원</strong></td>
+          <td>27건</td><td>887,000원</td>
+          <td>366%</td><td>275%</td><td>₩11,947</td>
+          <td><span class="bd binf">banner 유지</span></td>
+        </tr>
+        <tr class="rw">
+          <td>ryungs<span class="bd bbad">3월 광고소재 제외</span></td>
+          <td>146,599원</td><td style="color:var(--red);font-weight:700">500,000원</td><td><strong>646,599원</strong></td>
+          <td>9건</td><td>400,900원</td>
+          <td>273%</td><td class="bad">62%</td><td class="bad">₩71,844</td>
+          <td><span class="bd bbad">3월 제외</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 소재 단위 상세 -->
+  <div class="tcard">
+    <table>
+      <thead><tr>
+        <th>소재</th><th>인플루언서</th><th>광고비</th><th>노출</th><th>클릭 (CTR)</th><th>구매</th><th>전환율</th><th>ROAS</th><th>CPS</th>
+      </tr></thead>
+      <tbody>
+        <tr class="gh"><td colspan="9">✅ 주요 소재 (구매 5건 이상)</td></tr>
+        <tr class="rb">
+          <td>sooyammy._<span class="bd bst">인플루 1위</span></td>
+          <td><span class="bd binf">sooyammy</span></td>
+          <td>135,640원</td><td>16,583</td><td>396 (2.39%)</td>
+          <td>18건</td><td class="good">4.55%</td><td class="good">445%</td><td class="good">₩7,536</td>
+        </tr>
+        <tr>
+          <td>amu.eats_banner</td>
+          <td><span class="bd bwn">amu.eats</span></td>
+          <td>155,233원</td><td>19,104</td><td>221 (1.16%)</td>
+          <td>19건</td><td class="good">8.60%</td><td class="good">422%</td><td class="good">₩8,170</td>
+        </tr>
+        <tr>
+          <td>amu.eats</td>
+          <td><span class="bd bwn">amu.eats</span></td>
+          <td>87,348원</td><td>9,788</td><td>229 (2.34%)</td>
+          <td>8건</td><td>3.49%</td><td>266%</td><td>₩10,918</td>
+        </tr>
+        <tr>
+          <td>ryungs</td>
+          <td><span class="bd btl">ryungs</span></td>
+          <td>93,417원</td><td>10,525</td><td>205 (1.95%)</td>
+          <td>8건</td><td>3.90%</td><td>362%</td><td>₩11,677</td>
+        </tr>
+        <tr class="tot">
+          <td colspan="2" style="font-size:.68rem;color:var(--muted)">📎 5건 미만 소재: sooyammy._banner (3건·ROAS 499%), ryungs_banner (1건·CPS ₩53,182) — 데이터 신뢰도 낮아 판단 유보</td>
+          <td colspan="7"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ── 상세 ③ 리타겟팅 광고 효과 분석 ── -->
+<div class="detail-section">
+  <div class="sec-hd">
+    <div class="sec-num">③</div>
+    <div class="sec-title">리타겟팅 광고 효과 분석</div>
+    <div class="sec-sub">연출컷 이미지 소재</div>
+  </div>
+
+  <!-- 노출 타겟 설명 블럭 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+    <div style="background:var(--blue-bg);border:1px solid #B8CFF0;border-radius:10px;padding:12px 14px">
+      <div style="font-size:.65rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">🎯 노출 타겟</div>
+      <div style="font-size:.78rem;font-weight:700;margin-bottom:3px">오하루 / 지지 영상 시청자</div>
+      <div style="font-size:.72rem;color:var(--muted);line-height:1.65">오하루, 지지 2차활용 영상을 시청한 유저를 대상으로 리타겟팅. 이미 브랜드에 노출된 오디언스로 구매전환율이 높습니다.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px">
+      <div style="font-size:.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">📌 소재 유형</div>
+      <div style="font-size:.78rem;font-weight:700;margin-bottom:3px">제품 연출컷 이미지 10종</div>
+      <div style="font-size:.72rem;color:var(--muted);line-height:1.65">so_chewy / once_you_try_it 시리즈 이미지 소재. 요거퐁·피넛퐁·구름퐁 제품별로 다양한 연출 이미지를 테스트했습니다.</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
+    <div class="card"><div class="card-label">리타겟 광고비</div><div class="card-value accent">21.4만원</div></div>
+    <div class="card"><div class="card-label">리타겟 구매</div><div class="card-value">23건</div></div>
+    <div class="card c-green"><div class="card-label">리타겟 ROAS</div><div class="card-value good">368%</div></div>
+    <div class="card"><div class="card-label">리타겟 CPS</div><div class="card-value warn">₩9,323</div></div>
+  </div>
+
+  <div class="tcard">
+    <table>
+      <thead><tr><th>소재</th><th>광고비</th><th>노출</th><th>클릭</th><th>구매</th><th>전환율</th><th>ROAS</th><th>CPS</th><th>평가</th></tr></thead>
+      <tbody>
+        <tr class="rb">
+          <td>so_chewy_yopong<span class="bd bst">가장 높은 구매전환 수</span></td>
+          <td>115,212원</td><td>37,964</td><td>250</td><td>15건</td>
+          <td>6.00%</td><td class="good">464%</td><td class="good">₩7,681</td><td>✅ 주요 소재</td>
+        </tr>
+        <tr style="background:var(--surface2)">
+          <td colspan="4" style="font-size:.68rem;color:var(--muted);padding:7px 12px">
+            📎 나머지 9종 소재 (5건 미만) — 총 ₩99,221 집행 · 구매 8건 · 미전환 소재 포함. 신뢰도 낮아 패턴 파악 용도로만 참고
+          </td>
+          <td class="mc">8건</td><td class="mc">—</td><td class="mc">—</td><td class="mc">—</td><td class="mc">—</td>
+        </tr>
+        <tr class="tot">
+          <td><strong>합계</strong></td><td><strong>214,433원</strong></td><td>64,827</td><td>396</td>
+          <td><strong>23건</strong></td><td>5.81%</td>
+          <td class="good"><strong>368%</strong></td><td><strong>₩9,323</strong></td><td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert-band ab-green">
+    💡 <strong>3월 리타겟팅 핵심:</strong> so_chewy_yopong 소재 중심으로 바리에이션 + 1월 베스트 고객리뷰 소재를 활용하여 리타겟을 테스트할 예정입니다.
+  </div>
+</div>
+
+
+<!-- ── 상세 ④ 3월 광고 전략 제안 ── -->
+<div class="detail-section">
+  <div class="sec-hd">
+    <div class="sec-num">④</div>
+    <div class="sec-title">3월 광고 전략 제안</div>
+    <div class="sec-sub">2월 수준 유지 약 210만원 · 목표 CPS ≤ ₩7,500 / ROAS ≥ 400%</div>
+  </div>
+
+  <div class="alert-band ab-yellow" style="margin-bottom:16px">
+    📌 <strong>3월 핵심 방향:</strong> 2월에 효율이 증명된 소재에 집중하고 비효율 소재를 교체합니다. 같은 예산으로 더 많은 구매를 만드는 것이 목표입니다.
+  </div>
+
+  <div class="march-grid">
+    <div class="mc2">
+      <div class="mn">1</div>
+      <div class="mb">
+        <h4>여수언니 영상 비중 유지 (55~60%)</h4>
+        <p>초코퐁당(ROAS 464%)과 피넛퐁(ROAS 416%)은 2월에 가장 안정적인 성과. 기존 소재 유지하면서 <strong>새로운 제품의 영상</strong>을 소규모 테스트합니다.</p>
+      </div>
+    </div>
+    <div class="mc2">
+      <div class="mn">2</div>
+      <div class="mb">
+        <h4>인플루언서 sooyammy 님과 가니야미님 영상 중심 재편</h4>
+        <p>ryungs 광고소재는 3월에는 제외, sooyammy님, 가니야미님 영상 중심으로 예산 소진 (추가로 신제품 제품협찬 영상 2차 활용도 고려)</p>
+      </div>
+    </div>
+    <div class="mc2">
+      <div class="mn">3</div>
+      <div class="mb">
+        <h4>리타겟팅 소재 집중화 (10~12%)</h4>
+        <p>so_chewy_yopong를 위주로 소재를 바리에이션하고, <strong>1월 베스트 고객리뷰 소재를 리타겟팅 캠페인에 추가</strong>하여 구매전환을 유도합니다.</p>
+      </div>
+    </div>
+
+    <div class="mc2" style="border:1.5px solid var(--accent)">
+      <div class="mn" style="background:var(--green)">✓</div>
+      <div class="mb">
+        <h4>3월 예산 배분 권장안 (총 210만원)</h4>
+        <div class="budget-badge" style="margin-top:8px;padding:10px 8px">
+          <div class="bb-item"><div class="bb-color" style="background:#1E7A4E"></div><div class="bb-label">여수언니</div><div class="bb-val">120만</div><div class="bb-pct">57%</div></div>
+          <div class="bb-item"><div class="bb-color" style="background:#C8A020"></div><div class="bb-label">인플루언서</div><div class="bb-val">47만</div><div class="bb-pct">22%</div></div>
+          <div class="bb-item"><div class="bb-color" style="background:#6040A0"></div><div class="bb-label">리타겟</div><div class="bb-val">25만</div><div class="bb-pct">12%</div></div>
+          <div class="bb-item"><div class="bb-color" style="background:#1A50A0"></div><div class="bb-label">트래픽</div><div class="bb-val">18만</div><div class="bb-pct">9%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── 상세 ⑤ 광고 소재 미리보기 ── -->
+<div class="detail-section">
+  <div class="sec-hd">
+    <div class="sec-num">⑤</div>
+    <div class="sec-title">2월 집행 광고 소재 미리보기</div>
+    <div class="sec-sub">소재를 클릭하면 상세 정보를 확인할 수 있습니다</div>
+  </div>
+
+  <!-- 여수언니 -->
+  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">🧑‍🍳 여수언니 먹방 영상</div>
+  <div class="gallery-grid" style="margin-bottom:20px">
+    <div class="gal-item" onclick="openLB('피넛퐁 먹방영상','여수언니','ROAS 418% · CPS ₩8,516 · 구매 104건','https://drive.google.com/thumbnail?id=1VwO9An0Odh3HdUVZHm5RSxz_SoGATvgS&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1VwO9An0Odh3HdUVZHm5RSxz_SoGATvgS/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1VwO9An0Odh3HdUVZHm5RSxz_SoGATvgS&sz=w400" alt="피넛퐁 먹방영상" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🎬</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">피넛퐁 먹방영상</div>
+        <div class="gal-tag bst">ROAS 418%</div>
+      </div>
+    </div>
+    <div class="gal-item" onclick="openLB('초코퐁당 먹방영상2','여수언니','ROAS 473% · CPS ₩7,619 · 구매 46건','https://drive.google.com/thumbnail?id=1FXJhXXkh5Bp5BnV-x8iwdArtnYfJlPKb&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1FXJhXXkh5Bp5BnV-x8iwdArtnYfJlPKb/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1FXJhXXkh5Bp5BnV-x8iwdArtnYfJlPKb&sz=w400" alt="초코퐁당 먹방영상2" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🎬</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">초코퐁당 먹방영상2</div>
+        <div class="gal-tag bst">ROAS 473%</div>
+      </div>
+    </div>
+    <div class="gal-item" onclick="openLB('가니야미 영상','인플루언서','ROAS 703% · CPS ₩5,314 · 구매 21건','https://drive.google.com/thumbnail?id=1fmLYyA7Jzd85CyUGoo6YLIXhYsnI6jBl&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1fmLYyA7Jzd85CyUGoo6YLIXhYsnI6jBl/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1fmLYyA7Jzd85CyUGoo6YLIXhYsnI6jBl&sz=w400" alt="가니야미 영상" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🎬</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">가니야미 영상</div>
+        <div class="gal-tag bst">ROAS 703%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- sooyammy -->
+  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">📱 sooyammy._ 소재</div>
+  <div class="gallery-grid" style="margin-bottom:20px">
+    <div class="gal-item" onclick="openLB('sooyammy._ 영상','sooyammy._','ROAS 445% · CPS ₩7,536 · 구매 18건','https://drive.google.com/thumbnail?id=136dvnaPCZ9QWC5KIcJp43rs_bC7UF66_&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/136dvnaPCZ9QWC5KIcJp43rs_bC7UF66_/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=136dvnaPCZ9QWC5KIcJp43rs_bC7UF66_&sz=w400" alt="sooyammy._ 영상" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🎬</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">sooyammy._ 영상</div>
+        <div class="gal-tag bst">ROAS 445%</div>
+      </div>
+    </div>
+    <div class="gal-item" onclick="openLB('sooyammy._ banner','sooyammy._','ROAS 499% · CPS ₩7,410 · 구매 3건 (참고)','https://drive.google.com/thumbnail?id=1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF&sz=w400" alt="sooyammy._ banner" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🖼️</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">sooyammy._ banner</div>
+        <div class="gal-tag bwn">참고용</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- amu.eats -->
+  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">📱 amu.eats 소재</div>
+  <div class="gallery-grid" style="margin-bottom:20px">
+    <div class="gal-item" onclick="openLB('amu.eats_banner','amu.eats','ROAS 422% · CPS ₩8,170 · 구매 19건','https://drive.google.com/thumbnail?id=1rNJah7BiQH_KhXQXTk5VYLmtYcoCSaSa&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1rNJah7BiQH_KhXQXTk5VYLmtYcoCSaSa/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1rNJah7BiQH_KhXQXTk5VYLmtYcoCSaSa&sz=w400" alt="amu.eats_banner" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🖼️</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">amu.eats_banner</div>
+        <div class="gal-tag bst">ROAS 422%</div>
+      </div>
+    </div>
+    <div class="gal-item" onclick="openLB('amu.eats 영상','amu.eats','ROAS 266% · CPS ₩10,918 · 구매 8건','https://drive.google.com/thumbnail?id=11Pj8dsm_DCaytQUOYfxPa3TRK3lr_wf0&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/11Pj8dsm_DCaytQUOYfxPa3TRK3lr_wf0/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=11Pj8dsm_DCaytQUOYfxPa3TRK3lr_wf0&sz=w400" alt="amu.eats 영상" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🎬</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">amu.eats 영상</div>
+        <div class="gal-tag bwn">ROAS 266%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ryungs -->
+  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">📱 ryungs 소재</div>
+  <div class="gallery-grid" style="margin-bottom:20px">
+    <div class="gal-item" onclick="openLB('ryungs 영상','ryungs','ROAS 362% · CPS ₩11,677 · 구매 8건','https://drive.google.com/thumbnail?id=1HrVpeGfdAWwamRtZmQgfxtC7C-onfG2k&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1HrVpeGfdAWwamRtZmQgfxtC7C-onfG2k/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1HrVpeGfdAWwamRtZmQgfxtC7C-onfG2k&sz=w400" alt="ryungs 영상" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🎬</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">ryungs 영상</div>
+        <div class="gal-tag bwn">ROAS 362%</div>
+      </div>
+    </div>
+    <div class="gal-item" onclick="openLB('ryungs_banner','ryungs','ROAS 118% · CPS ₩53,182 · 구매 1건 (참고)','https://drive.google.com/thumbnail?id=1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW&sz=w400" alt="ryungs_banner" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🖼️</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">ryungs_banner</div>
+        <div class="gal-tag bbad">비효율</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 리타겟팅 -->
+  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">🔁 리타겟팅 이미지 소재</div>
+  <div class="gallery-grid" style="margin-bottom:12px">
+    <div class="gal-item" onclick="openLB('so_chewy_yopong','리타겟팅','ROAS 464% · CPS ₩7,681 · 구매 15건','https://drive.google.com/thumbnail?id=1LFJZBuAYsAzVm1_plPodnF2qC3RIcXj7&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1LFJZBuAYsAzVm1_plPodnF2qC3RIcXj7/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1LFJZBuAYsAzVm1_plPodnF2qC3RIcXj7&sz=w400" alt="so_chewy_yopong" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🖼️</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">so_chewy_yopong</div>
+        <div class="gal-tag bst">가장 높은 구매전환 수</div>
+      </div>
+    </div>
+    <div class="gal-item" onclick="openLB('once_you_try_it_peanutpong_02','리타겟팅','ROAS 1,202% · CPS ₩2,663 · 구매 3건 (참고)','https://drive.google.com/thumbnail?id=1lhw2Y7hrhGlH9YaMiy7hBEXgWnB4yUNZ&sz=w400')">
+      <div class="gal-thumb" style="background:var(--surface2)">
+        <a href="https://drive.google.com/file/d/1lhw2Y7hrhGlH9YaMiy7hBEXgWnB4yUNZ/view" target="_blank" style="display:block;width:100%;height:100%">
+          <img src="https://drive.google.com/thumbnail?id=1lhw2Y7hrhGlH9YaMiy7hBEXgWnB4yUNZ&sz=w400" alt="once_you_try_…_02" style="width:100%;height:100%;object-fit:cover"
+               onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem;&quot;>🖼️</div>'">
+        </a>
+      </div>
+      <div class="gal-info">
+        <div class="gal-name">once_you_try_…_02</div>
+        <div class="gal-tag bwn">참고용</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-band ab-yellow">
+    📎 <strong>소재 이미지 첨부 안내:</strong> 구글 드라이브에서 각 소재 파일을 <strong>"링크가 있는 모든 사용자 보기"</strong>로 공유 설정 후, 파일별 공유 링크를 전달해주시면 썸네일에 실제 이미지를 바로 넣어드릴 수 있습니다.
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  봄날엔 인스타그램 광고 운영 보고서 · 2026년 2월 · 이익률 50% · 변동비 미포함 기준
+</div>
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lb" onclick="closeLB(event)">
+  <button class="lb-close" onclick="closeLB()">×</button>
+  <div class="lb-inner">
+    <div id="lb-img-wrap"></div>
+    <div class="lb-title" id="lb-title"></div>
+    <div class="lb-meta" id="lb-meta"></div>
+  </div>
+</div>
+
+<script>
+function openLB(name, tag, meta, imgUrl) {
+  document.getElementById('lb-title').textContent = name;
+  document.getElementById('lb-meta').textContent = tag + ' · ' + meta;
+  const wrap = document.getElementById('lb-img-wrap');
+  if (imgUrl) {
+    wrap.innerHTML = `<img src="${imgUrl}" alt="${name}" style="max-width:100%;border-radius:8px;margin-bottom:10px" onerror="this.outerHTML='<div style=\'font-size:3rem;text-align:center;padding:20px\'>🖼️</div>'">`;
+  } else {
+    wrap.innerHTML = `<div style="width:100%;aspect-ratio:1/1;background:#F4F1EC;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:3rem;">🖼️</div>`;
+  }
+  document.getElementById('lb').classList.add('open');
+}
+function closeLB(e) {
+  if (!e || e.target === document.getElementById('lb') || e.target.classList.contains('lb-close')) {
+    document.getElementById('lb').classList.remove('open');
+  }
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB({target:document.getElementById('lb')}); });
+</script>
+
+</body>
+</html>
