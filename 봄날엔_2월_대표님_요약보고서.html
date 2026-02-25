@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>봄날엔 · 2월 광고 성과 최종 보고</title>
+<title>봄날엔 · 2월 광고 성과 최종 보고서</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
+/* 기존 스타일 유지 및 영상 레이아웃 최적화 */
 :root {
   --bg: #0E0F11; --surface: #161719; --surface2: #1E2023; --border: rgba(255,255,255,0.07);
   --text: #F0EDE8; --muted: #7A7670; --accent: #E8A24A; --green: #4ABA7E; --red: #E05A4A; --yellow: #E8C84A; --blue: #4A8AE8;
@@ -19,19 +20,14 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .grid { display: grid; gap: 14px; margin-bottom: 14px; }
 .row-top { grid-template-columns: repeat(5, 1fr); }
 .row-mid { grid-template-columns: 1.2fr 1fr 1fr; }
-.row-bottom { grid-template-columns: 1.2fr 1.8fr; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; position: relative; overflow: hidden; }
-.card-label { font-size: 0.63rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-.card-value { font-family: 'DM Serif Display', serif; font-size: 1.45rem; line-height: 1; }
-.card-sub { font-size: 0.67rem; color: var(--muted); margin-top: 4px; }
-.pnl-row { display: flex; justify-content: space-between; padding: 8px 10px; border-radius: 7px; background: var(--surface2); margin-bottom: 6px; }
-.pnl-total { background: rgba(74,186,126,0.12); border: 1px solid rgba(74,186,126,0.2); color: var(--green); }
-.bar-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.bar-name { font-size: 0.68rem; color: var(--muted); width: 100px; text-align: right; }
-.bar-track { flex: 1; height: 7px; background: var(--surface2); border-radius: 3px; position: relative; }
-.bar-fill { height: 100%; border-radius: 3px; position: absolute; left: 0; }
-.action-item { display: flex; gap: 9px; padding: 8px 10px; border-radius: 7px; background: var(--surface2); margin-bottom: 7px; }
-iframe { border-radius: 6px; background: #000; }
+.card-label { font-size: 0.63rem; font-weight: 700; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; }
+.creative-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 10px; }
+.creative-item { background: var(--surface2); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.video-container { position: relative; width: 100%; padding-bottom: 125%; height: 0; background: #000; } /* 4:5 비율 최적화 */
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.creative-info { padding: 8px; font-size: 0.7rem; text-align: center; color: var(--muted); }
+.action-item { display: flex; gap: 9px; padding: 10px; border-radius: 7px; background: var(--surface2); margin-bottom: 7px; }
 </style>
 </head>
 <body>
@@ -39,84 +35,64 @@ iframe { border-radius: 6px; background: #000; }
 <div class="header">
   <div class="header-left">
     <h1>봄날엔 · <em>2월</em> 광고 성과 요약</h1>
-    <div style="font-size: 0.7rem; color: var(--muted); margin-top: 4px;">2026.02.01 – 02.25 · 확정 데이터 반영</div>
+    <div style="font-size: 0.7rem; color: var(--muted); margin-top: 4px;">2026.02.01 – 02.25 · 최종 데이터 및 영상 최적화 완료</div>
   </div>
   <div class="header-right" style="text-align:right">
     <div class="roas-big">423%</div>
-    <div style="font-size: 0.65rem; color: var(--muted);">최종 ROAS</div>
+    <div style="font-size: 0.65rem; color: var(--muted);">2월 전체 ROAS</div>
   </div>
 </div>
 
 <div class="grid row-top">
-  <div class="card"><div class="card-label">총 광고비</div><div class="card-value" style="color:var(--accent)">210.9만원</div></div>
-  <div class="card"><div class="card-label">광고 매출</div><div class="card-value" style="color:var(--green)">893.1만원</div><div class="card-sub">251건 구매</div></div>
-  <div class="card"><div class="card-label">광고 이익 (50%)</div><div class="card-value">446.5만원</div></div>
-  <div class="card"><div class="card-label">광고 순이익</div><div class="card-value" style="color:var(--green)">+235.6만원</div></div>
-  <div class="card"><div class="card-label">평균 CPS</div><div class="card-value" style="color:var(--red)">₩8,403</div></div>
-</div>
-
-<div class="grid row-mid">
-  <div class="card">
-    <div class="card-label" style="margin-bottom:12px">💰 실질 손익 (협찬비 포함)</div>
-    <div class="pnl-row"><span>광고비 지출</span><span style="color:var(--red)">- 210.9만원</span></div>
-    <div class="pnl-row"><span>광고 이익</span><span>446.5만원</span></div>
-    <div class="pnl-row pnl-total"><span>광고 순이익</span><span>+ 235.6만원</span></div>
-    <div class="pnl-row" style="background:rgba(232,162,74,0.1)"><span>실질 수익(협찬차감)</span><span style="color:var(--accent)">+ 172.6만원</span></div>
-  </div>
-
-  <div class="card">
-    <div class="card-label" style="margin-bottom:12px">🎬 소재별 ROAS (TOP 5)</div>
-    <div class="bar-item">
-      <div class="bar-name">가니야미 영상</div>
-      <div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--green)"></div></div>
-      <div style="font-size:0.7rem; font-weight:700; width:40px; text-align:right">703%</div>
-    </div>
-    <div class="bar-item">
-      <div class="bar-name">여수언니(초코)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:67%; background:var(--green)"></div></div>
-      <div style="font-size:0.7rem; font-weight:700; width:40px; text-align:right">473%</div>
-    </div>
-    <div class="bar-item">
-      <div class="bar-name">여수언니(피넛)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:59%; background:var(--accent)"></div></div>
-      <div style="font-size:0.7rem; font-weight:700; width:40px; text-align:right">418%</div>
-    </div>
-    <div class="bar-item">
-      <div class="bar-name">sooyammy._</div>
-      <div class="bar-track"><div class="bar-fill" style="width:53%; background:var(--accent)"></div></div>
-      <div style="font-size:0.7rem; font-weight:700; width:40px; text-align:right">371%</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-label" style="margin-bottom:12px">🗓 3월 운영 방향</div>
-    <div class="action-item">
-      <div style="font-size:0.8rem">✅</div>
-      <div style="font-size:0.72rem"><strong>인플루언서 sooyammy 님과 가니야미님 영상 중심 재편</strong><br>
-      <span style="color:var(--muted)">ryungs 소재 제외, 효율 중심 예산 소진 및 신제품 협찬 2차 활용</span></div>
-    </div>
-    <div class="action-item">
-      <div style="font-size:0.8rem">🎯</div>
-      <div style="font-size:0.72rem"><strong>CPA ₩7,500 이하 최적화</strong><br>
-      <span style="color:var(--muted)">고효율 소재(가니야미 등) 비중 확대로 수익 극대화</span></div>
-    </div>
-  </div>
+  <div class="card"><div class="card-label">총 광고비</div><div style="font-family:'DM Serif Display'; font-size:1.45rem; color:var(--accent)">210.9만원</div></div>
+  <div class="card"><div class="card-label">광고 매출</div><div style="font-family:'DM Serif Display'; font-size:1.45rem; color:var(--green)">893.1만원</div></div>
+  <div class="card"><div class="card-label">광고 순이익</div><div style="font-family:'DM Serif Display'; font-size:1.45rem; color:var(--green)">+235.6만원</div></div>
+  <div class="card"><div class="card-label">평균 CPS</div><div style="font-family:'DM Serif Display'; font-size:1.45rem; color:var(--red)">₩8,403</div></div>
+  <div class="card"><div class="card-label">구매 건수</div><div style="font-family:'DM Serif Display'; font-size:1.45rem;">251건</div></div>
 </div>
 
 <div class="card">
-  <div class="card-label" style="margin-bottom:12px">📹 주요 소재 미리보기 (구글 드라이브 연동)</div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
-    <div>
-      <p style="font-size: 0.65rem; color: var(--muted); margin-bottom: 5px; text-align:center;">가니야미 영상 (ROAS 703%)</p>
-      <iframe src="https://drive.google.com/file/d/1kK9hgTaVj0mKr40xD0Gd6zxq2oW3NDnG/preview" width="100%" height="240" allow="autoplay"></iframe>
+  <div class="card-label">📹 광고 소재 미리보기 (전체 영상)</div>
+  <div class="creative-grid">
+    
+    <div class="creative-item">
+      <div class="video-container">
+        <iframe src="https://drive.google.com/file/d/1fmLYyA7Jzd85CyUGoo6YLIXhYsnI6jBl/preview"></iframe>
+      </div>
+      <div class="creative-info">가니야미 (ROAS 703%)</div>
     </div>
-    <div>
-      <p style="font-size: 0.65rem; color: var(--muted); margin-bottom: 5px; text-align:center;">sooyammy._ banner</p>
-      <iframe src="https://drive.google.com/file/d/1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF/preview" width="100%" height="240" allow="autoplay"></iframe>
+
+    <div class="creative-item">
+      <div class="video-container">
+        <iframe src="https://drive.google.com/file/d/1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF/preview"></iframe>
+      </div>
+      <div class="creative-info">sooyammy._ banner</div>
     </div>
-    <div>
-      <p style="font-size: 0.65rem; color: var(--muted); margin-bottom: 5px; text-align:center;">ryungs_banner (3월 중단예정)</p>
-      <iframe src="https://drive.google.com/file/d/1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW/preview" width="100%" height="240" allow="autoplay"></iframe>
+
+    <div class="creative-item">
+      <div class="video-container">
+        <iframe src="https://drive.google.com/file/d/1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW/preview"></iframe>
+      </div>
+      <div class="creative-info">ryungs_banner (3월 제외)</div>
+    </div>
+
+    <div class="creative-item">
+      <div class="video-container">
+        <iframe src="https://drive.google.com/file/d/1kK9hgTaVj0mKr40xD0Gd6zxq2oW3NDnG/preview"></iframe>
+      </div>
+      <div class="creative-info">여수언니 영상 (초코퐁당)</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="grid row-mid" style="margin-top:20px">
+  <div class="card">
+    <div class="card-label">🗓 3월 광고 전략</div>
+    <div class="action-item">
+      <div>✅</div>
+      <div style="font-size:0.75rem"><strong>인플루언서 sooyammy 님과 가니야미님 영상 중심 재편</strong><br>
+      <span style="color:var(--muted)">ryungs 소재 제외, 고효율 소재 중심으로 예산 집중 소진</span></div>
     </div>
   </div>
 </div>
