@@ -3,897 +3,1052 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍰 디저트 트럭이 찾아갑니다!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>🍰 디저트 트럭 대학 대항전</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@400;700;800&family=Gaegu:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --peach: #FF8C69;
-            --coral: #FF6B6B;
-            --mint: #4ECDC4;
-            --yellow: #FFE66D;
-            --cream: #FFF9F0;
+            --coral: #FF5A5F;
+            --coral-dark: #D63E43;
+            --yellow: #FFD84D;
+            --yellow-dark: #E5B800;
+            --mint: #3ECFB2;
+            --mint-dark: #2BA990;
+            --cream: #FFF8F0;
+            --brown: #3D2314;
+            --brown-mid: #7A4E3C;
             --pink-light: #FFD6D6;
-            --brown: #5C3D2E;
-            --text-dark: #3D2B1F;
             --gold: #FFD700;
             --silver: #C0C0C0;
             --bronze: #CD7F32;
+            --bg-dark: #1A0E08;
+            --bg-section: #FFF3E8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Nanum Gothic', sans-serif;
-            background-color: var(--cream);
-            min-height: 100vh;
+            background: var(--cream);
             overflow-x: hidden;
+        }
+
+        /* ===== HERO BANNER ===== */
+        .hero {
+            background: linear-gradient(160deg, #FF7043 0%, #FF3D00 40%, #BF360C 100%);
             position: relative;
+            overflow: hidden;
+            padding: 0 0 36px;
+            text-align: center;
         }
 
-        body::before {
+        .hero::before {
             content: '';
-            position: fixed;
+            position: absolute;
             inset: 0;
-            background-image: radial-gradient(circle, #FFD6D6 1.5px, transparent 1.5px);
-            background-size: 28px 28px;
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255,220,100,0.25) 0%, transparent 55%),
+                radial-gradient(circle at 80% 20%, rgba(255,100,100,0.2) 0%, transparent 50%);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .hero-top-bar {
+            background: var(--yellow);
+            color: var(--brown);
+            font-weight: 800;
+            font-size: 0.95em;
+            padding: 10px 16px;
+            letter-spacing: 0.4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hero-top-bar .dot {
+            width: 8px; height: 8px;
+            background: var(--coral);
+            border-radius: 50%;
+            animation: pulse 1.4s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%,100%{opacity:1;transform:scale(1)}
+            50%{opacity:.4;transform:scale(1.5)}
+        }
+
+        .truck-wrap {
+            font-size: 5.5em;
+            margin: 28px 0 10px;
+            display: block;
+            animation: truckBounce 2.2s ease-in-out infinite;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+        }
+
+        @keyframes truckBounce {
+            0%,100%{transform:translateY(0) rotate(-3deg)}
+            50%{transform:translateY(-14px) rotate(3deg)}
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--brown);
+            font-size: 0.85em;
+            font-weight: 800;
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 0 var(--yellow-dark);
+        }
+
+        .hero h1 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.8em;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            margin-bottom: 6px;
             position: relative;
             z-index: 1;
         }
 
-        /* ===== HEADER ===== */
-        header {
-            text-align: center;
-            padding: 40px 20px 30px;
+        .hero h1 em {
+            font-style: normal;
+            color: var(--yellow);
+        }
+
+        .hero-sub {
+            color: rgba(255,255,255,0.88);
+            font-size: 1em;
+            line-height: 1.65;
+            margin: 10px auto 20px;
+            max-width: 320px;
             position: relative;
+            z-index: 1;
         }
 
-        .truck-emoji {
-            font-size: 5em;
-            display: block;
-            animation: bounce 2s infinite;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-12px) rotate(2deg); }
-        }
-
-        h1 {
-            font-family: 'Gaegu', cursive;
-            font-size: 3em;
-            color: var(--brown);
-            line-height: 1.2;
-            text-shadow: 3px 3px 0px var(--pink-light);
-            position: relative;
-        }
-
-        h1 span { color: var(--coral); }
-
-        .subtitle {
-            font-size: 1.1em;
-            color: #7a5c50;
-            margin: 12px 0 20px;
-            line-height: 1.6;
-        }
-
-        .live-badge {
+        .live-chip {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: var(--coral);
+            gap: 7px;
+            background: rgba(0,0,0,0.3);
             color: white;
-            padding: 8px 22px;
-            border-radius: 30px;
-            font-size: 0.95em;
+            font-size: 0.88em;
             font-weight: 700;
-            box-shadow: 0 4px 0 #c0392b;
+            padding: 7px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.25);
+            position: relative;
+            z-index: 1;
+        }
+
+        .live-chip .dot {
+            width: 9px; height: 9px;
+            background: #4AFF91;
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+            box-shadow: 0 0 6px #4AFF91;
+        }
+
+        /* ===== SECTION SHARED ===== */
+        .section {
+            padding: 28px 20px;
+            position: relative;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.45em;
+            color: var(--brown);
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ===== EVENT INFO ===== */
+        .info-section {
+            background: var(--bg-section);
+            padding: 28px 20px 24px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #FFE0C8;
+        }
+
+        .info-row:last-child { border-bottom: none; }
+
+        .info-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4em;
+            flex-shrink: 0;
+        }
+
+        .info-icon.orange { background: #FFE8D5; }
+        .info-icon.yellow { background: #FFF5CC; }
+        .info-icon.mint { background: #D5F5F0; }
+
+        .info-label {
+            font-size: 0.78em;
+            color: #B07050;
+            font-weight: 700;
+            margin-bottom: 3px;
             letter-spacing: 0.5px;
         }
 
-        .live-dot {
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
+        .info-text {
+            font-size: 0.95em;
+            color: var(--brown);
+            font-weight: 700;
+            line-height: 1.5;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.4); }
+        /* ===== PRIZE CARDS ===== */
+        .prize-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .prize-card {
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prize-card.first {
+            background: linear-gradient(135deg, #FFF8E1, #FFE082);
+            border: 2px solid var(--gold);
+            grid-column: span 2;
+        }
+
+        .prize-card.second { background: linear-gradient(135deg, #F5F5F5, #E0E0E0); border: 2px solid #BDBDBD; }
+        .prize-card.third { background: linear-gradient(135deg, #FFF3E0, #FFCC80); border: 2px solid var(--bronze); }
+
+        .prize-rank {
+            font-size: 1.6em;
+            margin-bottom: 4px;
+        }
+
+        .prize-name {
+            font-size: 0.78em;
+            font-weight: 700;
+            color: var(--brown-mid);
+            margin-bottom: 6px;
+        }
+
+        .prize-value {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.5em;
+            color: var(--brown);
+        }
+
+        .prize-detail {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 4px;
         }
 
         /* ===== URGENCY BANNER ===== */
-        .urgency-banner {
-            background: linear-gradient(90deg, var(--yellow), #FFD700, var(--yellow));
+        .urgency {
+            background: linear-gradient(90deg, var(--yellow), #FFED80, var(--yellow));
             background-size: 200% auto;
             animation: shimmer 3s linear infinite;
-            border-radius: 16px;
-            padding: 16px 24px;
-            margin: 20px 0;
+            padding: 16px 20px;
             text-align: center;
-            font-size: 1.05em;
             font-weight: 800;
+            font-size: 1em;
             color: var(--brown);
-            box-shadow: 0 4px 0 #d4a017, 0 6px 20px rgba(255, 180, 0, 0.3);
-            border: 2px dashed #d4a017;
-            letter-spacing: 0.3px;
+            border-top: 3px solid var(--yellow-dark);
+            border-bottom: 3px solid var(--yellow-dark);
         }
 
         @keyframes shimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
+            0%{background-position:0% center}
+            100%{background-position:200% center}
         }
 
-        .cta-box {
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
-            border: 2px solid var(--coral);
-            color: var(--brown);
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
+        /* ===== VOTE SECTION ===== */
+        .vote-section {
+            background: white;
+            padding: 28px 20px;
             text-align: center;
         }
 
-        .cta-box h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: var(--coral);
+        .vote-section .section-title {
+            margin-bottom: 8px;
         }
 
-        .cta-box p {
+        .vote-desc {
+            font-size: 0.92em;
+            color: #888;
+            margin-bottom: 20px;
             line-height: 1.6;
-            color: #7a5c50;
         }
 
-        /* ===== ACTION BUTTONS ===== */
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
+        /* ===== BUTTONS ===== */
         .btn {
-            padding: 16px 32px;
-            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px 28px;
+            border-radius: 14px;
             font-size: 1.1em;
-            font-weight: 700;
+            font-weight: 800;
+            font-family: 'Nanum Gothic', sans-serif;
             border: none;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+            transition: all 0.2s cubic-bezier(.34,1.56,.64,1);
+            letter-spacing: 0.2px;
         }
 
-        .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 0 rgba(0,0,0,0.2);
-        }
+        .btn:hover { transform: translateY(-3px); }
+        .btn:active { transform: translateY(1px); }
 
-        .btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--coral), #FF4757);
+        .btn-vote {
+            background: var(--coral);
             color: white;
-            box-shadow: 0 6px 0 #D63031;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 10px 0 #D63031;
+            box-shadow: 0 5px 0 var(--coral-dark), 0 8px 20px rgba(255,90,95,0.35);
+            margin-bottom: 12px;
         }
 
         .btn-share {
-            background: linear-gradient(135deg, var(--mint), #2EBAAE);
+            background: var(--brown);
             color: white;
-            box-shadow: 0 6px 0 #259B8F;
+            box-shadow: 0 5px 0 #1A0E08;
         }
 
-        .btn-share:hover {
-            box-shadow: 0 10px 0 #259B8F;
+        .btn-icon { font-size: 1.25em; }
+
+        .vote-note {
+            font-size: 0.78em;
+            color: #B0B0B0;
+            margin-top: 10px;
         }
 
-        .btn-icon {
-            font-size: 1.3em;
+        /* ===== MY SCHOOL SCORE ===== */
+        .my-school-box {
+            background: linear-gradient(135deg, #FFF5F0, #FFE8E0);
+            border: 2px solid var(--coral);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin: 0 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* ===== PODIUM DESIGN ===== */
-        .podium-section {
-            margin: 40px 0;
-            perspective: 1000px;
+        .my-school-label {
+            font-size: 0.8em;
+            color: var(--coral);
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
+        .my-school-name {
+            font-size: 1.1em;
+            font-weight: 800;
+            color: var(--brown);
+        }
+
+        .my-school-count {
+            text-align: right;
+        }
+
+        .my-school-count .num {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2em;
+            color: var(--coral);
+        }
+
+        .my-school-count .unit {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        /* ===== REALTIME RANK ===== */
+        .rank-section {
+            background: var(--bg-dark);
+            padding: 28px 20px 36px;
+        }
+
+        .rank-section .section-title {
+            color: white;
+        }
+
+        .rank-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .rank-tab {
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .rank-tab.active {
+            background: var(--yellow);
+            color: var(--brown);
+        }
+
+        .rank-tab.inactive {
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ===== PODIUM ===== */
         .podium-container {
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            padding: 0 20px;
+            gap: 12px;
+            margin-bottom: 28px;
         }
 
         .podium-card {
-            position: relative;
             text-align: center;
             animation: podiumRise 0.8s cubic-bezier(.34,1.56,.64,1) both;
-        }
-
-        @keyframes podiumRise {
-            from { opacity: 0; transform: translateY(100px) scale(0.8); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            flex: 1;
+            max-width: 140px;
         }
 
         .podium-card.rank-1 { animation-delay: 0.2s; order: 2; }
         .podium-card.rank-2 { animation-delay: 0.1s; order: 1; }
         .podium-card.rank-3 { animation-delay: 0.15s; order: 3; }
 
+        @keyframes podiumRise {
+            from{opacity:0;transform:translateY(80px) scale(0.8)}
+            to{opacity:1;transform:translateY(0) scale(1)}
+        }
+
         .podium-profile {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: -10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 14px 10px 12px;
+            margin-bottom: -6px;
             position: relative;
-            z-index: 2;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            min-width: 180px;
-            transition: transform 0.3s ease;
+            transition: transform 0.2s;
         }
 
-        .podium-profile:hover {
-            transform: translateY(-8px) scale(1.05);
-        }
+        .podium-profile:hover { transform: translateY(-6px); }
 
-        .rank-1 .podium-profile {
-            border: 3px solid var(--gold);
-            background: linear-gradient(160deg, #FFFEF8 0%, #FFF9E6 100%);
-        }
-
-        .rank-2 .podium-profile {
-            border: 3px solid var(--silver);
-            background: linear-gradient(160deg, #FAFAFA 0%, #F5F5F5 100%);
-        }
-
-        .rank-3 .podium-profile {
-            border: 3px solid var(--bronze);
-            background: linear-gradient(160deg, #FFF8F0 0%, #F5E8D8 100%);
-        }
-
-        /* University Avatar */
-        .uni-avatar {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 12px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5em;
-            position: relative;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .rank-1 .uni-avatar { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); }
-        .rank-2 .uni-avatar { background: linear-gradient(135deg, #E8E8E8 0%, #BDBDBD 100%); }
-        .rank-3 .uni-avatar { background: linear-gradient(135deg, #D4A574 0%, #B8860B 100%); }
-
-        .uni-avatar::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: inherit;
-            filter: blur(8px);
-            opacity: 0.4;
-            z-index: -1;
-        }
+        .rank-1 .podium-profile { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+        .rank-2 .podium-profile { border-color: var(--silver); background: rgba(192,192,192,0.07); }
+        .rank-3 .podium-profile { border-color: var(--bronze); background: rgba(205,127,50,0.07); }
 
         .crown-icon {
             position: absolute;
-            top: -20px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2em;
+            font-size: 1.6em;
             animation: crownFloat 2s ease-in-out infinite;
         }
 
         @keyframes crownFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-5px); }
+            0%,100%{transform:translateX(-50%) translateY(0)}
+            50%{transform:translateX(-50%) translateY(-5px)}
         }
 
+        .uni-avatar {
+            width: 56px; height: 56px;
+            margin: 0 auto 8px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .rank-1 .uni-avatar { background: linear-gradient(135deg, #FFE27A, #FFB300); }
+        .rank-2 .uni-avatar { background: linear-gradient(135deg, #E0E0E0, #9E9E9E); }
+        .rank-3 .uni-avatar { background: linear-gradient(135deg, #FFCC80, #FF8F00); }
+
         .uni-name {
-            font-size: 1.1em;
+            font-size: 0.78em;
             font-weight: 800;
-            color: var(--brown);
-            margin-bottom: 8px;
+            color: white;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            word-break: keep-all;
         }
 
         .uni-count {
-            font-size: 2em;
-            font-weight: 800;
-            color: var(--coral);
-            margin-bottom: 4px;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.5em;
+            color: var(--yellow);
         }
 
         .uni-label {
-            font-size: 0.85em;
-            color: #888;
+            font-size: 0.75em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
         }
 
         .rank-change {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            font-size: 0.9em;
-            padding: 4px 10px;
-            border-radius: 12px;
+            gap: 3px;
+            font-size: 0.75em;
+            padding: 3px 8px;
+            border-radius: 10px;
             font-weight: 700;
-            margin-top: 8px;
-            animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1);
+            margin-top: 4px;
         }
 
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .rank-change.up { background: rgba(74,255,145,0.2); color: #4AFF91; }
+        .rank-change.down { background: rgba(255,90,95,0.2); color: #FF8A8D; }
 
-        .rank-change.up {
-            background: #D4EDDA;
-            color: #155724;
-        }
-
-        .rank-change.down {
-            background: #F8D7DA;
-            color: #721C24;
-        }
-
-        /* Podium Base */
         .podium-base {
-            background: linear-gradient(180deg, #E0E0E0 0%, #BDBDBD 100%);
             border-radius: 8px 8px 0 0;
-            padding: 20px 10px;
-            box-shadow: 0 -4px 0 rgba(0,0,0,0.1) inset;
-            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 12px;
         }
 
-        .rank-1 .podium-base {
-            height: 140px;
-            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
-        }
-
-        .rank-2 .podium-base {
-            height: 100px;
-            background: linear-gradient(180deg, #E0E0E0 0%, #BDBDBD 100%);
-        }
-
-        .rank-3 .podium-base {
-            height: 80px;
-            background: linear-gradient(180deg, #D4A574 0%, #B8860B 100%);
-        }
+        .rank-1 .podium-base { height: 110px; background: linear-gradient(180deg, #FFD700, #FF8C00); }
+        .rank-2 .podium-base { height: 80px; background: linear-gradient(180deg, #D0D0D0, #909090); }
+        .rank-3 .podium-base { height: 60px; background: linear-gradient(180deg, #D4A574, #8B6914); }
 
         .podium-rank {
-            font-size: 3em;
-            font-weight: 900;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            font-family: 'Gaegu', cursive;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.2em;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
-        /* ===== OTHER RANKS LIST ===== */
-        .other-ranks {
-            max-width: 800px;
-            margin: 40px auto;
-        }
-
-        .other-ranks h3 {
-            text-align: center;
-            font-size: 1.5em;
-            color: var(--brown);
-            margin-bottom: 20px;
-        }
+        /* ===== RANK LIST ===== */
+        .rank-list { display: none; }
+        .rank-list.active { display: block; }
 
         .rank-item {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: slideIn 0.5s ease both;
+            gap: 14px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            animation: slideIn 0.4s ease both;
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
+            from{opacity:0;transform:translateX(-30px)}
+            to{opacity:1;transform:translateX(0)}
         }
 
-        .rank-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-
-        .rank-number {
-            font-size: 1.8em;
-            font-weight: 800;
-            color: var(--brown);
-            min-width: 40px;
+        .rank-num {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.5em;
+            color: rgba(255,255,255,0.4);
+            min-width: 32px;
             text-align: center;
         }
 
         .rank-item .uni-avatar {
-            width: 60px;
-            height: 60px;
-            font-size: 1.8em;
-            background: linear-gradient(135deg, #FFE5E5 0%, #FFD0D0 100%);
-        }
-
-        .rank-info {
-            flex: 1;
-        }
-
-        .rank-info .uni-name {
-            font-size: 1.2em;
-            margin-bottom: 4px;
-        }
-
-        .rank-stats {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.9em;
-            color: #888;
-        }
-
-        .rank-item .uni-count {
-            font-size: 1.5em;
+            width: 46px; height: 46px;
+            font-size: 1.4em;
+            background: linear-gradient(135deg, #FF7043, #BF360C);
             margin: 0;
         }
 
+        .rank-info { flex: 1; }
+        .rank-info .uni-name { font-size: 0.95em; color: white; margin: 0 0 2px; }
+        .rank-info .stat { font-size: 0.82em; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 8px; }
+
+        .rank-item .uni-count {
+            font-size: 1.25em;
+            color: var(--yellow);
+        }
+
         /* ===== TOTAL BOX ===== */
-        .total-box {
+        .total-section {
+            padding: 24px 20px;
+            background: var(--bg-section);
+        }
+
+        .total-card {
             background: white;
-            border-radius: 24px;
-            padding: 40px;
-            margin: 40px 0;
+            border-radius: 20px;
+            padding: 28px 20px;
             text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            border: 3px solid var(--coral);
+            border: 2px solid #FFD0B0;
+            box-shadow: 0 6px 24px rgba(255,90,95,0.1);
         }
 
-        .total-box h2 {
-            font-size: 1.6em;
-            color: var(--brown);
-            margin-bottom: 20px;
-        }
-
-        .total-number {
-            font-size: 4.5em;
-            font-weight: 900;
-            color: var(--coral);
-            font-family: 'Gaegu', cursive;
-            text-shadow: 3px 3px 0 var(--pink-light);
+        .total-card h3 {
+            font-size: 1.1em;
+            color: var(--brown-mid);
             margin-bottom: 10px;
         }
 
-        .total-label {
-            font-size: 1.2em;
-            color: #7a5c50;
-            margin-bottom: 20px;
+        .total-number {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 4em;
+            color: var(--coral);
+            text-shadow: 3px 3px 0 var(--pink-light);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .total-unit {
+            font-size: 1.1em;
+            color: var(--brown-mid);
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
         .update-time {
-            font-size: 0.9em;
-            color: #999;
+            font-size: 0.8em;
+            color: #C0A090;
         }
 
-        /* ===== LOADING & ERROR ===== */
+        /* ===== BOTTOM CTA ===== */
+        .bottom-cta {
+            background: linear-gradient(135deg, #FF5A5F, #FF3D00);
+            padding: 28px 20px 36px;
+            text-align: center;
+        }
+
+        .bottom-cta h3 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.6em;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+
+        .bottom-cta p {
+            color: rgba(255,255,255,0.82);
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .bottom-cta .btn-vote {
+            background: var(--yellow);
+            color: var(--brown);
+            box-shadow: 0 5px 0 var(--yellow-dark);
+            margin-bottom: 12px;
+        }
+
+        .bottom-cta .btn-share {
+            background: rgba(0,0,0,0.3);
+            box-shadow: 0 5px 0 rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* ===== LOADING ===== */
         .loading {
             text-align: center;
-            font-size: 1.5em;
-            color: var(--brown);
-            padding: 60px;
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.6);
+            padding: 48px 20px;
             font-weight: 700;
         }
 
         .loading span {
-            animation: loadingDot 1.4s infinite both;
             display: inline-block;
             margin: 0 2px;
+            animation: loadDot 1.4s infinite both;
         }
 
-        .loading span:nth-child(2) { animation-delay: 0.2s; }
-        .loading span:nth-child(3) { animation-delay: 0.4s; }
+        .loading span:nth-child(2){animation-delay:.2s}
+        .loading span:nth-child(3){animation-delay:.4s}
 
-        @keyframes loadingDot {
-            0%, 80%, 100% { opacity: 0.3; }
-            40% { opacity: 1; }
+        @keyframes loadDot {
+            0%,80%,100%{opacity:.3}
+            40%{opacity:1}
         }
 
-        .error-message {
-            background: #FFF3CD;
-            border: 2px solid #FFA500;
-            color: var(--brown);
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
+        .error-msg {
+            background: rgba(255,200,80,0.15);
+            border: 1px solid rgba(255,200,80,0.4);
+            color: rgba(255,255,255,0.8);
+            padding: 18px;
+            border-radius: 14px;
+            margin: 16px 0;
             text-align: center;
             font-weight: 700;
         }
 
-        /* Floating treats */
+        /* ===== FLOATING ITEMS ===== */
         .floater {
             position: fixed;
             pointer-events: none;
-            animation: floatUp 8s ease-in infinite;
+            animation: floatUp 9s ease-in infinite;
             z-index: 0;
             opacity: 0;
         }
 
         .floater img {
-            width: 80px;
-            height: 80px;
+            width: 64px; height: 64px;
             object-fit: contain;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
         }
 
         @keyframes floatUp {
-            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.4; }
-            100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
+            0%{opacity:0;transform:translateY(0) rotate(0deg)}
+            10%{opacity:.6}
+            90%{opacity:.3}
+            100%{opacity:0;transform:translateY(-100vh) rotate(360deg)}
         }
 
-        /* Stagger animations */
-        .floater:nth-child(1) { animation-delay: 0s; left: 5%; }
-        .floater:nth-child(2) { animation-delay: 2s; left: 15%; }
-        .floater:nth-child(3) { animation-delay: 4s; left: 28%; }
-        .floater:nth-child(4) { animation-delay: 1s; left: 45%; }
-        .floater:nth-child(5) { animation-delay: 3s; left: 62%; }
-        .floater:nth-child(6) { animation-delay: 5s; left: 75%; }
-        .floater:nth-child(7) { animation-delay: 1.5s; left: 88%; }
-        .floater:nth-child(8) { animation-delay: 3.5s; left: 92%; }
+        .floater:nth-child(1){animation-delay:0s;left:5%}
+        .floater:nth-child(2){animation-delay:2s;left:15%}
+        .floater:nth-child(3){animation-delay:4s;left:28%}
+        .floater:nth-child(4){animation-delay:1s;left:45%}
+        .floater:nth-child(5){animation-delay:3s;left:62%}
+        .floater:nth-child(6){animation-delay:5s;left:75%}
+        .floater:nth-child(7){animation-delay:1.5s;left:88%}
+        .floater:nth-child(8){animation-delay:3.5s;left:92%}
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.1em; }
-            .truck-emoji { font-size: 3.5em; }
-            .podium-container {
-                gap: 8px;
-                padding: 0 10px;
-            }
-            .podium-profile {
-                padding: 12px;
-                min-width: 0;
-            }
-            .uni-avatar {
-                width: 50px;
-                height: 50px;
-                font-size: 1.8em;
-            }
-            .uni-name {
-                font-size: 0.85em;
-            }
-            .uni-count {
-                font-size: 1.5em;
-            }
-            .uni-label {
-                font-size: 0.75em;
-            }
-            .podium-base {
-                padding: 12px 5px;
-            }
-            .rank-1 .podium-base { height: 100px; }
-            .rank-2 .podium-base { height: 70px; }
-            .rank-3 .podium-base { height: 60px; }
-            .podium-rank {
-                font-size: 2em;
-            }
-            .crown-icon {
-                font-size: 1.5em;
-                top: -15px;
-            }
-            .rank-change {
-                font-size: 0.75em;
-                padding: 3px 8px;
-            }
-            .total-number { font-size: 3.5em; }
-            .action-buttons {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2em; }
+            .truck-wrap { font-size: 4.2em; }
+            .podium-card { max-width: 110px; }
+            .uni-avatar { width: 46px; height: 46px; font-size: 1.5em; }
+            .uni-count { font-size: 1.2em; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating product images -->
-    <div class="floater"><img src="1771930651027_image.png" alt="약과 캐릭터"></div>
-    <div class="floater"><img src="image_117.png" alt="떡 캐릭터"></div>
-    <div class="floater"><img src="두쫀떡_피넛__패키지.png" alt="두쫀떡 피넛"></div>
-    <div class="floater"><img src="우리밀_약과.png" alt="우리밀 약과"></div>
-    <div class="floater"><img src="초코퐁당요거꿀떡.png" alt="초코퐁당 요거꿀떡"></div>
-    <div class="floater"><img src="1771930651027_image.png" alt="약과 캐릭터"></div>
-    <div class="floater"><img src="image_117.png" alt="떡 캐릭터"></div>
-    <div class="floater"><img src="두쫀떡_피넛__패키지.png" alt="두쫀떡 피넛"></div>
+<!-- Floating items -->
+<div class="floater"><img src="1771930651027_image.png" alt=""></div>
+<div class="floater"><img src="image_117.png" alt=""></div>
+<div class="floater"><img src="두쫀떡_피넛__패키지.png" alt=""></div>
+<div class="floater"><img src="우리밀_약과.png" alt=""></div>
+<div class="floater"><img src="초코퐁당요거꿀떡.png" alt=""></div>
+<div class="floater"><img src="1771930651027_image.png" alt=""></div>
+<div class="floater"><img src="image_117.png" alt=""></div>
+<div class="floater"><img src="두쫀떡_피넛__패키지.png" alt=""></div>
 
-    <div class="container">
-        <header>
-            <span class="truck-emoji">🚚</span>
-            <h1>디저트 트럭이<br><span>찾아갑니다!</span></h1>
-            <p class="subtitle">
-                응모수가 가장 많은 대학교에<br>
-                달콤한 디저트 트럭을 직접 보내드려요 🍰
-            </p>
-            <div class="live-badge">
-                <div class="live-dot"></div>
-                실시간 집계 중
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-top-bar">
+        <div class="dot"></div>
+        우리 학교에 투표하면 디저트 트럭 온다!
+    </div>
+    <span class="truck-wrap">🚚</span>
+    <div class="hero-badge">디저트 트럭 대학 대항전</div>
+    <h1>응모수 <em>TOP 3</em><br>학교에 트럭이<br>찾아갑니다!</h1>
+    <p class="hero-sub">지금 바로 응모하고<br>우리 학교 순위를 올려주세요 🔥</p>
+    <div class="live-chip">
+        <div class="dot"></div>
+        실시간 집계 중
+    </div>
+</section>
+
+<!-- URGENCY -->
+<div class="urgency">
+    🏆 지금 1등 대학교로 트럭 출동 확정! 우리 학교를 이기게 해주세요 🔥
+</div>
+
+<!-- EVENT INFO -->
+<section class="info-section">
+    <p class="section-title">📋 이벤트 안내</p>
+    <div class="section-card" style="padding:4px 20px;">
+        <div class="info-row">
+            <div class="info-icon orange">📅</div>
+            <div>
+                <div class="info-label">투표 기간</div>
+                <div class="info-text">9월 10일(화) ~ 10월 13일(일)</div>
             </div>
-        </header>
-
-        <div class="urgency-banner">
-            🏆 지금 1등 대학교로 트럭이 출동합니다! 우리 학교가 이기게 해주세요 🔥
         </div>
-
-        <div class="cta-box">
-            <h3>🍩 아직 응모 안 했다면 지금 바로!</h3>
-            <p>내 학교 순위가 올라가는 걸 실시간으로 확인해보세요!<br>한 명 한 명의 응모가 순위를 바꿉니다 ✨</p>
-            
-            <div class="action-buttons">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScDTEGuc0fR4LmoQIAvIehzdTgykRXpdL-YUi535FJALB7fbA/viewform?usp=header" target="_blank" class="btn btn-primary">
-                    <span class="btn-icon">📝</span>
-                    지금 바로 응모하기
-                </a>
-                <button onclick="shareEvent()" class="btn btn-share">
-                    <span class="btn-icon">📢</span>
-                    친구에게 공유하기
-                </button>
+        <div class="info-row">
+            <div class="info-icon yellow">🎓</div>
+            <div>
+                <div class="info-label">참여 대상</div>
+                <div class="info-text">일반대학 재학생<br><span style="font-size:0.88em;color:#999">서울/경기/인천 지역 내 대학교</span></div>
             </div>
         </div>
-
-        <div id="loading" class="loading">
-            불러오는 중<span>●</span><span>●</span><span>●</span>
-        </div>
-        <div id="error" class="error-message" style="display:none;"></div>
-
-        <div id="podiumSection" class="podium-section" style="display:none;">
-            <div class="podium-container" id="podiumContainer"></div>
-            <div class="other-ranks" id="otherRanks" style="display:none;"></div>
-        </div>
-
-        <div class="total-box" id="totalStats" style="display:none;">
-            <h2>🎉 지금까지 총 응모 수</h2>
-            <div class="total-number" id="totalResponses">0</div>
-            <div class="total-label">명이 참여했어요!</div>
-            <div class="update-time">마지막 업데이트: <span id="updateTime">—</span></div>
+        <div class="info-row">
+            <div class="info-icon mint">🍰</div>
+            <div>
+                <div class="info-label">트럭 방문</div>
+                <div class="info-text">최종 순위 상위 3개 학교<br><span style="font-size:0.88em;color:#999">10월 중 직접 찾아갑니다!</span></div>
+            </div>
         </div>
     </div>
+</section>
 
-    <script>
-        const SHEET_ID = '1K9E0VDxspjRsTpjRbKL9KKvcyHFM4POz1HekzUSPL0k';
-        const SHEET_GID = '750506638';
-        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
+<!-- PRIZES -->
+<section class="section" style="background:white;padding-top:0;padding-bottom:28px;">
+    <div style="padding:0 0 4px;">
+        <p class="section-title" style="padding-top:28px;">🏅 순위별 혜택</p>
+        <div class="prize-grid">
+            <div class="prize-card first">
+                <div class="prize-rank">🥇</div>
+                <div class="prize-name">1등 학교</div>
+                <div class="prize-value">트럭 방문 + 전 제품 무료 시식</div>
+                <div class="prize-detail">선착순 200명 / 10만원 상당</div>
+            </div>
+            <div class="prize-card second">
+                <div class="prize-rank">🥈</div>
+                <div class="prize-name">2등 학교</div>
+                <div class="prize-value">트럭 방문</div>
+                <div class="prize-detail">선착순 100명</div>
+            </div>
+            <div class="prize-card third">
+                <div class="prize-rank">🥉</div>
+                <div class="prize-name">3등 학교</div>
+                <div class="prize-value">트럭 방문</div>
+                <div class="prize-detail">선착순 50명</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        let previousData = {};
+<!-- VOTE -->
+<section class="vote-section">
+    <p class="section-title">🍩 매일 투표하고<br>우리 학교 순위 올리자!</p>
+    <p class="vote-desc">한 명 한 명의 응모가 순위를 바꿉니다<br>매일 투표할 수 있어요!</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScDTEGuc0fR4LmoQIAvIehzdTgykRXpdL-YUi535FJALB7fbA/viewform?usp=header" target="_blank" class="btn btn-vote">
+        <span class="btn-icon">📝</span>
+        지금 바로 응모하기
+    </a>
+    <button onclick="shareEvent()" class="btn btn-share">
+        <span class="btn-icon">📢</span>
+        친구에게 공유하면 투표 한 번 더!
+    </button>
+    <p class="vote-note">*하루 최대 2회 투표 가능</p>
+</section>
 
-        // University emoji mapping (간단한 대학 아이콘)
-        const uniEmojis = {
-            '건국대학교': '🐃',
-            '고려대학교': '🐯',
-            '연세대학교': '🦅',
-            '서울대학교': '🎓',
-            '성균관대학교': '📚',
-            '한양대학교': '🦁',
-            '이화여대': '🌸',
-            '서강대학교': '⚜️',
-            '중앙대학교': '💙',
-            '경희대학교': '🌏',
-            '상명회대학교': '🎨',
-            '평택대학교': '📖',
-            '동국대학교': '☸️'
-        };
+<!-- MY SCHOOL -->
+<div class="my-school-box" id="mySchoolBox" style="display:none;">
+    <div>
+        <div class="my-school-label">우리 학교 현황</div>
+        <div class="my-school-name" id="mySchoolName">—</div>
+    </div>
+    <div class="my-school-count">
+        <div class="num" id="mySchoolCount">0</div>
+        <div class="unit">표</div>
+    </div>
+</div>
 
-        function getUniEmoji(name) {
-            for (let key in uniEmojis) {
-                if (name.includes(key.replace('대학교', ''))) {
-                    return uniEmojis[key];
-                }
-            }
-            return '🎓'; // Default
+<!-- REALTIME RANK -->
+<section class="rank-section">
+    <p class="section-title">👑 실시간 순위</p>
+
+    <div class="rank-tabs">
+        <button class="rank-tab active" onclick="switchTab('top3', this)">🏆 TOP 3</button>
+        <button class="rank-tab inactive" onclick="switchTab('all', this)">📊 전체 순위</button>
+    </div>
+
+    <!-- TOP3 PODIUM -->
+    <div id="top3View">
+        <div id="loading" class="loading">불러오는 중<span>●</span><span>●</span><span>●</span></div>
+        <div id="errorMsg" class="error-msg" style="display:none;"></div>
+        <div class="podium-container" id="podiumContainer" style="display:none;"></div>
+    </div>
+
+    <!-- ALL RANKS -->
+    <div id="allView" class="rank-list" style="display:none;">
+        <div id="rankList"></div>
+    </div>
+</section>
+
+<!-- TOTAL -->
+<section class="total-section" id="totalSection" style="display:none;">
+    <div class="total-card">
+        <h3>🎉 지금까지 총 응모 수</h3>
+        <div class="total-number" id="totalResponses">0</div>
+        <div class="total-unit">명이 참여했어요!</div>
+        <div class="update-time">마지막 업데이트: <span id="updateTime">—</span></div>
+    </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+    <h3>아직 투표 안 했다면?</h3>
+    <p>매일 투표해서 우리 학교를<br>1등으로 만들어 주세요! 🚚💨</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScDTEGuc0fR4LmoQIAvIehzdTgykRXpdL-YUi535FJALB7fbA/viewform?usp=header" target="_blank" class="btn btn-vote">
+        <span class="btn-icon">📝</span>
+        지금 바로 응모하기
+    </a>
+    <button onclick="shareEvent()" class="btn btn-share">
+        <span class="btn-icon">📣</span>
+        친구에게 이벤트 공유하기
+    </button>
+</section>
+
+<script>
+    const SHEET_ID = '1K9E0VDxspjRsTpjRbKL9KKvcyHFM4POz1HekzUSPL0k';
+    const SHEET_GID = '750506638';
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
+
+    let previousData = {};
+    let currentTab = 'top3';
+    let allUniversities = [];
+
+    const uniEmojis = {
+        '건국대학교':'🐃','고려대학교':'🐯','연세대학교':'🦅','서울대학교':'🎓',
+        '성균관대학교':'📚','한양대학교':'🦁','이화여대':'🌸','서강대학교':'⚜️',
+        '중앙대학교':'💙','경희대학교':'🌏','동국대학교':'☸️','국민대학교':'🌿',
+        '숙명여대':'🌺','한국외대':'🌐','세종대학교':'👑'
+    };
+
+    function getEmoji(name) {
+        for (let key in uniEmojis) {
+            if (name.includes(key.replace('대학교',''))) return uniEmojis[key];
         }
+        return '🎓';
+    }
 
-        async function fetchGoogleSheetData() {
-            try {
-                const response = await fetch(SHEET_URL);
-                const text = await response.text();
-                
-                const start = text.indexOf('(') + 1;
-                const end = text.lastIndexOf(')');
-                const json = JSON.parse(text.substring(start, end));
-                
-                const rows = json.table.rows;
-                const universities = [];
-                
-                for (let i = 0; i < rows.length; i++) {
-                    const row = rows[i];
-                    if (row.c && row.c[0] && row.c[1]) {
-                        const nameCell = row.c[0];
-                        const countCell = row.c[1];
-                        if (nameCell.v && countCell.v !== null && countCell.v !== '') {
-                            const name = nameCell.v.toString().trim();
-                            const responses = parseInt(countCell.v);
-                            if (name && !isNaN(responses)) {
-                                const lastCount = previousData[name] || 0;
-                                universities.push({ 
-                                    name, 
-                                    responses, 
-                                    change: responses - lastCount,
-                                    emoji: getUniEmoji(name)
-                                });
-                                previousData[name] = responses;
-                            }
-                        }
+    function switchTab(tab, btn) {
+        currentTab = tab;
+        document.querySelectorAll('.rank-tab').forEach(t => {
+            t.className = 'rank-tab ' + (t === btn ? 'active' : 'inactive');
+        });
+        document.getElementById('top3View').style.display = tab === 'top3' ? 'block' : 'none';
+        const allView = document.getElementById('allView');
+        allView.style.display = tab === 'all' ? 'block' : 'none';
+        if (tab === 'all') allView.classList.add('active');
+    }
+
+    async function fetchData() {
+        try {
+            const res = await fetch(SHEET_URL);
+            const text = await res.text();
+            const json = JSON.parse(text.slice(text.indexOf('(') + 1, text.lastIndexOf(')')));
+            const rows = json.table.rows;
+            const unis = [];
+            for (const row of rows) {
+                if (row.c && row.c[0] && row.c[1]) {
+                    const name = row.c[0].v?.toString().trim();
+                    const count = parseInt(row.c[1].v);
+                    if (name && !isNaN(count)) {
+                        unis.push({ name, responses: count, change: count - (previousData[name] || 0), emoji: getEmoji(name) });
+                        previousData[name] = count;
                     }
                 }
-                return universities;
-            } catch (error) {
-                console.error('데이터 가져오기 실패:', error);
-                throw error;
             }
+            return unis;
+        } catch (e) { throw e; }
+    }
+
+    function renderPodium(unis) {
+        const top3 = unis.slice(0, 3);
+        const container = document.getElementById('podiumContainer');
+        container.innerHTML = top3.map((uni, i) => {
+            const chg = uni.change;
+            const chgHTML = chg !== 0
+                ? `<div class="rank-change ${chg > 0 ? 'up' : 'down'}">${chg > 0 ? '▲' : '▼'}${Math.abs(chg)}</div>`
+                : '';
+            return `
+            <div class="podium-card rank-${i+1}">
+                <div class="podium-profile">
+                    ${i === 0 ? '<div class="crown-icon">👑</div>' : ''}
+                    <div class="uni-avatar">${uni.emoji}</div>
+                    <div class="uni-name">${uni.name}</div>
+                    <div class="uni-count">${uni.responses.toLocaleString()}</div>
+                    <div class="uni-label">표</div>
+                    ${chgHTML}
+                </div>
+                <div class="podium-base"><div class="podium-rank">${i+1}</div></div>
+            </div>`;
+        }).join('');
+        container.style.display = 'flex';
+    }
+
+    function renderList(unis) {
+        document.getElementById('rankList').innerHTML = unis.map((uni, i) => {
+            const chg = uni.change;
+            const chgHTML = chg !== 0
+                ? `<span class="rank-change ${chg > 0 ? 'up' : 'down'}">${chg > 0 ? '▲' : '▼'}${Math.abs(chg)}</span>`
+                : '';
+            return `
+            <div class="rank-item" style="animation-delay:${i * 0.04}s">
+                <div class="rank-num">${i+1}</div>
+                <div class="uni-avatar">${uni.emoji}</div>
+                <div class="rank-info">
+                    <div class="uni-name">${uni.name}</div>
+                    <div class="stat"><span>${uni.responses.toLocaleString()}표</span>${chgHTML}</div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function updateDisplay(unis) {
+        if (!unis.length) { showError('아직 응모한 대학교가 없습니다. 첫 번째가 되어보세요! 🎉'); return; }
+        unis.sort((a,b) => b.responses - a.responses);
+        allUniversities = unis;
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('errorMsg').style.display = 'none';
+
+        renderPodium(unis);
+        renderList(unis);
+
+        const total = unis.reduce((s,u) => s + u.responses, 0);
+        document.getElementById('totalResponses').textContent = total.toLocaleString();
+        document.getElementById('updateTime').textContent = new Date().toLocaleTimeString('ko-KR');
+        document.getElementById('totalSection').style.display = 'block';
+    }
+
+    function showError(msg) {
+        document.getElementById('loading').style.display = 'none';
+        const el = document.getElementById('errorMsg');
+        el.textContent = msg;
+        el.style.display = 'block';
+    }
+
+    async function refresh() {
+        try { updateDisplay(await fetchData()); }
+        catch (e) { showError('데이터를 불러오는데 실패했습니다.'); }
+    }
+
+    refresh();
+    setInterval(refresh, 10000);
+
+    function shareEvent() {
+        const data = {
+            title: '🍰 디저트 트럭 대학 대항전',
+            text: '우리 학교에 디저트 트럭을 보내주세요! 지금 바로 응모하고 실시간 순위 확인하세요!',
+            url: window.location.href
+        };
+        if (navigator.share) {
+            navigator.share(data).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => alert('🎉 링크가 복사되었습니다!\n친구들에게 공유해주세요!'))
+                .catch(() => prompt('아래 링크를 공유해주세요:', window.location.href));
         }
-
-        function updateDisplay(universities) {
-            if (!universities || universities.length === 0) {
-                showError('아직 응모한 대학교가 없습니다. 첫 번째 응모자가 되어보세요! 🎉');
-                return;
-            }
-
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('error').style.display = 'none';
-            document.getElementById('podiumSection').style.display = 'block';
-            document.getElementById('totalStats').style.display = 'block';
-
-            universities.sort((a, b) => b.responses - a.responses);
-
-            // Top 3 - Podium
-            const podiumContainer = document.getElementById('podiumContainer');
-            const top3 = universities.slice(0, 3);
-            
-            podiumContainer.innerHTML = top3.map((uni, index) => {
-                const rankClass = `rank-${index + 1}`;
-                const change = uni.change;
-                const changeHTML = change !== 0 
-                    ? `<div class="rank-change ${change > 0 ? 'up' : 'down'}">
-                         ${change > 0 ? '▲' : '▼'}${Math.abs(change)}
-                       </div>` 
-                    : '';
-                
-                return `
-                    <div class="podium-card ${rankClass}">
-                        <div class="podium-profile">
-                            ${index === 0 ? '<div class="crown-icon">👑</div>' : ''}
-                            <div class="uni-avatar">${uni.emoji}</div>
-                            <div class="uni-name">${uni.name}</div>
-                            <div class="uni-count">${uni.responses.toLocaleString()}</div>
-                            <div class="uni-label">명</div>
-                            ${changeHTML}
-                        </div>
-                        <div class="podium-base">
-                            <div class="podium-rank">${index + 1}</div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            // Others
-            const others = universities.slice(3);
-            const otherRanksDiv = document.getElementById('otherRanks');
-            
-            if (others.length > 0) {
-                otherRanksDiv.style.display = 'block';
-                otherRanksDiv.innerHTML = `
-                    <h3>📊 전체 순위</h3>
-                    ${others.map((uni, index) => {
-                        const actualRank = index + 4;
-                        const change = uni.change;
-                        const changeHTML = change !== 0 
-                            ? `<span class="rank-change ${change > 0 ? 'up' : 'down'}">
-                                 ${change > 0 ? '▲' : '▼'}${Math.abs(change)}
-                               </span>` 
-                            : '';
-                        
-                        return `
-                            <div class="rank-item" style="animation-delay: ${index * 0.05}s">
-                                <div class="rank-number">${actualRank}</div>
-                                <div class="uni-avatar">${uni.emoji}</div>
-                                <div class="rank-info">
-                                    <div class="uni-name">${uni.name}</div>
-                                    <div class="rank-stats">
-                                        <span>${uni.responses.toLocaleString()}명</span>
-                                        ${changeHTML}
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                `;
-            } else {
-                otherRanksDiv.style.display = 'none';
-            }
-
-            // Total
-            const total = universities.reduce((sum, uni) => sum + uni.responses, 0);
-            document.getElementById('totalResponses').textContent = total.toLocaleString();
-            document.getElementById('updateTime').textContent = new Date().toLocaleTimeString('ko-KR');
-        }
-
-        function showError(message) {
-            document.getElementById('loading').style.display = 'none';
-            const errorDiv = document.getElementById('error');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-        }
-
-        async function refreshData() {
-            try {
-                const data = await fetchGoogleSheetData();
-                updateDisplay(data);
-            } catch (error) {
-                showError('데이터를 불러오는데 실패했습니다. 구글 시트 설정을 확인해주세요.');
-                console.error('상세 오류:', error);
-            }
-        }
-
-        refreshData();
-        setInterval(refreshData, 10000);
-
-        // Share function
-        function shareEvent() {
-            const shareData = {
-                title: '🍰 디저트 트럭 이벤트',
-                text: '우리 학교에 디저트 트럭을 보내주세요! 지금 바로 응모하고 실시간 순위를 확인하세요!',
-                url: window.location.href
-            };
-
-            // Web Share API 지원 여부 확인 (모바일)
-            if (navigator.share) {
-                navigator.share(shareData)
-                    .then(() => console.log('공유 성공!'))
-                    .catch((error) => console.log('공유 취소:', error));
-            } else {
-                // Web Share API 미지원 시 URL 복사
-                const url = window.location.href;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('🎉 링크가 복사되었습니다!\n\n친구들에게 공유해주세요:\n' + url);
-                }).catch(() => {
-                    // 복사 실패 시 프롬프트 표시
-                    prompt('아래 링크를 복사해서 공유해주세요:', url);
-                });
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
