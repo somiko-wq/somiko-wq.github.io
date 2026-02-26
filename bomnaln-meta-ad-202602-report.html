@@ -44,9 +44,14 @@ body {
 .page-header {
   background: var(--text);
   color: #fff;
-  padding: 48px 40px 40px;
+  padding: 48px 0 40px;
   position: relative;
   overflow: hidden;
+}
+.page-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .page-header::before {
   content: '';
@@ -812,18 +817,20 @@ tbody tr.note-row td {
 
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-header">
-  <div class="header-top">
-    <div>
-      <div class="header-eyebrow">봄날엔 · 인스타그램 Meta Ads</div>
-      <h1 class="header-title">봄날엔 · <em>2월</em> 광고 성과 요약</h1>
-      <p class="header-sub">2026.02.01 – 02.25 &nbsp;·&nbsp; 인스타그램 Meta Ads &nbsp;·&nbsp; 캠페인 3개</p>
-      <div class="header-roas">
-        <span class="roas-num">423%</span>
-        <span class="roas-label">2월 전체 ROAS</span>
+  <div class="page-header-inner">
+    <div class="header-top">
+      <div>
+        <div class="header-eyebrow">봄날엔 · 인스타그램 Meta Ads</div>
+        <h1 class="header-title">봄날엔 · <em>2월</em> 광고 성과 요약</h1>
+        <p class="header-sub">2026.02.01 – 02.25 &nbsp;·&nbsp; 인스타그램 Meta Ads &nbsp;·&nbsp; 캠페인 3개</p>
+        <div class="header-roas">
+          <span class="roas-num">423%</span>
+          <span class="roas-label">2월 전체 ROAS</span>
+        </div>
       </div>
     </div>
+    <p class="header-caption">집계 기간 2026년 2월 1일 – 25일 &nbsp;·&nbsp; 이익 마진 50% 기준 &nbsp;·&nbsp; 객단가 ₩30,000 기준</p>
   </div>
-  <p class="header-caption">집계 기간 2026년 2월 1일 – 25일 &nbsp;·&nbsp; 이익 마진 50% 기준 &nbsp;·&nbsp; 객단가 ₩30,000 기준</p>
 </header>
 
 <!-- ═══ KPI STRIP ═══ -->
@@ -883,7 +890,7 @@ tbody tr.note-row td {
           <span class="pnl-val plus">+ 172.6만원 <span class="small">(매출의 19.3%)</span></span>
         </div>
         <div class="pnl-summary">
-          <strong>광고비가 이익 마진의 47.2%</strong>를 차지합니다. 권장 비율(30~40%)보다 높아 개선 여지가 있지만, 현재 흑자 구조는 유지 중입니다. 여수언니 영상(ROAS 429%)이 수익 대부분을 견인하며, 협찬비 포함 인플루언서 ROAS는 170%로 sooyammy._ 위주 재편이 필요합니다.
+          2월 광고비는 이익 마진의 <strong>47.2%</strong>를 차지해 권장 비율(30~40%)을 소폭 상회했지만, 전체 흑자 구조는 안정적으로 유지됐습니다. 여수언니 영상(ROAS 429%)이 수익의 대부분을 이끌었으며, 협찬비 포함 인플루언서 효율(ROAS 170%)은 sooyammy._ 중심으로 재편이 필요합니다.
         </div>
       </div>
     </div>
@@ -960,8 +967,8 @@ tbody tr.note-row td {
         </div>
 
         <div class="cps-note" style="margin-top:14px;">
-          여수언니·소재별 CPS ₩7,536~8,516<br>
-          ryungs·amu.eats 소재가 평균 끌어올리는 구조
+          여수언니·주요 소재 CPS는 ₩7,536~8,516 수준으로<br>
+          ryungs·amu.eats 소재가 전체 평균을 끌어올리고 있습니다
         </div>
       </div>
     </div>
@@ -1004,7 +1011,7 @@ tbody tr.note-row td {
           </div>
         </div>
         <div class="inf-note" style="margin-top:12px;">
-          ryungs는 협찬비 50만원 포함 시 <strong>실질 손실 구조</strong>. <strong>3월 광고소재에서 제외</strong>하며 예산은 sooyammy._로 이동합니다.
+          ryungs는 협찬비 50만원을 포함하면 <strong>실질 손실 구조</strong>로 전환됩니다. 3월부터 광고 소재에서 제외하고, 해당 예산은 sooyammy._로 이동할 예정입니다.
         </div>
       </div>
     </div>
@@ -1015,19 +1022,19 @@ tbody tr.note-row td {
         <ul class="march-list">
           <li class="march-item">
             <span class="march-icon">✅</span>
-            <span><strong>예산 분배 방안</strong> (약 210만원)<br>여수언니 57% · 인플루언서 22% · 리타겟 12% · 기타 9%</span>
+            <span><strong>예산 배분 방향</strong> (약 210만원 기준)<br>여수언니 57% · 인플루언서 22% · 리타겟 12% · 기타 9%</span>
           </li>
           <li class="march-item">
             <span class="march-icon">⭐</span>
-            <span><strong>sooyammy._ 예산 확대</strong> — 협찬비 포함 ROAS 344%로 유일하게 300%+ 유지</span>
+            <span><strong>sooyammy._ 예산 확대</strong> — 협찬비 포함 ROAS 344%로 인플루언서 중 유일하게 300%+ 유지 중</span>
           </li>
           <li class="march-item">
             <span class="march-icon">🔁</span>
-            <span><strong>리타겟 소재 다각화</strong> — 1월 베스트 고객리뷰 소재를 광고 소재로 추가하여 구매전환 유도</span>
+            <span><strong>리타겟 소재 다각화</strong> — 1월 베스트 고객리뷰 소재를 리타겟 캠페인에 추가해 재방문 전환율을 높입니다</span>
           </li>
           <li class="march-item">
             <span class="march-icon">🎯</span>
-            <span><strong>CPS ₩7,500 이하 목표</strong> — 비효율 소재 교체 + 타겟 세분화</span>
+            <span><strong>CPS ₩7,500 이하 목표</strong> — 비효율 소재 교체와 타겟 세분화를 병행합니다</span>
           </li>
         </ul>
       </div>
@@ -1550,14 +1557,79 @@ tbody tr.note-row td {
   </div>
 
   <div style="padding:12px 16px;background:var(--green-bg);border:1px solid #b8e0c8;border-radius:8px;font-size:13px;color:var(--text-mid);line-height:1.7;">
-    💡 <strong>3월 리타겟팅 핵심:</strong> so_chewy_yopong 소재 중심으로 바리에이션 + 1월 베스트 고객리뷰 소재를 활용하여 리타겟을 테스트할 예정입니다.
+    💡 <strong>3월 리타겟팅 방향:</strong> so_chewy_yopong 소재를 중심으로 바리에이션을 늘리고, 1월 베스트 고객리뷰 소재를 리타겟 캠페인에 추가해 전환율을 높일 예정입니다.
   </div>
 </div>
 
-<!-- ─── ④ 3월 광고 전략 ─── -->
+<!-- ─── ④ 신상위크 트래픽 캠페인 ─── -->
 <div class="detail-section" style="padding-top:32px;">
   <div class="detail-header">
     <div class="detail-num">④</div>
+    <div>
+      <div class="detail-title">신상위크 트래픽 캠페인</div>
+      <div class="detail-sub">2026.02.10 집행 · 게재 종료 · 구매전환 별도 집계</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-title" style="margin-bottom:14px;">📌 캠페인 주요 지표</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
+            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">광고비 지출</div>
+            <div style="font-size:22px;font-weight:700;">₩103,523</div>
+          </div>
+          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
+            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">고유 링크 클릭</div>
+            <div style="font-size:22px;font-weight:700;">216건</div>
+          </div>
+          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
+            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">CTR</div>
+            <div style="font-size:22px;font-weight:700;">1.10%</div>
+          </div>
+          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
+            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">노출 / CPM</div>
+            <div style="font-size:22px;font-weight:700;">33,147</div>
+            <div style="font-size:11px;color:var(--text-light);">CPM ₩3,123</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-title" style="margin-bottom:14px;">🛒 캠페인 상세</div>
+        <div style="font-size:13px;line-height:2;color:var(--text-mid);">
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
+            <span>캠페인명</span><span style="color:var(--text);font-weight:500;">봄날엔 스마트스토어 트래픽</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
+            <span>광고 세트</span><span style="color:var(--text);font-weight:500;">두쫀떡 피넛버터 신상위크</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
+            <span>소재</span><span style="color:var(--text);font-weight:500;">신상위크 안내게시글</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
+            <span>목적</span><span><span class="camp-badge traffic">트래픽</span> 클릭 유도</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:4px 0;">
+            <span>상태</span><span><span class="tag tag-gray">게재 종료</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 16px;background:#fafaf8;border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-mid);line-height:1.8;">
+    💡 이 캠페인은 구매전환이 아닌 <strong>트래픽(클릭 유도)</strong> 목적으로 운영되어 구매·매출 데이터는 별도 집계되지 않습니다. 보고서 상단의 ROAS·CPS·구매건수는 구매전환 캠페인(210.9만) 기준이며, 신상위크 비용(10.4만)을 포함한 <strong>2월 실제 집행 총액은 221.3만원</strong>입니다.
+  </div>
+</div>
+
+<!-- ─── ⑤ 3월 광고 전략 ─── -->
+<div class="detail-section" style="padding-top:32px;">
+  <div class="detail-header">
+    <div class="detail-num">⑤</div>
     <div>
       <div class="detail-title">3월 광고 전략 제안</div>
       <div class="detail-sub">2월 수준 유지 약 210만원 · 목표 CPS ≤ ₩7,500 / ROAS ≥ 400%</div>
@@ -1565,7 +1637,7 @@ tbody tr.note-row td {
   </div>
 
   <div style="padding:12px 16px;background:#fafaf8;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text-mid);margin-bottom:18px;line-height:1.7;">
-    📌 <strong>3월 핵심 방향:</strong> 2월에 효율이 증명된 소재에 집중하고 비효율 소재를 교체합니다. 같은 예산으로 더 많은 구매를 만드는 것이 목표입니다.
+    📌 <strong>3월 핵심 방향:</strong> 2월에 성과가 검증된 소재에 집중하고, 효율이 낮은 소재는 과감히 교체합니다. 같은 예산으로 더 많은 구매를 만드는 것이 목표입니다.
   </div>
 
   <div class="strategy-grid">
@@ -1574,21 +1646,21 @@ tbody tr.note-row td {
         <div class="strat-circle">1</div>
       </div>
       <div class="strat-title">여수언니 영상 비중 유지 (55~60%)</div>
-      <div class="strat-desc">초코퐁당(ROAS 464%)과 피넛퐁(ROAS 416%)은 2월에 가장 안정적인 성과. 기존 소재 유지하면서 <strong>새로운 제품의 영상</strong>을 소규모 테스트합니다.</div>
+      <div class="strat-desc">초코퐁당(ROAS 473%)과 피넛퐁(ROAS 418%)은 2월 내내 안정적인 성과를 보여줬습니다. 기존 소재를 유지하면서 <strong>신제품 영상</strong>을 소규모로 테스트할 예정입니다.</div>
     </div>
     <div class="strat-card">
       <div class="strat-num-wrap">
         <div class="strat-circle">2</div>
       </div>
-      <div class="strat-title">인플루언서 sooyammy 님과 가니야미님 영상 중심 재편</div>
-      <div class="strat-desc">ryungs 광고소재는 3월에는 제외, sooyammy님, 가니야미님 영상 중심으로 예산 소진 (추가로 신제품 제품협찬 영상 2차 활용도 고려)</div>
+      <div class="strat-title">인플루언서 sooyammy · 가니야미 중심 재편</div>
+      <div class="strat-desc">ryungs 소재는 3월부터 제외하고, sooyammy·가니야미 영상 위주로 예산을 운용합니다. 신제품 협찬 영상의 2차 활용도 함께 검토할 예정입니다.</div>
     </div>
     <div class="strat-card">
       <div class="strat-num-wrap">
         <div class="strat-circle">3</div>
       </div>
       <div class="strat-title">리타겟팅 소재 집중화 (10~12%)</div>
-      <div class="strat-desc">so_chewy_yopong를 위주로 소재를 바리에이션하고, <strong>1월 베스트 고객리뷰 소재를 리타겟팅 캠페인에 추가</strong>하여 구매전환을 유도합니다.</div>
+      <div class="strat-desc">so_chewy_yopong를 중심으로 소재 바리에이션을 늘리고, <strong>1월 베스트 고객리뷰 소재를 리타겟 캠페인에 추가</strong>해 구매전환을 더욱 끌어올립니다.</div>
     </div>
 
     <!-- 예산 배분 권장안 -->
@@ -1631,10 +1703,10 @@ tbody tr.note-row td {
   </div>
 </div>
 
-<!-- ─── ⑤ 갤러리 ─── -->
+<!-- ─── ⑥ 광고 소재 미리보기 ─── -->
 <div class="detail-section" style="padding-top:32px;">
   <div class="detail-header">
-    <div class="detail-num">⑤</div>
+    <div class="detail-num">⑥</div>
     <div>
       <div class="detail-title">2월 집행 광고 소재 미리보기</div>
       <div class="detail-sub">소재를 클릭하면 상세 정보를 확인할 수 있습니다</div>
@@ -1645,21 +1717,21 @@ tbody tr.note-row td {
   <div class="gallery-section-header">🧑‍🍳 여수언니 먹방 영상</div>
   <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);max-width:500px;">
     <a class="gallery-item" href="https://drive.google.com/file/d/1VwO9An0Odh3HdUVZHm5RSxz_SoGATvgS/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1VwO9An0Odh3HdUVZHm5RSxz_SoGATvgS&sz=w400" alt="피넛퐁 먹방영상" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1VwO9An0Odh3HdUVZHm5RSxz_SoGATvgS&sz=w400" alt="피넛퐁 먹방영상" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">피넛퐁 먹방영상</div>
         <div class="gallery-roas highlight">ROAS 418%</div>
       </div>
     </a>
     <a class="gallery-item" href="https://drive.google.com/file/d/1FXJhXXkh5Bp5BnV-x8iwdArtnYfJlPKb/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1FXJhXXkh5Bp5BnV-x8iwdArtnYfJlPKb&sz=w400" alt="초코퐁당 먹방영상2" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1FXJhXXkh5Bp5BnV-x8iwdArtnYfJlPKb&sz=w400" alt="초코퐁당 먹방영상2" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">초코퐁당 먹방영상2</div>
         <div class="gallery-roas highlight">ROAS 473%</div>
       </div>
     </a>
-    <a class="gallery-item" href="https://drive.google.com/file/d/1fmLYyA7Jzd85CyUGoo6YLIXhYsnI6jBl/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1fmLYyA7Jzd85CyUGoo6YLIXhYsnI6jBl&sz=w400" alt="가니야미 영상" loading="lazy"></div>
+    <a class="gallery-item" href="https://drive.google.com/file/d/1kK9hgTaVj0mKr40xD0Gd6zxq2oW3NDnG/view" target="_blank">
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1kK9hgTaVj0mKr40xD0Gd6zxq2oW3NDnG&sz=w400" alt="가니야미 영상" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">가니야미 영상</div>
         <div class="gallery-roas highlight">ROAS 703%</div>
@@ -1670,15 +1742,15 @@ tbody tr.note-row td {
   <!-- sooyammy -->
   <div class="gallery-section-header">📱 sooyammy._ 소재</div>
   <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);max-width:340px;">
-    <a class="gallery-item" href="https://drive.google.com/file/d/136dvnaPCZ9QWC5KIcJp43rs_bC7UF66_/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=136dvnaPCZ9QWC5KIcJp43rs_bC7UF66_&sz=w400" alt="sooyammy._ 영상" loading="lazy"></div>
+    <a class="gallery-item" href="https://drive.google.com/file/d/1OspavKYXg8ijYSk_iRfxeKCvh20A1u88/view" target="_blank">
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1OspavKYXg8ijYSk_iRfxeKCvh20A1u88&sz=w400" alt="sooyammy._ 영상" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">sooyammy._ 영상</div>
         <div class="gallery-roas highlight">ROAS 445%</div>
       </div>
     </a>
     <a class="gallery-item" href="https://drive.google.com/file/d/1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF&sz=w400" alt="sooyammy._ banner" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1Ft-Olzvj9MyzaOSAyLLji-YOWmYzsKgF&sz=w400" alt="sooyammy._ banner" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🖼</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">sooyammy._ banner</div>
         <div class="gallery-roas dim">참고용</div>
@@ -1690,14 +1762,14 @@ tbody tr.note-row td {
   <div class="gallery-section-header">📱 amu.eats 소재</div>
   <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);max-width:340px;">
     <a class="gallery-item" href="https://drive.google.com/file/d/1rNJah7BiQH_KhXQXTk5VYLmtYcoCSaSa/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1rNJah7BiQH_KhXQXTk5VYLmtYcoCSaSa&sz=w400" alt="amu.eats_banner" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1rNJah7BiQH_KhXQXTk5VYLmtYcoCSaSa&sz=w400" alt="amu.eats_banner" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">amu.eats_banner</div>
         <div class="gallery-roas highlight">ROAS 422%</div>
       </div>
     </a>
-    <a class="gallery-item" href="https://drive.google.com/file/d/11Pj8dsm_DCaytQUOYfxPa3TRK3lr_wf0/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=11Pj8dsm_DCaytQUOYfxPa3TRK3lr_wf0&sz=w400" alt="amu.eats 영상" loading="lazy"></div>
+    <a class="gallery-item" href="https://drive.google.com/file/d/1-Bd_k2U9gK9jxzCBv2-wOY0w2O3KyIdv/view" target="_blank">
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1-Bd_k2U9gK9jxzCBv2-wOY0w2O3KyIdv&sz=w400" alt="amu.eats 영상" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">amu.eats 영상</div>
         <div class="gallery-roas dim">ROAS 266%</div>
@@ -1708,15 +1780,15 @@ tbody tr.note-row td {
   <!-- ryungs -->
   <div class="gallery-section-header">📱 ryungs 소재</div>
   <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);max-width:340px;">
-    <a class="gallery-item" href="https://drive.google.com/file/d/1HrVpeGfdAWwamRtZmQgfxtC7C-onfG2k/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1HrVpeGfdAWwamRtZmQgfxtC7C-onfG2k&sz=w400" alt="ryungs 영상" loading="lazy"></div>
+    <a class="gallery-item" href="https://drive.google.com/file/d/1pWqWew1B--9jajFwTB-E1akTIjd7kLel/view" target="_blank">
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1pWqWew1B--9jajFwTB-E1akTIjd7kLel&sz=w400" alt="ryungs 영상" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🎬</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">ryungs 영상</div>
         <div class="gallery-roas dim">ROAS 362%</div>
       </div>
     </a>
     <a class="gallery-item" href="https://drive.google.com/file/d/1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW&sz=w400" alt="ryungs_banner" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1rexfuiMg0AtpMgusn0mmIIbmLHwPp-gW&sz=w400" alt="ryungs_banner" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🖼</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">ryungs_banner</div>
         <div class="gallery-roas dim">비효율</div>
@@ -1728,14 +1800,14 @@ tbody tr.note-row td {
   <div class="gallery-section-header">🔁 리타겟팅 이미지 소재</div>
   <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);max-width:340px;">
     <a class="gallery-item" href="https://drive.google.com/file/d/1LFJZBuAYsAzVm1_plPodnF2qC3RIcXj7/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1LFJZBuAYsAzVm1_plPodnF2qC3RIcXj7&sz=w400" alt="so_chewy_yopong" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1LFJZBuAYsAzVm1_plPodnF2qC3RIcXj7&sz=w400" alt="so_chewy_yopong" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🖼</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">so_chewy_yopong</div>
-        <div class="gallery-roas highlight">가장 높은 구매전환 수</div>
+        <div class="gallery-roas highlight">구매전환 1위</div>
       </div>
     </a>
     <a class="gallery-item" href="https://drive.google.com/file/d/1lhw2Y7hrhGlH9YaMiy7hBEXgWnB4yUNZ/view" target="_blank">
-      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1lhw2Y7hrhGlH9YaMiy7hBEXgWnB4yUNZ&sz=w400" alt="once_you_try_…_02" loading="lazy"></div>
+      <div class="gallery-thumb"><img src="https://drive.google.com/thumbnail?id=1lhw2Y7hrhGlH9YaMiy7hBEXgWnB4yUNZ&sz=w400" alt="once_you_try_…_02" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;padding:12px;text-align:center\'><span style=\'font-size:20px\'>🖼</span><span style=\'font-size:10px;color:#9a9390\'>이미지 로드 실패<br>클릭하여 드라이브에서 확인</span></div>'"></div>
       <div class="gallery-info">
         <div class="gallery-name">once_you_try_…_02</div>
         <div class="gallery-roas dim">참고용</div>
@@ -1744,74 +1816,7 @@ tbody tr.note-row td {
   </div>
 
   <div class="gallery-note">
-    📎 <strong>소재 이미지 첨부 안내:</strong> 구글 드라이브에서 각 소재 파일을 <strong>"링크가 있는 모든 사용자 보기"</strong>로 공유 설정 후, 파일별 공유 링크를 전달해주시면 썸네일에 실제 이미지를 바로 넣어드릴 수 있습니다.
-  </div>
-</div>
-
-<!-- ─── ⑥ 신상위크 트래픽 캠페인 ─── -->
-<div class="detail-section" style="padding-top:32px;padding-bottom:8px;">
-  <div class="detail-header">
-    <div class="detail-num">⑥</div>
-    <div>
-      <div class="detail-title">신상위크 트래픽 캠페인</div>
-      <div class="detail-sub">2026.02.10 집행 · 게재 종료 · 구매전환 미집계 캠페인</div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-    <!-- 요약 카드 -->
-    <div class="card">
-      <div class="card-inner">
-        <div class="card-title" style="margin-bottom:14px;">📌 캠페인 개요</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
-            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">광고비 지출</div>
-            <div style="font-size:22px;font-weight:700;">₩103,523</div>
-          </div>
-          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
-            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">고유 링크 클릭</div>
-            <div style="font-size:22px;font-weight:700;">216건</div>
-          </div>
-          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
-            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">CTR</div>
-            <div style="font-size:22px;font-weight:700;">1.10%</div>
-          </div>
-          <div style="background:#f4f1ec;border-radius:8px;padding:14px 16px;">
-            <div style="font-size:11px;color:var(--text-light);margin-bottom:5px;">노출 / CPM</div>
-            <div style="font-size:22px;font-weight:700;">33,147</div>
-            <div style="font-size:11px;color:var(--text-light);">CPM ₩3,123</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 캠페인 정보 -->
-    <div class="card">
-      <div class="card-inner">
-        <div class="card-title" style="margin-bottom:14px;">🛒 상세 정보</div>
-        <div style="font-size:13px;line-height:2;color:var(--text-mid);">
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
-            <span>캠페인명</span><span style="color:var(--text);font-weight:500;">봄날엔 스마트스토어 트래픽</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
-            <span>광고 세트</span><span style="color:var(--text);font-weight:500;">두쫀떡 피넛버터 신상위크</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
-            <span>소재</span><span style="color:var(--text);font-weight:500;">신상위크 안내게시글</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border-light);padding:4px 0;">
-            <span>목적</span><span><span class="camp-badge traffic">트래픽</span> 클릭 유도</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:4px 0;">
-            <span>상태</span><span><span class="tag tag-gray">게재 종료</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding:12px 16px;background:#fafaf8;border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-mid);line-height:1.8;">
-    💡 <strong>참고:</strong> 이 캠페인은 구매전환이 아닌 <strong>트래픽(클릭) 목적</strong>으로 집행되어 구매·매출 데이터가 없습니다. 보고서 상단의 ROAS·CPS·구매 수치는 구매전환 캠페인(210.9만) 기준이며, 신상위크 트래픽 비용(10.4만)을 포함한 <strong>2월 총 광고비는 221.3만원</strong>입니다.
+    📎 <strong>이미지가 보이지 않는 경우:</strong> 구글 드라이브에서 해당 파일의 공유 설정을 <strong>"링크가 있는 모든 사용자 보기"</strong>로 변경해주세요. 이미지를 클릭하면 드라이브에서 직접 확인하실 수 있습니다.
   </div>
 </div>
 
