@@ -6,9 +6,6 @@
 <title>봄날엔 캠퍼스 어택 🚚🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ==========================================
-     디자인 토큰 (원본 100% 동일)
-  ========================================== */
   :root {
     --pink: #FF6B9D;
     --pink-light: #FFB3CE;
@@ -33,30 +30,30 @@
     overflow-x: hidden;
   }
 
-  /* 플로팅 데코 */
+  /* FLOATING DECO */
   .deco-float {
     position: fixed;
     pointer-events: none;
     z-index: 0;
-    font-size: clamp(28px, 2.5vw, 44px);
-    opacity: 0.15;
+    font-size: 28px;
+    opacity: 0.18;
     animation: floatDeco 6s ease-in-out infinite;
   }
-  .deco-float:nth-child(1) { top: 8%; left: 3%; animation-delay: 0s; }
-  .deco-float:nth-child(2) { top: 22%; right: 3%; animation-delay: 1.5s; }
-  .deco-float:nth-child(3) { top: 50%; left: 1.5%; animation-delay: 3s; }
-  .deco-float:nth-child(4) { top: 68%; right: 2%; animation-delay: 0.8s; }
-  .deco-float:nth-child(5) { top: 84%; left: 5%; animation-delay: 2s; }
+  .deco-float:nth-child(1) { top: 8%; left: 4%; animation-delay: 0s; }
+  .deco-float:nth-child(2) { top: 22%; right: 5%; animation-delay: 1.5s; }
+  .deco-float:nth-child(3) { top: 55%; left: 2%; animation-delay: 3s; }
+  .deco-float:nth-child(4) { top: 70%; right: 3%; animation-delay: 0.8s; }
+  .deco-float:nth-child(5) { top: 85%; left: 8%; animation-delay: 2s; }
   @keyframes floatDeco {
     0%,100% { transform: translateY(0) rotate(-5deg); }
     50% { transform: translateY(-18px) rotate(5deg); }
   }
 
-  /* 히어로 */
+  /* HERO SECTION */
   .hero {
     position: relative;
     background: linear-gradient(160deg, #FF6B9D 0%, #FF8C69 55%, #FFD93D 100%);
-    padding: clamp(44px, 6vw, 88px) 20px clamp(52px, 7vw, 96px);
+    padding: 44px 20px 52px;
     text-align: center;
     overflow: hidden;
     z-index: 1;
@@ -67,36 +64,42 @@
     inset: 0;
     background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
+  /* decorative glow behind title */
   .hero::after {
     content: '';
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(280px, 45vw, 700px);
-    height: clamp(160px, 24vw, 380px);
+    width: 280px;
+    height: 160px;
     background: radial-gradient(ellipse, rgba(255,255,255,0.18) 0%, transparent 70%);
     pointer-events: none;
   }
 
+  /* TOP BADGE */
   .hero-badge-top {
     display: inline-block;
     background: rgba(255,255,255,0.2);
     border: 1.5px solid rgba(255,255,255,0.45);
     color: rgba(255,255,255,0.95);
-    font-size: clamp(12px, 1.1vw, 16px);
+    font-size: 12px;
     font-weight: 700;
-    padding: clamp(5px, 0.6vw, 9px) clamp(16px, 2vw, 28px);
+    padding: 5px 16px;
     border-radius: 999px;
     letter-spacing: 1.5px;
-    margin-bottom: clamp(20px, 2.5vw, 36px);
+    margin-bottom: 20px;
     backdrop-filter: blur(4px);
   }
 
-  .hero-brand-block { position: relative; margin-bottom: 4px; }
+  /* MAIN BRAND TITLE — 봄날엔 캠퍼스 어택 */
+  .hero-brand-block {
+    position: relative;
+    margin-bottom: 4px;
+  }
   .hero-brand-name {
     display: block;
-    font-size: clamp(15px, 1.6vw, 26px);
+    font-size: clamp(15px, 4.5vw, 22px);
     font-weight: 900;
     color: rgba(255,255,255,0.9);
     letter-spacing: 3px;
@@ -105,10 +108,11 @@
   }
   .hero-campus-attack {
     display: block;
-    font-size: clamp(44px, 7.5vw, 108px);
+    font-size: clamp(44px, 13vw, 76px);
     font-weight: 900;
     line-height: 1.0;
     letter-spacing: -2px;
+    /* big white-to-yellow gradient, pop */
     background: linear-gradient(160deg, #ffffff 0%, #ffffff 50%, #FFE566 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -116,6 +120,7 @@
     filter: drop-shadow(0 4px 16px rgba(80,20,40,0.28)) drop-shadow(0 0 32px rgba(255,255,255,0.25));
     position: relative;
   }
+  /* outline stroke effect via text-shadow workaround */
   .hero-campus-attack-wrap {
     position: relative;
     display: inline-block;
@@ -125,7 +130,7 @@
     content: '캠퍼스 어택';
     position: absolute;
     inset: 0;
-    font-size: clamp(44px, 7.5vw, 108px);
+    font-size: clamp(44px, 13vw, 76px);
     font-weight: 900;
     line-height: 1.0;
     letter-spacing: -2px;
@@ -134,15 +139,16 @@
     z-index: -1;
   }
 
+  /* TRUCK + SUBTITLE */
   .hero-truck-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(10px, 1.5vw, 24px);
-    margin: clamp(18px, 2.2vw, 36px) 0 6px;
+    gap: 10px;
+    margin: 18px 0 6px;
   }
   .truck-emoji {
-    font-size: clamp(52px, 5.5vw, 80px);
+    font-size: 52px;
     display: inline-block;
     filter: drop-shadow(0 6px 14px rgba(0,0,0,0.15));
     animation: truckBounce 2.5s ease-in-out infinite;
@@ -152,27 +158,28 @@
     50% { transform: translateY(-10px) rotate(2deg); }
   }
   .hero-subtitle {
-    font-size: clamp(17px, 2.2vw, 32px);
+    font-size: clamp(17px, 5vw, 24px);
     font-weight: 700;
     color: #fff;
     text-shadow: 0 2px 10px rgba(100,30,60,0.2);
     line-height: 1.4;
   }
 
+  /* BOTTOM TAGLINE */
   .hero-bottom-group {
-    margin-top: clamp(20px, 2.5vw, 40px);
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(10px, 1.2vw, 18px);
+    gap: 10px;
   }
   .hero-tagline {
     display: inline-block;
     background: var(--yellow);
     color: var(--dark);
-    font-size: clamp(15px, 1.4vw, 20px);
+    font-size: 15px;
     font-weight: 900;
-    padding: clamp(12px, 1.2vw, 18px) clamp(28px, 3.5vw, 52px);
+    padding: 12px 28px;
     border-radius: 999px;
     box-shadow: 0 4px 18px rgba(255,217,61,0.55);
     letter-spacing: 0.3px;
@@ -182,57 +189,34 @@
     background: rgba(255,255,255,0.22);
     border: 2px solid rgba(255,255,255,0.45);
     color: #fff;
-    font-size: clamp(13px, 1.2vw, 18px);
+    font-size: 13px;
     font-weight: 700;
-    padding: clamp(8px, 0.9vw, 14px) clamp(22px, 2.8vw, 42px);
+    padding: 8px 22px;
     border-radius: 999px;
     backdrop-filter: blur(6px);
   }
   .hero-top3 {
-    font-size: clamp(12.5px, 1.1vw, 16px);
+    font-size: 12.5px;
     color: rgba(255,255,255,0.88);
     font-weight: 700;
   }
 
-  /* ==========================================
-     레이아웃 - PC 2열 그리드
-  ========================================== */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 clamp(16px, 3.5vw, 56px);
-    position: relative;
-    z-index: 1;
-  }
+  .container { max-width: 480px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
 
-  .pc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(20px, 2.5vw, 36px);
-    align-items: start;
-  }
-  .pc-full { grid-column: 1 / -1; }
-
-  @media (max-width: 768px) {
-    .pc-grid { grid-template-columns: 1fr; }
-    .pc-full { grid-column: 1; }
-    .container { max-width: 480px; padding: 0 16px; }
-  }
-
-  /* 공통 섹션/카드 */
-  .section { margin: clamp(20px, 2.5vw, 36px) 0; }
+  /* EVENT INFO */
+  .section { margin: 24px 0; }
   .card {
     background: var(--white);
-    border-radius: clamp(18px, 2vw, 28px);
-    padding: clamp(22px, 2.5vw, 40px) clamp(20px, 2.5vw, 36px);
+    border-radius: 20px;
+    padding: 24px 20px;
     box-shadow: var(--shadow);
     border: 2px solid rgba(255,107,157,0.08);
   }
   .section-title {
-    font-size: clamp(17px, 1.5vw, 22px);
+    font-size: 18px;
     font-weight: 900;
     color: var(--pink);
-    margin-bottom: clamp(14px, 1.6vw, 24px);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -246,21 +230,20 @@
     border-radius: 4px;
   }
 
-  /* 이벤트 안내 */
   .info-row {
     display: flex;
     gap: 12px;
-    margin-bottom: clamp(12px, 1.2vw, 18px);
+    margin-bottom: 12px;
     align-items: flex-start;
-    font-size: clamp(13px, 1.1vw, 15px);
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.6;
   }
   .info-label {
     font-weight: 700;
     color: var(--pink);
     white-space: nowrap;
-    min-width: clamp(76px, 7.5vw, 100px);
-    font-size: clamp(12px, 1vw, 14px);
+    min-width: 76px;
+    font-size: 13px;
   }
   .info-value { color: var(--dark); font-weight: 500; }
 
@@ -268,23 +251,23 @@
     background: linear-gradient(135deg, var(--pink-pale), var(--yellow-light));
     border: 2px dashed var(--pink-light);
     border-radius: 14px;
-    padding: clamp(14px, 1.4vw, 22px) clamp(16px, 1.8vw, 28px);
-    margin-top: 16px;
-    font-size: clamp(13px, 1.1vw, 16px);
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 13.5px;
     font-weight: 700;
     color: var(--dark);
     text-align: center;
     line-height: 1.6;
   }
 
-  /* 투표 폼 */
+  /* VOTE SECTION */
   .vote-header {
     background: linear-gradient(135deg, var(--pink), var(--coral));
-    border-radius: clamp(18px, 2vw, 26px);
-    padding: clamp(24px, 2.5vw, 40px) clamp(20px, 2.5vw, 36px) clamp(20px, 2.2vw, 34px);
+    border-radius: 20px;
+    padding: 28px 20px 24px;
     text-align: center;
     color: #fff;
-    margin-bottom: clamp(18px, 2vw, 30px);
+    margin-bottom: 20px;
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
@@ -294,21 +277,22 @@
     position: absolute;
     right: -8px;
     bottom: -10px;
-    font-size: clamp(80px, 8vw, 120px);
+    font-size: 80px;
     opacity: 0.12;
   }
   .vote-header h2 {
-    font-size: clamp(20px, 2vw, 28px);
+    font-size: 22px;
     font-weight: 900;
     margin-bottom: 6px;
   }
-  .vote-header p { font-size: clamp(12px, 1vw, 15px); opacity: 0.9; font-weight: 500; }
+  .vote-header p { font-size: 13px; opacity: 0.9; font-weight: 500; }
 
-  .step-wrap { display: flex; flex-direction: column; gap: clamp(14px, 1.6vw, 24px); }
+  /* STEP */
+  .step-wrap { display: flex; flex-direction: column; gap: 18px; }
   .step-item {
     background: var(--white);
-    border-radius: clamp(16px, 1.8vw, 22px);
-    padding: clamp(18px, 2vw, 30px);
+    border-radius: 18px;
+    padding: 20px;
     box-shadow: 0 2px 14px rgba(255,107,157,0.12);
     border: 2px solid rgba(255,107,157,0.08);
     position: relative;
@@ -317,18 +301,18 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: clamp(30px, 2.6vw, 40px);
-    height: clamp(30px, 2.6vw, 40px);
+    width: 32px;
+    height: 32px;
     background: linear-gradient(135deg, var(--pink), var(--coral));
     color: #fff;
-    font-size: clamp(12px, 1.1vw, 15px);
+    font-size: 13px;
     font-weight: 900;
     border-radius: 50%;
     margin-bottom: 10px;
     box-shadow: 0 3px 10px rgba(255,107,157,0.35);
   }
   .step-label {
-    font-size: clamp(11px, 1vw, 14px);
+    font-size: 11px;
     font-weight: 700;
     color: var(--pink);
     letter-spacing: 1px;
@@ -336,13 +320,14 @@
     vertical-align: middle;
   }
 
+  /* SCHOOL SEARCH */
   .school-search-wrap { position: relative; }
   .school-input {
     width: 100%;
-    padding: clamp(13px, 1.3vw, 18px) clamp(44px, 4.5vw, 60px) clamp(13px, 1.3vw, 18px) clamp(16px, 1.6vw, 24px);
+    padding: 14px 48px 14px 18px;
     border: 2px solid var(--pink-light);
-    border-radius: clamp(12px, 1.4vw, 18px);
-    font-size: clamp(14px, 1.2vw, 16px);
+    border-radius: 14px;
+    font-size: 15px;
     font-family: 'Noto Sans KR', sans-serif;
     color: var(--dark);
     background: var(--pink-pale);
@@ -358,20 +343,21 @@
   .school-input::placeholder { color: #C9A0B3; }
   .search-icon {
     position: absolute;
-    right: clamp(12px, 1.3vw, 20px);
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: clamp(18px, 1.8vw, 26px);
+    font-size: 20px;
     pointer-events: none;
   }
   .school-dropdown {
     position: absolute;
     top: calc(100% + 6px);
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     background: #fff;
     border: 2px solid var(--pink-light);
     border-radius: 14px;
-    max-height: 280px;
+    max-height: 220px;
     overflow-y: auto;
     z-index: 100;
     box-shadow: 0 8px 24px rgba(255,107,157,0.18);
@@ -379,8 +365,8 @@
   }
   .school-dropdown.show { display: block; }
   .school-option {
-    padding: clamp(11px, 1.1vw, 16px) clamp(16px, 1.6vw, 24px);
-    font-size: clamp(13px, 1.1vw, 15px);
+    padding: 12px 18px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.15s;
@@ -393,13 +379,13 @@
     display: none;
     align-items: center;
     gap: 10px;
-    padding: clamp(11px, 1.1vw, 16px) clamp(14px, 1.5vw, 22px);
+    padding: 12px 16px;
     background: linear-gradient(135deg, var(--pink-pale), var(--yellow-light));
     border: 2px solid var(--pink-light);
     border-radius: 12px;
     margin-top: 8px;
     font-weight: 700;
-    font-size: clamp(13px, 1.1vw, 15px);
+    font-size: 14px;
     color: var(--dark);
   }
   .selected-school.show { display: flex; }
@@ -411,12 +397,13 @@
     line-height: 1;
   }
 
+  /* TEXT INPUTS */
   .text-input {
     width: 100%;
-    padding: clamp(13px, 1.3vw, 18px) clamp(16px, 1.6vw, 24px);
+    padding: 14px 18px;
     border: 2px solid var(--pink-light);
-    border-radius: clamp(12px, 1.4vw, 18px);
-    font-size: clamp(14px, 1.2vw, 16px);
+    border-radius: 14px;
+    font-size: 15px;
     font-family: 'Noto Sans KR', sans-serif;
     color: var(--dark);
     background: var(--pink-pale);
@@ -432,33 +419,35 @@
   .text-input::placeholder { color: #C9A0B3; }
 
   .input-hint {
-    font-size: clamp(11px, 0.9vw, 13px);
+    font-size: 12px;
     color: var(--gray);
     margin-top: 6px;
     font-weight: 500;
   }
 
+  /* PRIVACY */
   .privacy-note {
-    font-size: clamp(11px, 0.9vw, 13px);
+    font-size: 12px;
     color: var(--gray);
     text-align: center;
-    margin-top: clamp(12px, 1.3vw, 20px);
+    margin-top: 14px;
     line-height: 1.6;
     font-weight: 500;
   }
 
+  /* VOTE BUTTON */
   .vote-btn {
     width: 100%;
-    padding: clamp(16px, 1.7vw, 24px);
+    padding: 18px;
     background: linear-gradient(135deg, var(--pink), var(--coral));
     color: #fff;
-    font-size: clamp(16px, 1.6vw, 22px);
+    font-size: 18px;
     font-weight: 900;
     font-family: 'Noto Sans KR', sans-serif;
     border: none;
-    border-radius: clamp(14px, 1.5vw, 20px);
+    border-radius: 16px;
     cursor: pointer;
-    margin-top: clamp(18px, 2vw, 28px);
+    margin-top: 20px;
     box-shadow: 0 6px 20px rgba(255,107,157,0.4);
     transition: transform 0.15s, box-shadow 0.15s;
     letter-spacing: 0.5px;
@@ -467,28 +456,28 @@
   .vote-btn:active { transform: translateY(0); }
   .vote-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-  /* 공유 카드 */
+  /* SHARE */
   .share-card {
     background: linear-gradient(135deg, var(--yellow-light), #fff8e0);
     border: 2px solid var(--yellow);
-    border-radius: clamp(18px, 2vw, 26px);
-    padding: clamp(18px, 2vw, 30px) clamp(20px, 2.5vw, 36px);
+    border-radius: 20px;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
     box-shadow: 0 4px 18px rgba(255,217,61,0.2);
   }
-  .share-text { font-size: clamp(13px, 1.2vw, 16px); font-weight: 700; color: var(--dark); line-height: 1.5; }
+  .share-text { font-size: 14px; font-weight: 700; color: var(--dark); line-height: 1.5; }
   .share-btn {
     background: linear-gradient(135deg, var(--yellow), #FFBA00);
     color: var(--dark);
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: clamp(13px, 1.2vw, 16px);
+    font-size: 14px;
     font-weight: 900;
-    padding: clamp(12px, 1.2vw, 18px) clamp(20px, 2.2vw, 36px);
+    padding: 12px 22px;
     border: none;
-    border-radius: clamp(10px, 1.1vw, 15px);
+    border-radius: 12px;
     cursor: pointer;
     white-space: nowrap;
     box-shadow: 0 4px 12px rgba(255,186,0,0.3);
@@ -496,23 +485,23 @@
   }
   .share-btn:hover { transform: translateY(-1px); }
 
-  /* 포디움 */
+  /* RANKING */
   .podium {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: clamp(8px, 1.4vw, 24px);
-    margin: clamp(20px, 2.5vw, 40px) 0 clamp(16px, 2vw, 30px);
+    gap: 8px;
+    margin: 24px 0 20px;
   }
   .podium-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
-    max-width: clamp(120px, 18vw, 220px);
+    max-width: 130px;
   }
   .podium-school {
-    font-size: clamp(12px, 1.2vw, 16px);
+    font-size: 12px;
     font-weight: 700;
     text-align: center;
     color: var(--dark);
@@ -522,7 +511,7 @@
     min-height: 32px;
   }
   .podium-votes {
-    font-size: clamp(12px, 1.1vw, 15px);
+    font-size: 12px;
     font-weight: 700;
     color: var(--gray);
     margin-bottom: 4px;
@@ -534,72 +523,71 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px 12px 6px 6px;
-    font-size: clamp(26px, 3vw, 44px);
-    padding: clamp(10px, 1.3vw, 20px) 6px;
+    font-size: 28px;
+    padding: 10px 6px;
     font-weight: 900;
     position: relative;
   }
-  .podium-rank { font-size: clamp(11px, 1.1vw, 15px); color: rgba(255,255,255,0.8); font-weight: 700; margin-top: 4px; }
-  .p1 .podium-block { height: clamp(100px, 11.5vw, 160px); background: linear-gradient(135deg, var(--yellow), #FFBA00); box-shadow: 0 6px 20px rgba(255,186,0,0.3); }
-  .p2 .podium-block { height: clamp(75px, 8.5vw, 120px); background: linear-gradient(135deg, var(--pink-light), var(--pink)); box-shadow: 0 4px 16px rgba(255,107,157,0.25); }
-  .p3 .podium-block { height: clamp(58px, 6.5vw, 92px); background: linear-gradient(135deg, #FFD1A4, var(--coral)); box-shadow: 0 4px 14px rgba(255,140,105,0.25); }
+  .podium-rank { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 700; margin-top: 4px; }
+  .p1 .podium-block { height: 100px; background: linear-gradient(135deg, var(--yellow), #FFBA00); box-shadow: 0 6px 20px rgba(255,186,0,0.3); }
+  .p2 .podium-block { height: 75px; background: linear-gradient(135deg, var(--pink-light), var(--pink)); box-shadow: 0 4px 16px rgba(255,107,157,0.25); }
+  .p3 .podium-block { height: 58px; background: linear-gradient(135deg, #FFD1A4, var(--coral)); box-shadow: 0 4px 14px rgba(255,140,105,0.25); }
   .p2 { order: -1; }
 
-  /* 전체 순위 */
-  .rank-list { display: flex; flex-direction: column; gap: clamp(7px, 0.8vw, 12px); }
+  .rank-list { display: flex; flex-direction: column; gap: 8px; }
   .rank-item {
     display: flex;
     align-items: center;
-    gap: clamp(10px, 1.2vw, 18px);
-    padding: clamp(11px, 1.2vw, 18px) clamp(14px, 1.6vw, 24px);
+    gap: 12px;
+    padding: 12px 16px;
     background: #fff;
-    border-radius: clamp(10px, 1.2vw, 16px);
+    border-radius: 12px;
     box-shadow: 0 2px 10px rgba(255,107,157,0.08);
     transition: transform 0.15s;
   }
   .rank-item:hover { transform: translateX(4px); }
   .rank-num {
-    width: clamp(26px, 2.5vw, 38px);
-    height: clamp(26px, 2.5vw, 38px);
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--gray-light);
     border-radius: 50%;
-    font-size: clamp(12px, 1.1vw, 15px);
+    font-size: 13px;
     font-weight: 900;
     color: var(--gray);
     flex-shrink: 0;
   }
-  .rank-school { font-size: clamp(13px, 1.2vw, 16px); font-weight: 700; flex: 1; color: var(--dark); }
-  .rank-votes { font-size: clamp(12px, 1.1vw, 15px); font-weight: 700; color: var(--pink); }
-  .rank-bar-wrap { flex: 1; height: 7px; background: var(--pink-pale); border-radius: 99px; overflow: hidden; }
+  .rank-school { font-size: 14px; font-weight: 700; flex: 1; color: var(--dark); }
+  .rank-votes { font-size: 13px; font-weight: 700; color: var(--pink); }
+  .rank-bar-wrap { flex: 1; height: 6px; background: var(--pink-pale); border-radius: 99px; overflow: hidden; }
   .rank-bar { height: 100%; background: linear-gradient(to right, var(--pink), var(--yellow)); border-radius: 99px; transition: width 0.8s ease; }
 
-  /* 총 참여자 */
+  /* TOTAL COUNT */
   .total-count-section {
     background: linear-gradient(135deg, var(--pink), var(--coral));
-    border-radius: clamp(18px, 2vw, 28px);
-    padding: clamp(24px, 3vw, 52px) clamp(20px, 3vw, 52px);
+    border-radius: 20px;
+    padding: 24px 20px;
     text-align: center;
     color: #fff;
     box-shadow: var(--shadow);
   }
-  .total-icon { font-size: clamp(36px, 4.5vw, 60px); margin-bottom: 10px; }
-  .total-num { font-size: clamp(48px, 7vw, 96px); font-weight: 900; line-height: 1; }
-  .total-label { font-size: clamp(14px, 1.5vw, 20px); font-weight: 700; margin-top: 6px; opacity: 0.9; }
-  .update-time { font-size: clamp(11px, 0.9vw, 14px); opacity: 0.75; margin-top: 10px; font-weight: 500; }
+  .total-icon { font-size: 36px; margin-bottom: 8px; }
+  .total-num { font-size: 48px; font-weight: 900; line-height: 1; }
+  .total-label { font-size: 15px; font-weight: 700; margin-top: 4px; opacity: 0.9; }
+  .update-time { font-size: 12px; opacity: 0.75; margin-top: 8px; font-weight: 500; }
 
-  /* 탭 */
-  .tab-wrap { display: flex; gap: 8px; margin-bottom: clamp(14px, 1.6vw, 22px); }
+  /* TABS */
+  .tab-wrap { display: flex; gap: 8px; margin-bottom: 16px; }
   .tab-btn {
     flex: 1;
-    padding: clamp(9px, 1vw, 15px);
+    padding: 10px;
     border: 2px solid var(--pink-light);
     background: #fff;
-    border-radius: clamp(9px, 1vw, 13px);
+    border-radius: 10px;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: clamp(12px, 1.1vw, 15px);
+    font-size: 13px;
     font-weight: 700;
     color: var(--gray);
     cursor: pointer;
@@ -612,7 +600,7 @@
     box-shadow: 0 3px 12px rgba(255,107,157,0.3);
   }
 
-  /* 토스트/모달 */
+  /* TOAST */
   .toast {
     position: fixed;
     bottom: 30px;
@@ -620,9 +608,9 @@
     transform: translateX(-50%) translateY(100px);
     background: var(--dark);
     color: #fff;
-    padding: 14px 28px;
+    padding: 14px 24px;
     border-radius: 14px;
-    font-size: clamp(13px, 1.1vw, 15px);
+    font-size: 14px;
     font-weight: 700;
     z-index: 9999;
     transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
@@ -631,6 +619,7 @@
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
+  /* MODAL */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -646,9 +635,9 @@
   .modal-box {
     background: #fff;
     border-radius: 24px;
-    padding: clamp(28px, 3.2vw, 52px) clamp(24px, 3vw, 48px);
+    padding: 32px 24px;
     text-align: center;
-    max-width: clamp(320px, 38vw, 500px);
+    max-width: 340px;
     width: 100%;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
@@ -657,17 +646,17 @@
     from { transform: scale(0.7); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
-  .modal-emoji { font-size: clamp(52px, 5.5vw, 72px); margin-bottom: 14px; }
-  .modal-title { font-size: clamp(19px, 1.9vw, 28px); font-weight: 900; color: var(--dark); margin-bottom: 8px; }
-  .modal-desc { font-size: clamp(13px, 1.2vw, 16px); font-weight: 500; color: var(--gray); line-height: 1.7; margin-bottom: 22px; }
+  .modal-emoji { font-size: 56px; margin-bottom: 12px; }
+  .modal-title { font-size: 20px; font-weight: 900; color: var(--dark); margin-bottom: 8px; }
+  .modal-desc { font-size: 14px; font-weight: 500; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
   .modal-school-name { color: var(--pink); font-weight: 900; }
   .modal-close {
     background: linear-gradient(135deg, var(--pink), var(--coral));
     color: #fff;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: clamp(14px, 1.3vw, 18px);
+    font-size: 15px;
     font-weight: 900;
-    padding: clamp(13px, 1.4vw, 20px) clamp(32px, 4vw, 60px);
+    padding: 14px 36px;
     border: none;
     border-radius: 14px;
     cursor: pointer;
@@ -677,40 +666,18 @@
   .divider {
     height: 1px;
     background: linear-gradient(to right, transparent, var(--pink-light), transparent);
-    margin: clamp(24px, 3vw, 48px) 0;
+    margin: 28px 0;
   }
 
   footer {
     text-align: center;
-    padding: clamp(20px, 2.5vw, 40px) 16px clamp(30px, 4vw, 60px);
-    font-size: clamp(11px, 0.9vw, 14px);
+    padding: 24px 16px 36px;
+    font-size: 12px;
     color: var(--gray);
     font-weight: 500;
   }
 
-
-  /* ==========================================
-     PC 2열 레이아웃 (기존 클래스 활용)
-  ========================================== */
-  .two-col-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(20px, 2.5vw, 36px);
-    align-items: start;
-  }
-  .bottom-row {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: clamp(20px, 2.5vw, 36px);
-    align-items: stretch;
-  }
-  .bottom-row .section { margin: 0; }
-  .bottom-row .share-card { height: 100%; box-sizing: border-box; }
-
-  @media (max-width: 768px) {
-    .two-col-layout { grid-template-columns: 1fr; }
-    .bottom-row { grid-template-columns: 1fr; }
-  }
+  /* Scrollbar */
   .school-dropdown::-webkit-scrollbar { width: 6px; }
   .school-dropdown::-webkit-scrollbar-track { background: transparent; }
   .school-dropdown::-webkit-scrollbar-thumb { background: var(--pink-light); border-radius: 99px; }
@@ -755,7 +722,7 @@
 <div class="container">
 
   <!-- EVENT INFO -->
-  <div class="section" style="max-width:100%;">
+  <div class="section">
     <div class="card">
       <div class="section-title">이벤트 안내</div>
       <p style="font-size:14px;font-weight:500;color:var(--dark);line-height:1.7;margin-bottom:16px;">
@@ -786,103 +753,101 @@
   </div>
 
   <!-- VOTE -->
-  <div class="two-col-layout">
-
-    <!-- 왼쪽: 투표 폼 -->
-    <div class="section">
-      <div class="vote-header">
-        <h2>🗳️ 투표하고 우리 대학교<br>순위 올리자!</h2>
-        <p>매일 투표할 수 있어요!</p>
-      </div>
-
-      <div class="step-wrap">
-        <!-- STEP 1 -->
-        <div class="step-item">
-          <div>
-            <span class="step-num">1</span>
-            <span class="step-label">STEP · 학교 선택</span>
-          </div>
-          <div class="school-search-wrap" style="margin-top:12px;">
-            <input type="text" class="school-input" id="schoolInput" placeholder="학교명을 검색하세요 (예: 건국대)" autocomplete="off">
-            <span class="search-icon">🔍</span>
-            <div class="school-dropdown" id="schoolDropdown"></div>
-          </div>
-          <div class="selected-school" id="selectedSchoolBox">
-            <span>🏫</span>
-            <span id="selectedSchoolName"></span>
-            <span class="clear-btn" id="clearSchool">✕</span>
-          </div>
-        </div>
-
-        <!-- STEP 2 -->
-        <div class="step-item">
-          <div>
-            <span class="step-num">2</span>
-            <span class="step-label">STEP · 이름</span>
-          </div>
-          <input type="text" class="text-input" id="nameInput" placeholder="이름을 입력하세요" style="margin-top:12px;">
-        </div>
-
-        <!-- STEP 3 -->
-        <div class="step-item">
-          <div>
-            <span class="step-num">3</span>
-            <span class="step-label">STEP · 전화번호</span>
-          </div>
-          <input type="tel" class="text-input" id="phoneInput" placeholder="010-0000-0000" style="margin-top:12px;">
-          <div class="input-hint">* 숫자만 입력해도 됩니다 (예: 01012345678)</div>
-        </div>
-      </div>
-
-      <p class="privacy-note">* 투표 참여 시 개인정보 수집·이용에 동의한 것으로 간주됩니다.<br>수집된 정보는 이벤트 운영 목적으로만 사용됩니다.</p>
-      <button class="vote-btn" id="voteBtn" onclick="submitVote()">🌸 투표하기</button>
+  <div class="section">
+    <div class="vote-header">
+      <h2>🗳️ 투표하고 우리 대학교<br>순위 올리자!</h2>
+      <p>매일 투표할 수 있어요!</p>
     </div>
 
-    <!-- 오른쪽: 순위 -->
-    <div class="section">
-      <div class="section-title" style="margin-bottom:8px;">👑 실시간 순위</div>
-
-      <div class="tab-wrap">
-        <button class="tab-btn active" id="tab-top3" onclick="switchTab('top3')">🏆 TOP 3 단상</button>
-        <button class="tab-btn" id="tab-all" onclick="switchTab('all')">📋 전체 순위</button>
+    <div class="step-wrap">
+      <!-- STEP 1 -->
+      <div class="step-item">
+        <div>
+          <span class="step-num">1</span>
+          <span class="step-label">STEP · 학교 선택</span>
+        </div>
+        <div class="school-search-wrap" style="margin-top:12px;">
+          <input type="text" class="school-input" id="schoolInput" placeholder="학교명을 검색하세요 (예: 건국대)" autocomplete="off">
+          <span class="search-icon">🔍</span>
+          <div class="school-dropdown" id="schoolDropdown"></div>
+        </div>
+        <div class="selected-school" id="selectedSchoolBox">
+          <span>🏫</span>
+          <span id="selectedSchoolName"></span>
+          <span class="clear-btn" id="clearSchool">✕</span>
+        </div>
       </div>
 
-      <div id="top3View">
-        <div class="podium" id="podium"></div>
+      <!-- STEP 2 -->
+      <div class="step-item">
+        <div>
+          <span class="step-num">2</span>
+          <span class="step-label">STEP · 이름</span>
+        </div>
+        <input type="text" class="text-input" id="nameInput" placeholder="이름을 입력하세요" style="margin-top:12px;">
       </div>
 
-      <div id="allView" style="display:none;">
-        <div class="rank-list" id="rankList"></div>
+      <!-- STEP 3 -->
+      <div class="step-item">
+        <div>
+          <span class="step-num">3</span>
+          <span class="step-label">STEP · 전화번호</span>
+        </div>
+        <input type="tel" class="text-input" id="phoneInput" placeholder="010-0000-0000" style="margin-top:12px;">
+        <div class="input-hint">* 숫자만 입력해도 됩니다 (예: 01012345678)</div>
       </div>
     </div>
 
-  </div><!-- /two-col-layout -->
+    <p class="privacy-note">* 투표 참여 시 개인정보 수집·이용에 동의한 것으로 간주됩니다.<br>수집된 정보는 이벤트 운영 목적으로만 사용됩니다.</p>
+    <button class="vote-btn" id="voteBtn" onclick="submitVote()">🌸 투표하기</button>
+  </div>
+
+  <!-- SHARE -->
+  <div class="section">
+    <div class="share-card">
+      <div class="share-text">🎀 친구에게 이 이벤트를<br>공유해주세요!</div>
+      <button class="share-btn" onclick="shareEvent()">📤 공유하기</button>
+    </div>
+  </div>
 
   <div class="divider"></div>
 
-  <!-- 하단: 공유 + 총 참여 수 -->
-  <div class="bottom-row">
+  <!-- RANKING -->
+  <div class="section">
+    <div class="section-title" style="margin-bottom:8px;">👑 실시간 순위</div>
 
-    <div class="section">
-      <div class="share-card" style="height:100%;">
-        <div class="share-text">🎀 친구에게 이 이벤트를<br>공유해주세요!</div>
-        <button class="share-btn" onclick="shareEvent()">📤 공유하기</button>
-      </div>
+    <div class="tab-wrap">
+      <button class="tab-btn active" id="tab-top3" onclick="switchTab('top3')">🏆 TOP 3 단상</button>
+      <button class="tab-btn" id="tab-all" onclick="switchTab('all')">📋 전체 순위</button>
     </div>
 
-    <div class="section">
-      <div class="total-count-section">
-        <div class="total-icon">🌸</div>
-        <div class="total-num" id="totalNum">0</div>
-        <div class="total-label">명이 참여했어요!</div>
-        <div class="update-time" id="updateTime">마지막 업데이트: --:--:--</div>
-        <div style="margin-top:10px;">
-          <button onclick="refreshData()" style="background:rgba(255,255,255,0.25);color:#fff;border:2px solid rgba(255,255,255,0.5);border-radius:10px;padding:8px 20px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">🔄 새로고침</button>
-        </div>
-      </div>
+    <!-- TOP 3 PODIUM -->
+    <div id="top3View">
+      <div class="podium" id="podium"></div>
     </div>
 
-  </div><!-- /bottom-row -->
+    <!-- ALL RANKING -->
+    <div id="allView" style="display:none;">
+      <div class="rank-list" id="rankList"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TOTAL -->
+  <div class="section">
+    <div class="total-count-section">
+      <div class="total-icon">🌸</div>
+      <div class="total-num" id="totalNum">0</div>
+      <div class="total-label">명이 참여했어요!</div>
+      <div class="update-time" id="updateTime">마지막 업데이트: --:--:--</div>
+      <div style="margin-top:10px;">
+        <button onclick="refreshData()" style="background:rgba(255,255,255,0.25);color:#fff;border:2px solid rgba(255,255,255,0.5);border-radius:10px;padding:8px 20px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">🔄 새로고침</button>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <footer>
   🚚 봄날엔 캠퍼스 어택 대학 대항전<br>
@@ -904,6 +869,11 @@
 
 <script>
 // ==============================
+// 🔗 Google Apps Script 연동 URL
+// ==============================
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6QID9VYlvuVoyeDg27TvPGLppz15jprauTOpBBLZbjsIYR6zSq_do6KKbXxVwbVr8/exec";
+
+// ==============================
 // 전국 대학교 목록 (가나다 순)
 // ==============================
 const UNIVERSITIES = [
@@ -917,24 +887,27 @@ let selectedSchool = '';
 let totalVotes = 0;
 let currentTab = 'top3';
 
-// Init
-function init() {
-  loadFromStorage();
-  renderRanking();
-  updateTotal();
-  updateTime();
-}
-
-function loadFromStorage() {
+// ==============================
+// 🔗 Google Sheets 데이터 가져오기 (GET)
+// ==============================
+async function fetchFromSheet() {
   try {
-    const saved = localStorage.getItem('campusVoteData');
-    if (saved) voteData = JSON.parse(saved);
+    const response = await fetch(SCRIPT_URL);
+    if (!response.ok) throw new Error('fetch error');
+    voteData = await response.json();
     totalVotes = Object.values(voteData).reduce((a, b) => a + b, 0);
-  } catch(e) { voteData = {}; }
+    renderRanking();
+    updateTotal();
+    updateTime();
+  } catch(e) {
+    console.error('데이터 로드 실패:', e);
+    showToast('데이터를 불러오지 못했습니다. 🔄');
+  }
 }
 
-function saveToStorage() {
-  try { localStorage.setItem('campusVoteData', JSON.stringify(voteData)); } catch(e) {}
+// Init
+async function init() {
+  await fetchFromSheet();
 }
 
 // School search
@@ -1004,8 +977,10 @@ document.getElementById('clearSchool').addEventListener('click', function() {
   document.getElementById('selectedSchoolBox').classList.remove('show');
 });
 
-// VOTE
-function submitVote() {
+// ==============================
+// 🗳️ 투표하기 (Google Sheets POST)
+// ==============================
+async function submitVote() {
   const name = document.getElementById('nameInput').value.trim();
   const phone = document.getElementById('phoneInput').value.trim();
 
@@ -1021,15 +996,11 @@ function submitVote() {
   btn.disabled = true;
   btn.textContent = '투표 중...';
 
-  setTimeout(() => {
-    voteData[selectedSchool] = (voteData[selectedSchool] || 0) + 1;
-    totalVotes++;
-    saveToStorage();
-    renderRanking();
-    updateTotal();
-
-    const formattedPhone = cleanPhone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-    logVote(name, formattedPhone, selectedSchool);
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ name, phone: cleanPhone, school: selectedSchool })
+    });
 
     document.getElementById('modalDesc').innerHTML =
       `<span class="modal-school-name">${selectedSchool}</span>에 투표했어요!<br>우리 학교 파이팅! 🌸🎉`;
@@ -1041,23 +1012,14 @@ function submitVote() {
     schoolInput.placeholder = '학교명을 검색하세요 (예: 건국대)';
     document.getElementById('selectedSchoolBox').classList.remove('show');
 
+    await fetchFromSheet(); // 랭킹 즉시 갱신
+  } catch(e) {
+    showToast('투표 전송에 실패했습니다. 다시 시도해주세요. 🔄');
+  } finally {
     btn.disabled = false;
     btn.textContent = '🌸 투표하기';
     updateTime();
-  }, 800);
-}
-
-function logVote(name, phone, school) {
-  // 투표 데이터 기록 (콘솔 + localStorage)
-  const record = { timestamp: new Date().toISOString(), name, phone, school };
-  let records = [];
-  try {
-    const saved = localStorage.getItem('voteRecords');
-    if (saved) records = JSON.parse(saved);
-  } catch(e) {}
-  records.push(record);
-  try { localStorage.setItem('voteRecords', JSON.stringify(records)); } catch(e) {}
-  console.log('투표 기록:', record);
+  }
 }
 
 // RANKING
@@ -1138,11 +1100,8 @@ function updateTime() {
   document.getElementById('updateTime').textContent = `마지막 업데이트: ${time}`;
 }
 
-function refreshData() {
-  loadFromStorage();
-  renderRanking();
-  updateTotal();
-  updateTime();
+async function refreshData() {
+  await fetchFromSheet();
   showToast('새로고침 완료! 🔄');
 }
 
@@ -1171,18 +1130,8 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-// Demo data
-if (!localStorage.getItem('campusVoteData')) {
-  voteData = {
-    '건국대학교': 600, '연세대학교': 520, '한양대학교': 480,
-    '고려대학교': 450, '이화여자대학교': 410, '서울대학교': 390,
-    '성균관대학교': 360, '홍익대학교': 320, '중앙대학교': 290,
-    '경희대학교': 260
-  };
-  totalVotes = Object.values(voteData).reduce((a, b) => a + b, 0);
-}
-
 init();
+
 </script>
 </body>
 </html>
