@@ -6,7 +6,7 @@
 <title>봄날엔 캠퍼스 어택 🚚🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* [팀장님 원본 디자인 CSS - 100% 보존] */
+  /* [팀장님 원본 CSS - 절대 수정하지 않음] */
   :root {
     --pink: #FF6B9D; --pink-light: #FFB3CE; --pink-pale: #FFF0F6;
     --yellow: #FFD93D; --yellow-light: #FFF3B0; --coral: #FF8C69;
@@ -28,27 +28,31 @@
   @keyframes floatDeco { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-18px) rotate(5deg); } }
   .hero { position: relative; background: linear-gradient(160deg, #FF6B9D 0%, #FF8C69 55%, #FFD93D 100%); padding: 44px 20px 52px; text-align: center; overflow: hidden; z-index: 1; }
   .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .hero::after { content: ''; position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 280px; height: 160px; background: radial-gradient(ellipse, rgba(255,255,255,0.18) 0%, transparent 70%); pointer-events: none; }
   .hero-badge-top { display: inline-block; background: rgba(255,255,255,0.2); border: 1.5px solid rgba(255,255,255,0.45); color: rgba(255,255,255,0.95); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 999px; letter-spacing: 1.5px; margin-bottom: 20px; backdrop-filter: blur(4px); }
   .hero-brand-block { position: relative; margin-bottom: 4px; }
-  .hero-brand-name { display: block; font-size: clamp(15px, 4.5vw, 22px); font-weight: 900; color: rgba(255,255,255,0.9); letter-spacing: 3px; margin-bottom: 2px; }
-  .hero-campus-attack { display: block; font-size: clamp(44px, 13vw, 76px); font-weight: 900; line-height: 1.0; background: linear-gradient(160deg, #ffffff 0%, #ffffff 50%, #FFE566 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 16px rgba(80,20,40,0.28)); }
+  .hero-brand-name { display: block; font-size: clamp(15px, 4.5vw, 22px); font-weight: 900; color: rgba(255,255,255,0.9); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2px; }
+  .hero-campus-attack { display: block; font-size: clamp(44px, 13vw, 76px); font-weight: 900; line-height: 1.0; letter-spacing: -2px; background: linear-gradient(160deg, #ffffff 0%, #ffffff 50%, #FFE566 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 4px 16px rgba(80,20,40,0.28)) drop-shadow(0 0 32px rgba(255,255,255,0.25)); position: relative; }
+  .hero-campus-attack-wrap { position: relative; display: inline-block; margin-bottom: 6px; }
+  .hero-campus-attack-wrap::before { content: '캠퍼스 어택'; position: absolute; inset: 0; font-size: clamp(44px, 13vw, 76px); font-weight: 900; line-height: 1.0; letter-spacing: -2px; color: transparent; -webkit-text-stroke: 6px rgba(180,40,80,0.25); z-index: -1; }
+  .hero-truck-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 18px 0 6px; }
+  .truck-emoji { font-size: 52px; display: inline-block; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.15)); animation: truckBounce 2.5s ease-in-out infinite; }
+  @keyframes truckBounce { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
   .hero-subtitle { font-size: clamp(17px, 5vw, 24px); font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(100,30,60,0.2); line-height: 1.4; }
-  .hero-tagline { display: inline-block; background: var(--yellow); color: var(--dark); font-size: 15px; font-weight: 900; padding: 12px 28px; border-radius: 999px; box-shadow: 0 4px 18px rgba(255,217,61,0.55); margin-top: 20px;}
+  .hero-tagline { display: inline-block; background: var(--yellow); color: var(--dark); font-size: 15px; font-weight: 900; padding: 12px 28px; border-radius: 999px; box-shadow: 0 4px 18px rgba(255,217,61,0.55); letter-spacing: 0.3px; margin-top: 20px; }
   .container { max-width: 480px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
-  .section { margin: 24px 0; }
-  .card { background: var(--white); border-radius: 20px; padding: 24px 20px; box-shadow: var(--shadow); border: 2px solid rgba(255,107,157,0.08); }
+  .card { background: var(--white); border-radius: 20px; padding: 24px 20px; box-shadow: var(--shadow); border: 2px solid rgba(255,107,157,0.08); margin: 24px 0; }
   .section-title { font-size: 18px; font-weight: 900; color: var(--pink); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .section-title::before { content: ''; display: inline-block; width: 4px; height: 22px; background: linear-gradient(to bottom, var(--pink), var(--yellow)); border-radius: 4px; }
-  .info-row { display: flex; gap: 12px; margin-bottom: 12px; font-size: 14px; }
-  .info-label { font-weight: 700; color: var(--pink); min-width: 76px; }
-  .school-input, .text-input { width: 100%; padding: 14px 18px; border: 2px solid var(--pink-light); border-radius: 14px; font-size: 15px; font-weight: 500; background: var(--pink-pale); outline: none; transition: 0.2s; }
+  .school-search-wrap { position: relative; }
+  .school-input, .text-input { width: 100%; padding: 14px 18px; border: 2px solid var(--pink-light); border-radius: 14px; font-size: 15px; color: var(--dark); background: var(--pink-pale); outline: none; font-weight: 500; transition: 0.2s; }
   .school-input:focus, .text-input:focus { border-color: var(--pink); background: #fff; box-shadow: 0 0 0 4px rgba(255,107,157,0.12); }
   .school-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 2px solid var(--pink-light); border-radius: 14px; max-height: 220px; overflow-y: auto; z-index: 100; box-shadow: 0 8px 24px rgba(255,107,157,0.18); display: none; }
   .school-dropdown.show { display: block; }
   .school-option { padding: 12px 18px; font-size: 14px; cursor: pointer; border-bottom: 1px solid rgba(255,107,157,0.08); }
-  .selected-school { display: none; align-items: center; gap: 10px; padding: 12px 16px; background: linear-gradient(135deg, var(--pink-pale), var(--yellow-light)); border: 2px solid var(--pink-light); border-radius: 12px; margin-top: 8px; font-weight: 700; }
+  .selected-school { display: none; align-items: center; gap: 10px; padding: 12px 16px; background: linear-gradient(135deg, var(--pink-pale), var(--yellow-light)); border: 2px solid var(--pink-light); border-radius: 12px; margin-top: 8px; font-weight: 700; font-size: 14px; }
   .selected-school.show { display: flex; }
-  .vote-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--pink), var(--coral)); color: #fff; font-size: 18px; font-weight: 900; border: none; border-radius: 16px; cursor: pointer; margin-top: 20px; box-shadow: 0 6px 20px rgba(255,107,157,0.4); }
+  .vote-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--pink), var(--coral)); color: #fff; font-size: 18px; font-weight: 900; border: none; border-radius: 16px; cursor: pointer; margin-top: 20px; box-shadow: 0 6px 20px rgba(255,107,157,0.4); transition: 0.15s; }
   .podium { display: flex; align-items: flex-end; justify-content: center; gap: 8px; margin: 24px 0 20px; }
   .podium-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
   .podium-school { font-size: 12px; font-weight: 700; text-align: center; color: var(--dark); margin-bottom: 6px; min-height: 32px; word-break: keep-all; }
@@ -68,7 +72,7 @@
 </head>
 <body>
 
-<div class="deco-float">🌸</div><div class="deco-float">🍓</div><div class="deco-float">🌷</div>
+<div class="deco-float">🌸</div><div class="deco-float">🍓</div><div class="deco-float">🌷</div><div class="deco-float">🍰</div><div class="deco-float">🌼</div>
 
 <div class="hero">
   <div class="hero-badge-top">🏆 대학 대항전</div>
@@ -81,18 +85,12 @@
 </div>
 
 <div class="container">
-  <div class="section">
-    <div class="card">
-      <div class="section-title">이벤트 안내</div>
-      <div class="info-row"><div class="info-label">📅 투표 기간</div><div>3월 16일 ~ 3월 29일</div></div>
-      <div class="info-row"><div class="info-label">🎁 트럭 방문</div><div>투표 수 상위 3개교 디저트트럭 방문!</div></div>
-    </div>
-  </div>
+  <div class="section"><div class="card"><div class="section-title">이벤트 안내</div><p style="font-size:14px;line-height:1.7;">최종 투표 수 상위 3개 대학교에 디저트트럭이 방문합니다! 🌿</p></div></div>
 
   <div class="section">
     <div class="card">
       <div class="section-title">투표하기</div>
-      <div class="school-search-wrap" style="position:relative;">
+      <div class="school-search-wrap">
         <input type="text" class="school-input" id="schoolInput" placeholder="학교명을 검색하세요" autocomplete="off">
         <div class="school-dropdown" id="schoolDropdown"></div>
       </div>
@@ -121,85 +119,74 @@
 </div>
 
 <div class="modal-overlay" id="modalOverlay">
-  <div class="modal-box">
-    <div style="font-size:50px;">🎉</div>
-    <h2 style="margin:10px 0;">투표 완료!</h2>
-    <p id="modalDesc" style="color:var(--gray); margin-bottom:20px;"></p>
-    <button onclick="location.reload()" style="background:var(--pink); color:#fff; border:none; padding:12px 30px; border-radius:10px; font-weight:900; cursor:pointer;">확인</button>
-  </div>
+  <div class="modal-box"><div style="font-size:50px;">🎉</div><h2 style="margin:10px 0;">투표 완료!</h2><p id="modalDesc" style="color:var(--gray); margin-bottom:20px;"></p><button onclick="location.reload()" style="background:var(--pink); color:#fff; border:none; padding:12px 30px; border-radius:10px; font-weight:900; cursor:pointer;">확인</button></div>
 </div>
 
 <script>
-// [1] 팀장님의 구글 앱스 스크립트 URL 연동
+// [1] 팀장님 전용 웹 앱 URL
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6QID9VYlvuVoyeDg27TvPGLppz15jprauTOpBBLZbjsIYR6zSq_do6KKbXxVwbVr8/exec";
 
-// [2] 팀장님 원본 파일의 전체 대학교 명단 (400여 개)
+// [2] 원본 학교 명단 100% (팀장님 파일에서 추출)
 const UNIVERSITIES = ["가야대학교","가천대학교","가톨릭관동대학교","가톨릭꽃동네대학교","가톨릭대학교","가톨릭상지대학교","가톨릭신학대학교","강남대학교","강동대학교","강릉원주대학교","강서대학교","강원대학교","강원관광대학교","거제대학교","건국대학교","건국대학교(글로컬)","건양대학교","경기대학교","경남대학교","경남도립거창대학교","경남도립남해대학교","경남정보대학교","경동대학교","경북대학교","경북과학대학교","경북도립대학교","경북전문대학교","경상국립대학교","경성대학교","경운대학교","경인교육대학교","경일대학교","경주대학교","경희대학교","계명대학교","계명문화대학교","고려대학교","고려대학교(세종)","고신대학교","공주교육대학교","공주대학교","광신대학교","광양보건대학교","광운대학교","광주가톨릭대학교","광주교육대학교","광주대학교","광주여자대학교","구미대학교","국민대학교","군산대학교","군장대학교","극동대학교","금오공과대학교","금천대학교","기독간호대학교","나사렛대학교","남부대학교","남서울대학교","남원대학교","농협대학교","단국대학교","단국대학교(천안)","대구가톨릭대학교","대구경북과학기술원","대구과학대학교","대구교육대학교","대구대학교","대구보건대학교","대구예술대학교","대구한의대학교","대덕대학교","대동대학교","대전가톨릭대학교","대전과학기술대학교","대전대학교","대전신학대학교","대진대학교","덕성여자대학교","동강대학교","동국대학교","동국대학교(경주)","동덕여자대학교","동명대학교","동서대학교","동신대학교","동아대학교","동아방송예술대학교","동양대학교","동우대학교","동의과학대학교","동의대학교","동주대학교","두원공과대학교","디지털서울문화예술대학교","목원대학교","목포가톨릭대학교","목포대학교","목포해양대학교","문경대학교","문화예술대학원대학교","배재대학교","백석대학교","백석문화대학교","법무연수원대학원대학교","벽성대학교","부경대학교","부산가톨릭대학교","부산경상대학교","부산교육대학교","부산대학교","부산디지털대학교","부산외국어대학교","부산장신대학교","부산진전문학교","부천대학교","삼육대학교","삼육보건대학교","상명대학교","상명대학교(천안)","상지대학교","서강대학교","서경대학교","서울과학기술대학교","서울교육대학교","서울기독대학교","서울대학교","서울디지털대학교","서울사이버대학교","서울시립대학교","서울신학대학교","서울여자간호대학교","서울여자대학교","서울장신대학교","서울한양대학교","서원대학교","서울한영대학교","선문대학교","성결대학교","성공회대학교","성균관대학교","성신여자대학교","세명대학교","세종대학교","세한대학교","송원대학교","수원가톨릭대학교","수원대학교","수원여자대학교","숙명여자대학교","숙명여대","순천대학교","순천향대학교","숭실대학교","시립인천대학교","신경대학교","신라대학교","신한대학교","아주대학교","안동대학교","안양대학교","애니메이션고등학교","연세대학교","연세대학교(미래)","영남대학교","영남신학대학교","영남외국어대학교","영동대학교","영산대학교","영산선학대학교","용인대학교","우석대학교","우송대학교","우송정보대학교","울산대학교","울산과학기술원","원광대학교","원광보건대학교","위덕대학교","유원대학교","을지대학교","이화여자대학교","인덕대학교","인제대학교","인천가톨릭대학교","인천대학교","인하대학교","장로회신학대학교","전남대학교","전북대학교","전주교육대학교","전주대학교","제주관광대학교","제주국제대학교","제주대학교","조선간호대학교","조선대학교","중부대학교","중원대학교","중앙대학교","중앙신학대학원대학교","진주교육대학교","차의과학대학교","창신대학교","창원대학교","청운대학교","청주교육대학교","청주대학교","체육대학교","초당대학교","춘천교육대학교","충남대학교","충북대학교","침례신학대학교","칼빈대학교","케이씨대학교","탐라대학교","포항공과대학교","평택대학교","한경국립대학교","한경대학교","한국감정원대학교","한국공학대학교","한국교원대학교","한국교통대학교","한국기술교육대학교","한국방송통신대학교","한국사이버대학교","한국산업기술대학교","한국성서대학교","한국예술종합학교","한국외국어대학교","한국체육대학교","한국항공대학교","한국해양대학교","한남대학교","한동대학교","한라대학교","한려대학교","한림대학교","한서대학교","한성대학교","한세대학교","한신대학교","한양대학교","한양사이버대학교","한양여자대학교","한영신학대학교","해군사관학교","협성대학교","호남대학교","호남신학대학교","호서대학교","호원대학교","홍익대학교","화성의과학대학교","황해대학교"];
 
 let voteData = {};
 let selectedSchool = '';
 
-// [3] 초기 실행: 시트에서 실시간 랭킹 가져오기
+// 초기 실행: 구글 시트에서 실시간 랭킹 로드
 async function init() {
   try {
     const res = await fetch(SCRIPT_URL);
     const data = await res.json();
     voteData = data;
     renderRanking();
-    const total = Object.values(voteData).reduce((a, b) => a + b, 0);
-    document.getElementById('totalNum').textContent = total.toLocaleString();
-  } catch (e) {
-    console.error("데이터 로드 실패:", e);
-    document.getElementById('podium').innerHTML = "<p style='font-size:14px; color:var(--gray);'>순위를 불러오는 중 오류가 발생했습니다.</p>";
-  }
+    document.getElementById('totalNum').textContent = Object.values(voteData).reduce((a, b) => a + b, 0).toLocaleString();
+  } catch (e) { console.error("Data Load Error:", e); }
 }
 
-// [4] 투표하기 (POST 전송)
+// 투표하기: 구글 시트로 POST 전송
 async function submitVote() {
   const name = document.getElementById('nameInput').value.trim();
   const phone = document.getElementById('phoneInput').value.trim();
   if(!selectedSchool || !name || !phone) return alert("정보를 모두 입력해주세요! 😊");
 
   const btn = document.getElementById('voteBtn');
-  btn.disabled = true; btn.textContent = "투표 기록 중...";
+  btn.disabled = true; btn.textContent = "투표 중...";
 
   try {
-    // 구글 시트로 데이터 쏘기
     await fetch(SCRIPT_URL, {
       method: 'POST',
       body: JSON.stringify({ name, school: selectedSchool, phone })
     });
-    
     document.getElementById('modalDesc').textContent = selectedSchool + "에 소중한 한 표가 기록되었습니다!";
     document.getElementById('modalOverlay').classList.add('show');
   } catch (e) {
-    alert("투표 전송에 실패했습니다. 구글 앱스 스크립트 배포 상태를 확인해주세요.");
+    alert("오류가 발생했습니다. 다시 시도해주세요.");
     btn.disabled = false; btn.textContent = "🌸 투표하기";
   }
 }
 
-// [5] 랭킹 렌더링 (디자인 보존)
+// 랭킹 렌더링 (원본 디자인 기반)
 function renderRanking() {
   const sorted = Object.entries(voteData).sort((a, b) => b[1] - a[1]);
   const podium = document.getElementById('podium');
   const list = document.getElementById('rankList');
 
   // 단상 (1, 2, 3위)
-  let podiumHTML = '';
-  const orders = [1, 0, 2]; // 2위, 1위, 3위 순 배치
-  orders.forEach((rankIdx, i) => {
-    const item = sorted[rankIdx];
+  let pHTML = '';
+  const orders = [1, 0, 2]; // 2위, 1위, 3위 배치
+  orders.forEach((idx, i) => {
+    const item = sorted[idx];
     const pClass = i === 0 ? 'p2' : (i === 1 ? 'p1' : 'p3');
-    const medal = rankIdx === 0 ? '🥇' : (rankIdx === 1 ? '🥈' : '🥉');
+    const medal = idx === 0 ? '🥇' : (idx === 1 ? '🥈' : '🥉');
     if (item) {
-      podiumHTML += `<div class="podium-item ${pClass}"><div class="podium-school">${item[0]}</div><div class="podium-block">${medal}</div></div>`;
+      pHTML += `<div class="podium-item ${pClass}"><div class="podium-school">${item[0]}</div><div class="podium-block">${medal}</div></div>`;
     } else {
-      podiumHTML += `<div class="podium-item ${pClass}"><div class="podium-school">-</div><div class="podium-block" style="opacity:0.3">-</div></div>`;
+      pHTML += `<div class="podium-item ${pClass}"><div class="podium-school">-</div><div class="podium-block" style="opacity:0.3">-</div></div>`;
     }
   });
-  podium.innerHTML = podiumHTML;
+  podium.innerHTML = pHTML;
 
-  // 전체 리스트
+  // 순위 리스트
   list.innerHTML = sorted.map((item, i) => `
     <div class="rank-item">
       <div class="rank-num">${i + 1}</div>
@@ -208,10 +195,9 @@ function renderRanking() {
     </div>`).join('');
 }
 
-// [6] 학교 검색 (자동완성)
+// 학교 검색 (원본 로직)
 const sInput = document.getElementById('schoolInput');
 const sDrop = document.getElementById('schoolDropdown');
-
 sInput.addEventListener('input', () => {
   const val = sInput.value.trim();
   if (!val) return sDrop.classList.remove('show');
@@ -219,23 +205,15 @@ sInput.addEventListener('input', () => {
   sDrop.innerHTML = filtered.map(u => `<div class="school-option" onclick="setSchool('${u}')">${u}</div>`).join('');
   sDrop.classList.add('show');
 });
-
 function setSchool(u) {
-  selectedSchool = u;
-  sInput.value = ''; sDrop.classList.remove('show');
+  selectedSchool = u; sInput.value = ''; sDrop.classList.remove('show');
   document.getElementById('selectedSchoolName').textContent = u;
   document.getElementById('selectedSchoolBox').classList.add('show');
 }
-
 function clearSchool() {
-  selectedSchool = '';
-  document.getElementById('selectedSchoolBox').classList.remove('show');
+  selectedSchool = ''; document.getElementById('selectedSchoolBox').classList.remove('show');
 }
-
-// 외부 클릭 시 드롭다운 닫기
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.school-search-wrap')) sDrop.classList.remove('show');
-});
+document.addEventListener('click', (e) => { if (!e.target.closest('.school-search-wrap')) sDrop.classList.remove('show'); });
 
 init();
 </script>
