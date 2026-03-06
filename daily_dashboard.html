@@ -467,6 +467,7 @@ td.plat-cell{white-space:nowrap;}
           <th onclick="setSort('platform',null)">플랫폼</th>
           <th onclick="setSort('spend',null)">지출금액 <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('revenue',null)">광고매출 <span class="sort-arrow">↕</span></th>
+          <th onclick="setSort('cv',null)">구매전환 수 <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('roas',null)">ROAS <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('ctr',null)">CTR <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('cvr',null)">CVR <span class="sort-arrow">↕</span></th>
@@ -474,7 +475,7 @@ td.plat-cell{white-space:nowrap;}
         </tr>
       </thead>
       <tbody id="adTableBody">
-        <tr><td colspan="9"><div class="spinner-wrap"><div class="spinner"></div></div></td></tr>
+        <tr><td colspan="10"><div class="spinner-wrap"><div class="spinner"></div></div></td></tr>
       </tbody>
     </table>
     <!-- 광고 세트별 테이블 -->
@@ -486,6 +487,7 @@ td.plat-cell{white-space:nowrap;}
           <th onclick="setSort('platform',null)">플랫폼</th>
           <th onclick="setSort('spend',null)">지출금액 <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('revenue',null)">광고매출 <span class="sort-arrow">↕</span></th>
+          <th onclick="setSort('cv',null)">구매전환 수 <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('roas',null)">ROAS <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('ctr',null)">CTR <span class="sort-arrow">↕</span></th>
           <th onclick="setSort('cvr',null)">CVR <span class="sort-arrow">↕</span></th>
@@ -724,6 +726,7 @@ function renderKPI(meta, kakao) {
   document.getElementById('kpiStrip').innerHTML = `
     ${kpi('blue','📦','광고 총 지출',won(totSpend),`Meta ${won(mSpend)} | 카카오 ${won(kSpend)}`)}
     ${kpi('green','💰','광고 구매전환 매출',won(totRev),`전환수 ${totCV.toLocaleString()}건`)}
+    ${kpi('purple','🛒','구매전환 수',`${totCV.toLocaleString()}건`,`Meta ${meta.reduce((a,r)=>a+num(r.purchases),0).toLocaleString()}건 | 카카오 ${kakao.reduce((a,r)=>a+num(r.purchases),0).toLocaleString()}건`)}
     ${kpi('yellow','📈','전체 ROAS',xval(roas),`${won(totSpend)} → ${won(totRev)}`)}
     ${kpi('red','🎯','구매전환당 비용 (CPS)',won(cps),`지출 ÷ ${totCV.toLocaleString()}건`)}
     ${kpi('cyan','👁','총 노출수',totImp.toLocaleString(),`CTR ${pct(avgCTR)}`)}
@@ -969,6 +972,7 @@ function renderAdsetTable() {
       <td class="plat-cell">${pb}</td>
       <td class="num">${won(r.spend)}</td>
       <td class="num">${r.revenue>0?won(r.revenue):'<span style="color:var(--t3)">—</span>'}</td>
+      <td class="num">${r.cv.toLocaleString()}건</td>
       <td class="num">
         <div class="roas-wrap">
           <span class="roas-pill ${rc}">${r.spend>0?xval(r.roas):'—'}</span>
@@ -1013,7 +1017,7 @@ function renderTable() {
 
   if(!rows.length) {
     document.getElementById('adTableBody').innerHTML =
-      `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--t3)">해당 기간/플랫폼 데이터 없음</td></tr>`;
+      `<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--t3)">해당 기간/플랫폼 데이터 없음</td></tr>`;
     return;
   }
 
@@ -1029,6 +1033,7 @@ function renderTable() {
       <td class="plat-cell">${pb}</td>
       <td class="num">${won(r.spend)}</td>
       <td class="num">${r.revenue>0?won(r.revenue):'<span style="color:var(--t3)">—</span>'}</td>
+      <td class="num">${r.cv.toLocaleString()}건</td>
       <td class="num">
         <div class="roas-wrap">
           <span class="roas-pill ${rc}">${r.spend>0?xval(r.roas):'—'}</span>
