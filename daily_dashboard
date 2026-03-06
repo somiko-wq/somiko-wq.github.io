@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>봄날엔 광고 성과 대시보드 (Live)</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* 디자인은 원본과 100% 동일하게 유지됩니다 */
+:root {
+  --bg: #f5f0e8; --s1: #faf7f2; --s2: #ede8de; --s3: #e4ddd0; --b1: #d4ccbc; --b2: #bdb09a; --b3: #a09280;
+  --accent: #8b6a3e; --accent2: #c4874a; --green: #4a7a52; --red: #a84040; --yellow: #b88820; --cyan: #4a7888;
+  --orange: #b46030; --t1: #2c2418; --t2: #6b5a44; --t3: #9a8870; --meta: #1877f2; --kakao: #c49500;
+  --kakao-t: #3c1e1e; --sans: 'Pretendard', -apple-system, sans-serif; --mono: 'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body { font-family: var(--sans); background: var(--bg); color: var(--t1); min-height: 100vh; overflow-x: hidden; }
+body::before { content:'';position:fixed;inset:0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none;z-index:0;opacity:.4; }
+body::after { content:'';position:fixed;inset:0; background-image: linear-gradient(rgba(245,200,66,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,200,66,.03) 1px, transparent 1px); background-size:48px 48px; pointer-events:none;z-index:0; }
+.wrap {position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:28px 24px;}
+header { display:flex;align-items:flex-end;justify-content:space-between; padding-bottom:22px;margin-bottom:26px; border-bottom:1px solid var(--b1); flex-wrap:wrap;gap:14px; }
+.logo-label { font-size:10px;font-weight:700;letter-spacing:.15em; color:var(--accent);text-transform:uppercase;margin-bottom:5px; display:flex;align-items:center;gap:6px; }
+.logo-label::before { content:'';display:inline-block;width:16px;height:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:1px; }
+h1 { font-size:22px;font-weight:900;letter-spacing:-.03em; background:linear-gradient(135deg,#fff8d0 0%,var(--t2) 100%); -webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+.header-controls {display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.filter-wrap { display:flex;align-items:center;gap:0; background:var(--s2);border:1px solid var(--b2); border-radius:10px;overflow:hidden; }
+.filter-section { display:flex;align-items:center;gap:8px; padding:8px 14px; }
+.filter-section:not(:last-child){border-right:1px solid var(--b1);}
+.filter-label {font-size:10px;font-weight:600;color:var(--t3);letter-spacing:.06em;white-space:nowrap;}
+input[type="date"] { background:transparent;border:none;color:var(--t1); font-family:var(--mono);font-size:11px;outline:none;cursor:pointer; }
+input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.4);cursor:pointer;}
+.platform-tabs { display:flex;gap:4px; background:var(--s2);border:1px solid var(--b2); border-radius:10px;padding:4px; }
+.ptab { padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700; cursor:pointer;transition:.2s;color:var(--t2); display:flex;align-items:center;gap:5px; }
+.ptab.active-all { background:var(--b2);color:var(--t1);}
+.ptab.active-meta { background:#1877f2;color:#fff;}
+.ptab.active-kakao { background:#f0c030;color:#3c1e1e;}
+.btn { display:inline-flex;align-items:center;gap:6px; padding:8px 16px;border-radius:9px;border:none; font-family:var(--sans);font-size:12px;font-weight:700;cursor:pointer;transition:.2s; }
+.btn-apply{background:var(--accent);color:#1a1200;}
+.live-bar { display:flex;align-items:center;gap:8px; font-size:10px;color:var(--t3);font-family:var(--mono); margin-bottom:22px; }
+.dot{width:5px;height:5px;border-radius:50%;animation:blink 2s infinite;}
+.dot-g{background:var(--green);box-shadow:0 0 5px var(--green);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.kpi-strip { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px;margin-bottom:22px; }
+.kpi { background:var(--s1);border:1px solid var(--b1); border-radius:13px;padding:18px 20px; position:relative;overflow:hidden; transition:.25s transform,.25s box-shadow; cursor:default; }
+.kpi:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.5);}
+.kpi::before { content:'';position:absolute;top:0;left:0;right:0;height:2px; background:linear-gradient(90deg,var(--kc),transparent); }
+.kpi[data-c="blue"]{--kc:#f5c842} .kpi[data-c="purple"]{--kc:#e8a020} .kpi[data-c="green"]{--kc:#10d98a} .kpi[data-c="yellow"]{--kc:#f5c842} .kpi[data-c="red"]{--kc:#ff4f72} .kpi[data-c="cyan"]{--kc:#f0e060} .kpi[data-c="orange"]{--kc:#fb923c}
+.kpi-icon{font-size:14px;margin-bottom:8px;}
+.kpi-label{font-size:10px;font-weight:600;color:var(--t2);letter-spacing:.04em;margin-bottom:6px;}
+.kpi-val{font-size:22px;font-weight:900;font-family:var(--mono);letter-spacing:-.02em;line-height:1;}
+.kpi-sub{font-size:10px;color:var(--t3);margin-top:5px;font-family:var(--mono);}
+.row2 {display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+.panel { background:var(--s1);border:1px solid var(--b1); border-radius:13px;overflow:hidden; }
+.panel-head { display:flex;align-items:center;justify-content:space-between; padding:14px 18px;border-bottom:1px solid var(--b1); background:var(--s2); }
+.panel-title { font-size:11px;font-weight:700;letter-spacing:.07em; text-transform:uppercase;color:var(--t2); display:flex;align-items:center;gap:7px; }
+.panel-title i { display:inline-block;width:3px;height:13px;border-radius:2px; background:var(--accent); }
+.panel-badge { font-size:10px;font-family:var(--mono);color:var(--t3); background:var(--s3);padding:2px 7px;border-radius:5px; }
+.rev-body{padding:18px;}
+.rev-row { display:flex;align-items:center;justify-content:space-between; padding:10px 0;border-bottom:1px solid var(--b1); }
+.rev-row:last-child{border:none;}
+.rev-name{font-size:12px;color:var(--t2);}
+.rev-amt{font-family:var(--mono);font-size:13px;font-weight:600;}
+.rev-bar-wrap{margin-top:4px;height:3px;background:var(--b1);border-radius:2px;overflow:hidden;}
+.rev-bar{height:100%;border-radius:2px;transition:.8s width;}
+.rev-total { display:flex;justify-content:space-between; padding:12px 0 0;margin-top:4px; }
+.rev-total-amt{font-family:var(--mono);font-size:15px;font-weight:800;}
+.ad-sum-body{padding:18px;}
+.ad-sum-row { display:flex;justify-content:space-between;align-items:flex-start; padding:9px 0;border-bottom:1px solid var(--b1); }
+.ad-sum-label{font-size:11px;color:var(--t2);}
+.ad-sum-val{font-family:var(--mono);font-size:13px;font-weight:600;text-align:right;}
+.ad-sum-val span{display:block;font-size:10px;color:var(--t3);margin-top:1px;}
+.plat-badge{ font-size:9px;font-weight:800;padding:3px 8px;border-radius:5px; letter-spacing:.04em;text-transform:uppercase;white-space:nowrap; min-width:52px;text-align:center; }
+.plat-meta{background:rgba(24,119,242,.15);color:#1877f2;}
+.plat-kakao{background:rgba(196,149,0,.15);color:#a07000;}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;min-width:900px;}
+thead tr{background:var(--s2);}
+thead th { padding:11px 14px;font-size:10px;font-weight:700;color:var(--t2); text-align:left;letter-spacing:.07em;text-transform:uppercase; white-space:nowrap;cursor:pointer;border-bottom:1px solid var(--b1); }
+tbody tr{border-bottom:1px solid var(--b1);transition:.15s background;}
+tbody tr:hover{background:var(--s2);}
+tbody td{padding:11px 14px;font-size:12px;}
+td.name{font-family:var(--sans);font-weight:500;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+td.num{font-family:var(--mono);white-space:nowrap;}
+.roas-pill { font-family:var(--mono);font-size:11px;font-weight:700; padding:2px 7px;border-radius:5px; }
+.roas-hi{background:rgba(74,122,82,.12);color:var(--green);}
+.roas-md{background:rgba(184,136,32,.12);color:var(--yellow);}
+.roas-lo{background:rgba(168,64,64,.12);color:var(--red);}
+.rbar-wrap{width:50px;height:3px;background:var(--b1);border-radius:2px;overflow:hidden;}
+.rbar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.6s width;}
+.sort-tabs, .view-tabs, .chart-tabs {display:flex;gap:3px;}
+.stab, .vtab, .ctab { padding:5px 10px;border-radius:6px;font-size:10px;font-weight:700; cursor:pointer;color:var(--t2);transition:.15s; }
+.stab.active, .ctab.active {background:var(--accent);color:#1a1200;}
+.vtab.active {background:var(--t1);color:var(--s1);}
+.chart-body { padding:20px 20px 14px; position:relative;height:280px; }
+.chart-legend { display:flex;align-items:center;gap:16px; padding:0 20px 14px;flex-wrap:wrap; }
+.spinner-wrap{display:flex;justify-content:center;padding:40px;}
+.spinner{width:28px;height:28px;border:2px solid var(--b2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo-area">
+    <div class="logo-label">Ad Performance Analytics</div>
+    <h1>봄날엔 광고 대시보드</h1>
+  </div>
+  <div class="header-controls">
+    <div class="platform-tabs" id="platformTabs">
+      <div class="ptab active-all" data-p="all" onclick="setPlatform('all',this)">전체</div>
+      <div class="ptab" data-p="meta" onclick="setPlatform('meta',this)">🔵 Meta</div>
+      <div class="ptab" data-p="kakao" onclick="setPlatform('kakao',this)">🟡 카카오</div>
+    </div>
+    <div class="filter-wrap">
+      <div class="filter-section"><span class="filter-label">FROM</span><input type="date" id="dFrom"></div>
+      <div class="filter-section"><span class="filter-label">TO</span><input type="date" id="dTo"></div>
+    </div>
+    <button class="btn btn-apply" onclick="applyFilter()">조회</button>
+  </div>
+</header>
+
+<div class="live-bar"><div class="dot dot-g"></div><span id="liveText">구글 시트 데이터 로드 중...</span><span style="margin-left:auto;color:var(--t3)" id="rangeText"></span></div>
+<div class="kpi-strip" id="kpiStrip"><div class="spinner-wrap" style="grid-column:1/-1"><div class="spinner"></div></div></div>
+
+<div class="chart-panel panel" style="margin-bottom:22px;">
+  <div class="panel-head">
+    <div class="panel-title"><i></i>일별 광고 성과 추이</div>
+    <div class="chart-tabs">
+      <div class="ctab active" onclick="setChartMetric('spend_rev',this)">지출 · 매출</div>
+      <div class="ctab" onclick="setChartMetric('roas',this)">ROAS</div>
+      <div class="ctab" onclick="setChartMetric('click_imp',this)">클릭 · 노출</div>
+    </div>
+  </div>
+  <div class="chart-body"><canvas id="mainChart"></canvas></div>
+  <div class="chart-legend" id="chartLegend"></div>
+</div>
+
+<div class="row2">
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i></i>채널별 지출</div><span class="panel-badge" id="revBadge">—</span></div>
+    <div class="rev-body" id="revBody"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i></i>광고 성과 요약</div><span class="panel-badge" id="adSumBadge">—</span></div>
+    <div class="ad-sum-body" id="adSumBody"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
+<div class="panel" style="margin-bottom:22px;">
+  <div class="panel-head">
+    <div class="panel-title"><i></i><span id="tablePanelTitle">광고 소재별 효율 상세</span></div>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+      <div class="view-tabs">
+        <div class="vtab active" onclick="setTableView('ad',this)">소재별</div>
+        <div class="vtab" onclick="setTableView('adset',this)">광고 세트별</div>
+      </div>
+      <div class="sort-tabs" id="sortTabs">
+        <div class="stab active" onclick="setSort('roas',this)">ROAS</div>
+        <div class="stab" onclick="setSort('spend',this)">지출</div>
+        <div class="stab" onclick="setSort('revenue',this)">매출</div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table id="adTable">
+      <thead>
+        <tr><th style="width:36px">#</th><th onclick="setSort('name',null)">명칭</th><th onclick="setSort('platform',null)">플랫폼</th><th onclick="setSort('spend',null)">지출금액</th><th onclick="setSort('revenue',null)">광고매출</th><th onclick="setSort('roas',null)">ROAS</th><th onclick="setSort('ctr',null)">CTR</th><th onclick="setSort('cvr',null)">CVR</th></tr>
+      </thead>
+      <tbody id="adTableBody"></tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// 구글 스프레드시트 설정
+// ═══════════════════════════════════════════
+// 여기에 구글 시트 '웹에 게시' -> 'CSV' 링크를 붙여넣으세요.
+const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1eXQVqu9qdzJyMRQl380teciChzG845OoUFyvA5xg9Qk/edit?gid=0#gid=0';
+
+let RAW = { meta: [], kakao: [] };
+let platform = 'all', sortKey = 'roas', sortDir = -1, chartMetric = 'spend_rev', tableView = 'ad', mainChart = null;
+
+// 데이터 파싱 및 로드
+async function loadData() {
+    try {
+        const response = await fetch(SPREADSHEET_URL);
+        const csv = await response.text();
+        const rows = csv.split('\n').slice(1); // 헤더 제외
+
+        const data = rows.map(row => {
+            const cols = row.split(',');
+            // 시트 컬럼 순서: date, platform, campaign, adset, adname, clicks, impressions, purchases, revenue, spend
+            return {
+                date: cols[0]?.trim(),
+                platform: cols[1]?.trim().toLowerCase(),
+                campaign: cols[2]?.trim(),
+                adset: cols[3]?.trim(),
+                adname: cols[4]?.trim(),
+                clicks: Number(cols[5] || 0),
+                impressions: Number(cols[6] || 0),
+                purchases: Number(cols[7] || 0),
+                revenue: Number(cols[8] || 0),
+                spend: Number(cols[9] || 0)
+            };
+        });
+
+        RAW.meta = data.filter(d => d.platform === 'meta');
+        RAW.kakao = data.filter(d => d.platform === 'kakao');
+
+        initDashboard();
+    } catch (e) {
+        document.getElementById('liveText').textContent = "오류: 링크가 올바르지 않거나 데이터가 없습니다.";
+    }
+}
+
+function initDashboard() {
+    const all = [...RAW.meta, ...RAW.kakao].map(r=>r.date).filter(Boolean).sort();
+    document.getElementById('dFrom').value = all[0] || '';
+    document.getElementById('dTo').value = all[all.length-1] || '';
+    render();
+}
+
+// ═══════════════════════════════════════════
+// 렌더링 로직 (디자인 유지)
+// ═══════════════════════════════════════════
+function num(v){return isNaN(v)||v==null?0:Number(v);}
+function won(v){return '₩'+Math.round(v).toLocaleString('ko-KR');}
+function pct(v){return (v*100).toFixed(2)+'%';}
+function xval(v){return v.toFixed(2)+'x';}
+
+function setPlatform(p, el) { platform = p; document.querySelectorAll('.ptab').forEach(t => t.className = 'ptab'); el.className = `ptab active-${p}`; render(); }
+function setSort(k, el) { if(sortKey===k) sortDir*=-1; else { sortKey=k; sortDir=-1; } if(el) { document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); } render(); }
+function setChartMetric(m, el) { chartMetric = m; document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active')); el.classList.add('active'); renderChart(); }
+function setTableView(v, el) { tableView = v; document.querySelectorAll('.vtab').forEach(t => t.classList.remove('active')); el.classList.add('active'); render(); }
+function applyFilter() { render(); }
+
+function getFiltered() {
+    const from = document.getElementById('dFrom').value;
+    const to = document.getElementById('dTo').value;
+    const f = (list) => list.filter(r => (!from || r.date >= from) && (!to || r.date <= to));
+    return { meta: platform==='kakao' ? [] : f(RAW.meta), kakao: platform==='meta' ? [] : f(RAW.kakao) };
+}
+
+function render() {
+    const {meta, kakao} = getFiltered();
+    document.getElementById('liveText').textContent = `Meta ${meta.length}행 · 카카오 ${kakao.length}행 로드됨`;
+    renderKPI(meta, kakao);
+    renderRevenue(meta, kakao);
+    renderAdSum(meta, kakao);
+    renderChart();
+    renderTable();
+}
+
+function renderKPI(meta, kakao) {
+    const all = [...meta, ...kakao];
+    const spend = all.reduce((a,r)=>a+r.spend,0);
+    const rev = all.reduce((a,r)=>a+r.revenue,0);
+    const cv = all.reduce((a,r)=>a+r.purchases,0);
+    const imp = all.reduce((a,r)=>a+r.impressions,0);
+    const clk = all.reduce((a,r)=>a+r.clicks,0);
+    
+    document.getElementById('kpiStrip').innerHTML = `
+        <div class="kpi" data-c="blue"><div class="kpi-label">광고 총 지출</div><div class="kpi-val">${won(spend)}</div></div>
+        <div class="kpi" data-c="green"><div class="kpi-label">전환 매출</div><div class="kpi-val">${won(rev)}</div></div>
+        <div class="kpi" data-c="yellow"><div class="kpi-label">ROAS</div><div class="kpi-val">${xval(spend>0?rev/spend:0)}</div></div>
+        <div class="kpi" data-c="red"><div class="kpi-label">전환수</div><div class="kpi-val">${cv}건</div></div>
+        <div class="kpi" data-c="cyan"><div class="kpi-label">CTR</div><div class="kpi-val">${pct(imp>0?clk/imp:0)}</div></div>
+    `;
+}
+
+function renderRevenue(meta, kakao) {
+    const ms = meta.reduce((a,r)=>a+r.spend,0), ks = kakao.reduce((a,r)=>a+r.spend,0), tot = ms+ks;
+    document.getElementById('revBadge').textContent = won(tot);
+    document.getElementById('revBody').innerHTML = `
+        <div class="rev-row"><span>Meta</span><span class="rev-amt">${won(ms)}</span></div>
+        <div class="rev-bar-wrap"><div class="rev-bar" style="width:${tot>0?ms/tot*100:0}%;background:#1877f2"></div></div>
+        <div class="rev-row" style="margin-top:10px"><span>카카오</span><span class="rev-amt">${won(ks)}</span></div>
+        <div class="rev-bar-wrap"><div class="rev-bar" style="width:${tot>0?ks/tot*100:0}%;background:#fee500"></div></div>
+    `;
+}
+
+function renderAdSum(meta, kakao) {
+    const all = [...meta, ...kakao];
+    const spend = all.reduce((a,r)=>a+r.spend,0), rev = all.reduce((a,r)=>a+r.revenue,0), cv = all.reduce((a,r)=>a+r.purchases,0);
+    document.getElementById('adSumBadge').textContent = `총 ${all.length}건`;
+    document.getElementById('adSumBody').innerHTML = `
+        <div class="ad-sum-row"><div class="ad-sum-label">지출</div><div class="ad-sum-val">${won(spend)}</div></div>
+        <div class="ad-sum-row"><div class="ad-sum-label">매출</div><div class="ad-sum-val">${won(rev)}</div></div>
+        <div class="ad-sum-row"><div class="ad-sum-label">ROAS</div><div class="ad-sum-val">${xval(spend>0?rev/spend:0)}</div></div>
+    `;
+}
+
+function renderChart() {
+    const {meta, kakao} = getFiltered();
+    const dayMap = {};
+    [...meta, ...kakao].forEach(r => {
+        if(!dayMap[r.date]) dayMap[r.date] = {s:0, r:0, i:0, c:0};
+        dayMap[r.date].s += r.spend; dayMap[r.date].r += r.revenue; dayMap[r.date].i += r.impressions; dayMap[r.date].c += r.clicks;
+    });
+    const labels = Object.keys(dayMap).sort();
+    const datasets = {
+        spend_rev: [{label:'지출', data:labels.map(l=>dayMap[l].s), borderColor:'#f59e0b'}, {label:'매출', data:labels.map(l=>dayMap[l].r), borderColor:'#10b981'}],
+        roas: [{label:'ROAS', data:labels.map(l=>dayMap[l].s>0?dayMap[l].r/dayMap[l].s:0), borderColor:'#818cf8'}],
+        click_imp: [{label:'노출', data:labels.map(l=>dayMap[l].i), borderColor:'#38bdf8'}]
+    };
+
+    if(mainChart) mainChart.destroy();
+    mainChart = new Chart(document.getElementById('mainChart'), {
+        type: 'line',
+        data: { labels: labels.map(l=>l.slice(5)), datasets: datasets[chartMetric] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    });
+}
+
+function renderTable() {
+    const {meta, kakao} = getFiltered();
+    const group = {};
+    const key = tableView === 'ad' ? 'adname' : 'adset';
+    [...meta, ...kakao].forEach(r => {
+        const k = r.platform + '::' + r[key];
+        if(!group[k]) group[k] = {name:r[key], platform:r.platform, s:0, r:0, i:0, c:0, p:0};
+        group[k].s += r.spend; group[k].r += r.revenue; group[k].i += r.impressions; group[k].c += r.clicks; group[k].p += r.purchases;
+    });
+    
+    let rows = Object.values(group).map(r => ({
+        ...r, spend: r.s, revenue: r.r, roas: r.s>0?r.r/r.s:0, ctr: r.i>0?r.c/r.i:0, cvr: r.c>0?r.p/r.c:0
+    }));
+
+    rows.sort((a,b) => sortDir * (a[sortKey] > b[sortKey] ? 1 : -1));
+
+    document.getElementById('adTableBody').innerHTML = rows.map((r,i) => `
+        <tr>
+            <td>${i+1}</td>
+            <td class="name">${r.name}</td>
+            <td><span class="plat-badge plat-${r.platform}">${r.platform}</span></td>
+            <td class="num">${won(r.spend)}</td>
+            <td class="num">${won(r.revenue)}</td>
+            <td><span class="roas-pill ${r.roas>=3?'roas-hi':r.roas>=1?'roas-md':'roas-lo'}">${xval(r.roas)}</span></td>
+            <td class="num">${pct(r.ctr)}</td>
+            <td class="num">${pct(r.cvr)}</td>
+        </tr>
+    `).join('');
+}
+
+// 최초 실행
+loadData();
+</script>
+</body>
+</html>
